@@ -31,6 +31,7 @@ sarvam/
 │   │   │   ├── layout.tsx      # Root layout (HTML shell, fonts, metadata)
 │   │   │   ├── page.tsx        # Homepage route (/)
 │   │   │   └── globals.css     # Global CSS and Tailwind base styles
+# Planned future routes (Phase 2+): /capture, /cultural-roots, /map, /timeline, /graph, /chat
 │   │   ├── components/         # Reusable UI components (Phase 2+)
 │   │   └── styles/             # Additional CSS modules (Phase 2+)
 │   ├── package.json            # Node.js dependencies and scripts
@@ -97,6 +98,9 @@ Planned contents:
 - `Timeline.tsx` — Chronological timeline component
 - `ChatInterface.tsx` — RAG conversational chat interface
 - `KnowledgeGraph.tsx` — Graph visualisation component
+- `CulturalContributionForm.tsx` — Cultural Roots document & share form
+- `CommunityMap.tsx` — Geographical Community Knowledge Map component
+- `CulturalChatbot.tsx` — AI-powered cultural heritage chatbot interface
 
 ### `/frontend/src/styles` 🔲 PLANNED (Phase 2+)
 

@@ -103,6 +103,38 @@
 - The system shall display timestamps within recordings that correspond to extracted content.
 - The system shall clearly label AI-extracted content versus direct user-provided content.
 
+### 1.11 Cultural Contributions (Cultural Roots Module) 🔲 PLANNED
+
+- The system shall allow users from different villages, towns, districts, and states to document and share cultural knowledge.
+- Each cultural contribution shall support structured fields: tradition name, cultural category, state, district, village, regional language, contributor information, historical background, description and significance, related festivals or events, photographs, audio and video, original source references, and time period.
+- The system shall provide templates and guided forms for documenting customs, festivals, folk stories, traditional food, recipes, occupations, art, crafts, and farming practices.
+
+### 1.12 Multilingual Processing & Regional Language Identification 🔲 PLANNED
+
+- The system shall perform multilingual voice-to-text transcription across diverse regional languages and dialects.
+- The AI pipeline shall automatically identify the regional language or dialect from audio inputs.
+- The system shall allow manual selection and correction of regional language tags for transcripts and cultural entries.
+
+### 1.13 Location-Based Cultural Organization & Community Knowledge Map 🔲 PLANNED
+
+- The system shall index all cultural contributions by geographic hierarchy (State → District → Village/Town).
+- The system shall provide an interactive Community Knowledge Map allowing users to explore cultural traditions geographically.
+- The system shall support geographical filtering and browsing by region (e.g., Karnataka, Rajasthan, Kerala, Tamil Nadu, Assam, etc.).
+
+### 1.14 Cultural Knowledge Search 🔲 PLANNED
+
+- The system shall enable users to search cultural knowledge using natural language queries across traditions, categories, locations, and languages.
+- The RAG search engine shall retrieve relevant cultural traditions and synthesize responses citing original sources and contributors.
+
+### 1.15 Community Consent and Privacy 🔲 PLANNED
+
+- Contributors must provide explicit consent before their cultural contributions are published.
+- The system shall support public, private, and community-only visibility settings.
+- The system shall enforce safeguards to respect sacred or restricted cultural knowledge.
+- The system shall preserve the identity and attribution of all knowledge contributors.
+- The system shall allow communities to control access to their proprietary or sensitive knowledge.
+- The system shall not publish sensitive or restricted cultural information automatically.
+
 ---
 
 ## 2. Non-Functional Requirements

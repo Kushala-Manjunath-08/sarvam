@@ -6,16 +6,33 @@
 
 ## What is LEGACYOS?
 
-LEGACYOS is an AI-powered Human Knowledge Preservation System designed to capture,
-organise, and transmit human wisdom across generations.
+LEGACYOS is an AI-powered Human Knowledge Preservation System designed to preserve individual life experiences, traditional wisdom, regional cultures, community knowledge, and cultural heritage for future generations.
 
-Elderly individuals, traditional farmers, master artisans, experienced teachers, local
-historians, and community elders possess decades of irreplaceable knowledge. This knowledge
-exists in conversational and experiential form — not in books or databases. When these
-individuals are no longer available, that knowledge is permanently lost.
+The platform preserves two major types of knowledge:
 
-LEGACYOS transforms raw human memory into structured, searchable, and conversationally
-accessible digital knowledge that future generations can explore.
+### A. Personal Heritage
+- Personal life experiences and family histories.
+- Stories and memories from elderly people.
+- Personal achievements, lessons, and traditional skills.
+- Experiences passed down through generations.
+
+### B. Community & Cultural Heritage
+- Local traditions, customs, and regional festivals.
+- Folk stories, folk songs, and regional dialects/languages.
+- Traditional food recipes, occupations, arts, and crafts.
+- Village histories, community ceremonies, and traditional farming practices.
+
+---
+
+## Major Module: CULTURAL ROOTS
+
+**CULTURAL ROOTS – Explore, Preserve & Share Your Heritage.**
+
+A dedicated module enabling people from different villages, towns, districts, and states to document, categorise, and share their cultural knowledge. 
+
+- **Geographical & Regional Indexing**: Explore cultural heritage through an interactive Community Knowledge Map (covering regional traditions across Karnataka, Rajasthan, Kerala, Tamil Nadu, Assam, and more).
+- **Multilingual Support**: Multilingual voice-to-text transcription and automatic regional language identification.
+- **Community Consent & Privacy**: Secure contributor consent, public/private/community visibility controls, and respect for sacred or restricted knowledge.
 
 ---
 
@@ -181,4 +198,4 @@ Families · Farmers · Artisans · Teachers · Historians · Governments · NGOs
 
 ---
 
-> LEGACYOS — Preserving Human Wisdom Beyond Generations.
+> LEGACYOS — "Preserving individual memories, traditional wisdom and the cultural identity of communities through AI, so that valuable human knowledge is never lost between generations."

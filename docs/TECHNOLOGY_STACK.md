@@ -97,12 +97,9 @@ authentication, file upload, memory CRUD, and AI job triggering.
 
 **Version**: 15+
 
-**Why Selected**: Mature, production-grade relational database with ACID compliance.
-Excellent full-text search for transcript and memory search. JSONB support for flexible
-extracted entity data. Wide hosting support (Supabase, Railway, AWS RDS, self-hosted).
+**Why Selected**: Mature, production-grade relational database with ACID compliance. Excellent full-text search for transcript and memory search. JSONB support for flexible extracted entity data and cultural contribution attributes. Geographic and hierarchical indexing for location-based cultural organization (state, district, village). Wide hosting support (Supabase, Railway, AWS RDS, self-hosted).
 
-**Responsibility**: Stores all structured application data — users, collections, memories,
-recordings, transcripts, extracted entities, and timeline events.
+**Responsibility**: Stores all structured application data — users, collections, memories, cultural contributions, recordings, transcripts, extracted entities, and timeline events.
 
 **Interacts With**: FastAPI backend via SQLAlchemy ORM.
 
@@ -118,9 +115,7 @@ recordings, transcripts, extracted entities, and timeline events.
 chat. Supports state-of-the-art open models without vendor lock-in. Simple REST API
 compatible with standard OpenAI-style clients. Cost-effective for high-volume inference.
 
-**Responsibility**: Performs intelligent knowledge extraction from transcripts (entity
-recognition, theme identification, life lesson extraction). Generates natural language
-responses in the RAG-based chat interface. Supports multilingual content understanding.
+**Responsibility**: Performs intelligent knowledge extraction from transcripts and cultural contributions (entity recognition, automatic categorization of traditions, cultural taxonomy, theme identification, life lesson extraction). Generates natural language responses in the RAG-based chat interface and cultural heritage chatbot. Supports multilingual content understanding and cross-lingual search.
 
 **Interacts With**: FastAPI backend, LangChain RAG pipeline.
 
@@ -135,9 +130,7 @@ across 90+ languages including Indian regional languages. Can be run locally to 
 sending sensitive personal recordings externally. Produces word-level timestamps enabling
 precise source verification.
 
-**Responsibility**: Transcribes all uploaded voice and video recordings into timestamped
-text. Detects the spoken language automatically. Produces transcripts that are the
-foundation for all downstream AI processing.
+**Responsibility**: Transcribes all uploaded voice and video recordings into timestamped text. Automatically identifies regional languages and dialects. Produces transcripts that are the foundation for all downstream AI processing and cultural categorization.
 
 **Interacts With**: FastAPI backend, triggered by upload events.
 

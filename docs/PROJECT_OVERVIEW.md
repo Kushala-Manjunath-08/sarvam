@@ -5,16 +5,33 @@
 
 ---
 
-## 1. Project Introduction
+## 1. Project Introduction & Expanded Vision
 
-LEGACYOS is an AI-powered Human Knowledge Preservation System designed to capture,
-organise, and transmit human wisdom across generations. It provides a structured platform
-for recording personal experiences, traditional practices, cultural knowledge, and practical
-skills — and transforming those recordings into searchable, interconnected, and
-conversationally accessible digital knowledge.
+LEGACYOS is an AI-powered Human Knowledge Preservation System that preserves individual life experiences, traditional wisdom, regional cultures, community knowledge, and cultural heritage for future generations.
 
-The name "LEGACYOS" reflects the idea of an operating system for human legacy — a
-foundational layer that processes raw human experience into structured, lasting knowledge.
+The platform preserves two major types of knowledge:
+
+### A. Personal Heritage
+- Personal life experiences.
+- Family histories.
+- Stories from elderly people.
+- Personal achievements and lessons.
+- Traditional skills and knowledge.
+- Experiences passed down through generations.
+
+### B. Community & Cultural Heritage
+- Local traditions and customs.
+- Regional festivals and celebrations.
+- Folk stories and folk songs.
+- Regional languages and dialects.
+- Traditional food and recipes.
+- Traditional occupations.
+- Art, crafts and cultural practices.
+- Village and community histories.
+- Traditional farming practices.
+- Cultural events and ceremonies.
+
+The name "LEGACYOS" reflects the idea of an operating system for human legacy — a foundational layer that processes raw human experience and community heritage into structured, lasting knowledge.
 
 ---
 
@@ -99,6 +116,67 @@ LEGACYOS is an AI-powered knowledge preservation platform designed to:
 
 ---
 
+## 6. Major Module: CULTURAL ROOTS
+
+Introduce a major module named:
+
+**CULTURAL ROOTS – Explore, Preserve & Share Your Heritage.**
+
+Its purpose is to allow people from different villages, towns, districts and states to document and share their cultural knowledge.
+
+**Examples of Cultural Contributions**:
+- An elderly person sharing how their village celebrates festivals.
+- A farmer explaining traditional farming practices.
+- An artisan explaining traditional handicraft techniques.
+- A family documenting wedding customs.
+- A community sharing local folk stories.
+- A person recording traditional songs in their regional language.
+
+### Planned AI Capabilities for Cultural Roots
+1. Multilingual voice-to-text transcription.
+2. Regional language identification.
+3. AI-based cultural information extraction.
+4. Automatic categorization of traditions.
+5. Location-based cultural organization.
+6. Cultural timeline generation.
+7. Knowledge graph connecting people, traditions, locations and events.
+8. AI-powered cultural heritage chatbot.
+9. Search cultural knowledge using natural language.
+10. Audio, video, photograph and text preservation.
+
+### Cultural Knowledge Organization
+Each cultural contribution will eventually support:
+- Tradition name.
+- Cultural category.
+- State, district and village.
+- Regional language.
+- Contributor information.
+- Historical background.
+- Description and significance.
+- Related festivals or events.
+- Photographs, audio and video.
+- Original source references.
+- Time period.
+
+### Community Knowledge Map
+A planned feature allowing users to explore cultural knowledge geographically.
+**Example Categories** (illustrative examples; not complete descriptions of any region):
+- Karnataka – Yakshagana, Bhoota Kola and regional traditions.
+- Rajasthan – Folk music, crafts and festivals.
+- Kerala – Theyyam and traditional art forms.
+- Tamil Nadu – Pongal traditions and folk arts.
+- Assam – Bihu traditions.
+
+### Community Consent and Privacy
+- Contributors must provide consent before their information is published.
+- Public, private and community-only visibility options.
+- Respect sacred or restricted cultural knowledge.
+- Preserve the identity and attribution of contributors.
+- Allow communities to control access to their knowledge.
+- Do not publish sensitive cultural information automatically.
+
+---
+
 ## 7. Target Users
 
 **Families** — Preserve grandparents' stories, family histories, traditions, and personal
@@ -134,15 +212,11 @@ traditional practices at scale.
 
 ## 9. Project Vision
 
-LEGACYOS envisions a world where no valuable human knowledge is permanently lost simply
-because it was never written down. Every person who has lived a full life has accumulated
-knowledge worth preserving. LEGACYOS exists to ensure that this knowledge has a structured,
-intelligent, accessible digital home that future generations can explore, learn from, and
-build upon.
+> "Preserving individual memories, traditional wisdom and the cultural identity of communities through AI, so that valuable human knowledge is never lost between generations."
 
-The long-term vision is for LEGACYOS to become foundational infrastructure for human
-knowledge preservation — used by families, communities, institutions, and governments
-worldwide.
+LEGACYOS envisions a world where no valuable human knowledge is permanently lost simply because it was never written down. Every person who has lived a full life, and every community with rich cultural traditions, has accumulated knowledge worth preserving. LEGACYOS exists to ensure that this personal and cultural knowledge has a structured, intelligent, accessible digital home that future generations can explore, learn from, and build upon.
+
+The long-term vision is for LEGACYOS to become foundational infrastructure for human knowledge preservation — used by families, communities, institutions, and governments worldwide.
 
 ---
 
