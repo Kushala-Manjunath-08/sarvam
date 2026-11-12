@@ -135,55 +135,70 @@ architecture, and requirements from the documentation alone.
 
 ---
 
-## Phase 7 — Timeline and Knowledge Graph 🔲 PLANNED
+## Phase 7 — Cultural Roots & Community Knowledge Map 🔲 PLANNED
 
-**Goal**: Build the visual timeline and knowledge graph interfaces.
+**Goal**: Implement the Cultural Roots module for documenting, categorising, and exploring regional and community cultural heritage.
+
+**Tasks**:
+- [ ] Build cultural contribution forms and structured templates (tradition name, cultural category, state, district, village, regional language, contributor info, historical background, significance, related events, time period).
+- [ ] Implement media attachments for photographs, audio, and video in cultural entries.
+- [ ] Build AI processing pipeline for automatic categorization of traditions and regional language identification.
+- [ ] Implement community consent verification and privacy controls (public, private, community-only visibility).
+- [ ] Build the interactive Community Knowledge Map UI for geographical exploration of traditions.
+- [ ] Implement geographical filtering and browsing by state, district, and region.
+- [ ] Preserve contributor identity and attribution across all cultural entries.
+
+**Technologies**: Next.js, FastAPI, PostgreSQL, Leaflet / Map libraries, Groq LLM
+
+---
+
+## Phase 8 — Timeline and Knowledge Graph 🔲 PLANNED
+
+**Goal**: Build the visual timeline and knowledge graph interfaces connecting people, traditions, locations, and events.
 
 **Tasks**:
 - [ ] Build the chronological timeline component.
-- [ ] Map extracted events to timeline positions.
+- [ ] Map extracted events and cultural traditions to timeline positions.
 - [ ] Support approximate date handling in the timeline.
 - [ ] Build the knowledge graph visualisation.
 - [ ] Implement Neo4j integration (or PostgreSQL graph queries as fallback).
-- [ ] Populate the knowledge graph from extracted entities.
+- [ ] Populate the knowledge graph from extracted entities and cultural contributions.
 - [ ] Build the graph exploration interface.
-- [ ] Connect timeline events and graph nodes to source memories.
+- [ ] Connect timeline events and graph nodes to source memories and cultural traditions.
 
 **Technologies**: Next.js (visualisation libraries), Neo4j (optional), PostgreSQL
 
 ---
 
-## Phase 8 — RAG-Based Conversational Memory Search 🔲 PLANNED
+## Phase 9 — RAG-Based Conversational Search & Cultural Chatbot 🔲 PLANNED
 
-**Goal**: Enable future generations to ask natural-language questions about preserved
-memories and receive cited, grounded answers.
+**Goal**: Enable future generations to ask natural-language questions about preserved memories and cultural traditions through an AI-powered cultural heritage chatbot.
 
 **Tasks**:
-- [ ] Build the LangChain RAG pipeline end-to-end.
-- [ ] Implement memory chunk retrieval from ChromaDB.
-- [ ] Integrate Groq LLM for response generation.
-- [ ] Build the conversational chat UI.
-- [ ] Implement source citation in chat responses.
-- [ ] Link citations to original recordings and transcripts.
+- [ ] Build the LangChain RAG pipeline end-to-end for both personal and cultural knowledge.
+- [ ] Implement memory and tradition chunk retrieval from ChromaDB.
+- [ ] Integrate Groq LLM for response generation and conversational Q&A.
+- [ ] Build the conversational chat UI and AI cultural heritage chatbot.
+- [ ] Implement source citation in chat responses linking back to original recordings and contributors.
 - [ ] Add conversation history and session management.
-- [ ] Implement multilingual query support.
+- [ ] Implement multilingual query support in regional languages.
 
 **Technologies**: LangChain, ChromaDB, Groq API, FastAPI, Next.js
 
 ---
 
-## Phase 9 — Testing, Polish, and Final Integration 🔲 PLANNED
+## Phase 10 — Testing, Polish, and Final Integration 🔲 PLANNED
 
 **Goal**: Ensure the system is production-ready, well-tested, and polished.
 
 **Tasks**:
 - [ ] Write unit tests for all backend API endpoints.
-- [ ] Write integration tests for the AI pipeline.
-- [ ] Write end-to-end tests for critical user flows.
+- [ ] Write integration tests for the AI pipeline and cultural extraction.
+- [ ] Write end-to-end tests for critical user flows (capture, cultural contributions, map exploration).
 - [ ] Perform accessibility audit and fix WCAG issues.
 - [ ] Optimise frontend performance (Core Web Vitals).
 - [ ] Implement error monitoring and logging.
-- [ ] Security review — authentication, authorisation, input validation.
+- [ ] Security review — authentication, authorisation, input validation, consent enforcement.
 - [ ] Final UI polish and design consistency review.
 - [ ] Write deployment documentation.
 - [ ] Deploy to staging environment.
@@ -202,7 +217,8 @@ memories and receive cited, grounded answers.
 | 4 | Memory Collection | 🔲 PLANNED |
 | 5 | AI Interview and Transcription | 🔲 PLANNED |
 | 6 | Wisdom Extraction and Memory Organisation | 🔲 PLANNED |
-| 7 | Timeline and Knowledge Graph | 🔲 PLANNED |
-| 8 | RAG-Based Conversational Memory Search | 🔲 PLANNED |
-| 9 | Testing, Polish, and Final Integration | 🔲 PLANNED |
+| 7 | Cultural Roots & Community Knowledge Map | 🔲 PLANNED |
+| 8 | Timeline and Knowledge Graph | 🔲 PLANNED |
+| 9 | RAG-Based Conversational Search & Cultural Chatbot | 🔲 PLANNED |
+| 10 | Testing, Polish, and Final Integration | 🔲 PLANNED |
 

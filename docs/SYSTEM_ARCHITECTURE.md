@@ -110,21 +110,20 @@ responsibility and communicates with adjacent layers through well-defined interf
 
 **Technology**: OpenAI Whisper, Groq API, LangChain
 
-**Responsibilities**:
-- Transcribe voice and video recordings into timestamped text (Whisper).
-- Extract meaningful knowledge entities from transcripts (Groq LLM).
+**Responsibilities**:\n- Transcribe voice and video recordings into timestamped text (Whisper) with multilingual support and regional language identification.
+- Extract meaningful knowledge entities and cultural heritage data from transcripts (Groq LLM).
+- Perform automatic categorization of traditions and location-based tagging.
 - Generate vector embeddings for semantic search.
-- Orchestrate the RAG pipeline for conversational memory retrieval (LangChain).
-- Perform multilingual processing for regional language support.
+- Orchestrate the RAG pipeline for conversational memory and cultural heritage retrieval (LangChain).
 
 **Processing Pipeline**:
 ```
-Media Upload
-    → Whisper Transcription
-    → LLM Entity Extraction (Groq)
-    → Embedding Generation
-    → ChromaDB Storage
-    → PostgreSQL Entity Records
+Media Upload (Personal / Cultural Roots)
+    → Multilingual Whisper Transcription & Language ID
+    → LLM Cultural Information Extraction & Categorization (Groq)
+    → Geographic & Location-Based Indexing
+    → Embedding Generation & ChromaDB Storage
+    → PostgreSQL Structured Records & Consent Verification
     → Knowledge Graph Update (Neo4j)
 ```
 
@@ -152,9 +151,9 @@ Media Upload
 - Enable graph traversal queries (e.g., "who did this person know?").
 - Power the visual knowledge graph exploration interface.
 
-**Node Types**: Person, Location, Event, Skill, Tradition, Memory
+**Node Types**: Person, Location, Event, Skill, Tradition, Memory, Community, Contributor
 
-**Relationship Types**: KNOWS, LIVES_IN, PRACTISED, TAUGHT, PARTICIPATED_IN, RELATED_TO
+**Relationship Types**: KNOWS, LIVES_IN, PRACTISED, TAUGHT, PARTICIPATED_IN, RELATED_TO, CELEBRATES, LOCATED_IN, CONTRIBUTED_BY
 
 ---
 
