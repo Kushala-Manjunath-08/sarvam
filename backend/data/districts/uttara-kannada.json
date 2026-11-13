@@ -1,0 +1,95 @@
+{
+  "district": {
+    "id": "uttara-kannada",
+    "name": "Uttara Kannada",
+    "state": "Karnataka",
+    "region": "Karavali",
+    "headquarters": "Karwar",
+    "primary_language": "Konkani, Kannada, Havyaka Kannada, Marathi",
+    "geographic_features": "Characterized by dense evergreen Western Ghat forests, wide river estuaries (Sharavathi, Kali, Aghanashini), and majestic sea forts.",
+    "climate": "Tropical monsoon with heavy rainfall and lush biodiversity."
+  },
+  "records": [
+    {
+      "id": "gokarna-mahabaleshwara",
+      "title": "Gokarna Mahabaleshwara Temple",
+      "category": "Architecture & Religion",
+      "description": "Ancient 4th-century CE temple housing the revered Atmalinga, a prime destination for Shaivite pilgrimage and Sanskrit learning.",
+      "location": "Gokarna",
+      "period": "Gupta / Kadamba Era",
+      "language": ["Sanskrit", "Kannada", "Konkani"],
+      "source": {
+        "name": "Uttara Kannada District Official Portal",
+        "url": "https://uttarakannada.nic.in/en/"
+      }
+    },
+    {
+      "id": "murudeshwar-temple-tower",
+      "title": "Murudeshwar Shiva Statue & Temple",
+      "category": "Architecture & Tourism",
+      "description": "Features the world's second-tallest Shiva statue overlooking the Arabian Sea, flanked by a towering 20-story Raja Gopura.",
+      "location": "Murudeshwar, Bhatkal",
+      "period": "Contemporary Monumental Architecture",
+      "language": ["Kannada", "English"],
+      "source": {
+        "name": "Karnataka Tourism",
+        "url": "https://karnatakatourism.org/en/"
+      }
+    },
+    {
+      "id": "mirjan-fort",
+      "title": "Mirjan Fort Spice Bastion",
+      "category": "History & Archaeology",
+      "description": "16th-century laterite fort associated with the Queen of Gersoppa (Chennabhairadevi), historically noted for pepper and spice shipping.",
+      "location": "Mirjan, Kumta",
+      "period": "16th Century CE",
+      "language": ["Kannada", "English"],
+      "source": {
+        "name": "Karnataka Archaeology Department",
+        "url": "https://archaeology.karnataka.gov.in/"
+      }
+    }
+  ],
+  "places": [
+    {
+      "id": "gokarna-beach",
+      "name": "Gokarna Beach & Mahabaleshwara",
+      "category": "Sacred & Coastal Heritage",
+      "description": "Sacred coastal town famous for pristine beaches (Kudle, Om, Paradise) and ancient Vedic traditions.",
+      "coordinates": "14.5500° N, 74.3160° E",
+      "highlights": ["Atmalinga Shrine", "Om Beach Rock Formations", "Vedic Heritage"]
+    },
+    {
+      "id": "murudeshwar-complex",
+      "name": "Murudeshwar Temple & Giant Shiva Statue",
+      "category": "Architecture & Landmark",
+      "description": "Monumental coastal temple complex built on Kanduka hill surrounded by the sea on three sides.",
+      "coordinates": "14.0926° N, 74.4847° E",
+      "highlights": ["123-foot Shiva Statue", "20-story Gopura", "Scuba Diving Island nearby"]
+    },
+    {
+      "id": "yana-caves",
+      "name": "Yana Karst Rock Formations",
+      "category": "Natural Heritage & Geology",
+      "description": "Massive monolithic rock outcrops of solid black crystalline limestone nestled deep within evergreen Western Ghat forests.",
+      "coordinates": "14.5855° N, 74.5562° E",
+      "highlights": ["Bhairaveshwara & Mohini Shikhara", "Evergreen Forest Trek", "Unique Karst Geology"]
+    }
+  ],
+  "media_references": [
+    {
+      "id": "uk-media-1",
+      "title": "Mirjan Fort Stone Walls and Moat",
+      "subject": "Medieval defensive architecture",
+      "location": "Mirjan, Uttara Kannada",
+      "catalogue_url": "https://archaeology.karnataka.gov.in/",
+      "rights_status": "Protected Monument",
+      "availability": "Open Access"
+    }
+  ],
+  "future_research": [
+    "Archaeological conservation study of Queen Chennabhairadevi's palace remains",
+    "Documentation of Konkani folk theatre (Gumphu / Korgajja traditions)",
+    "Biodiversity mapping of Aghanashini estuarine mangroves"
+  ]
+}

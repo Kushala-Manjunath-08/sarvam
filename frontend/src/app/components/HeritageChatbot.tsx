@@ -7,59 +7,56 @@ type Message = {
   id: number;
   sender: "bot" | "user";
   text: string;
+  sources?: ChatSource[];
+  error?: boolean;
 };
 
+type ChatSource = {
+  citation: number;
+  id: string;
+  title: string;
+  organization: string;
+  url: string;
+  region: string;
+  district: string;
+  publication_year: string | number | null;
+  reporting_year: string | number | null;
+};
+
+type ChatResponse = {
+  answer: string;
+  sources: ChatSource[];
+  retrieval_mode: string;
+  grounded: boolean;
+};
+
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+
 const suggestions = [
-  "Tell me about Karnataka",
-  "Explore heritage sites",
-  "What is Yakshagana?",
+  "What crops are grown in Old Mysuru?",
+  "Tell me about Bidar's heritage",
+  "What is Yakshagana in Karavali?",
 ];
 
-function getReply(message: string): string {
-  const text = message.toLowerCase();
-
-  if (
-    text.includes("yakshagana") ||
-    text.includes("dance") ||
-    text.includes("art form")
-  ) {
-    return "Yakshagana is a vibrant traditional theatre form from coastal Karnataka. It brings together expressive dance, music, elaborate costumes, dialogue and stories drawn largely from Indian epics.";
+function isChatResponse(value: unknown): value is ChatResponse {
+  if (typeof value !== "object" || value === null || !("answer" in value) || !("sources" in value)) {
+    return false;
   }
 
-  if (
-    text.includes("heritage") ||
-    text.includes("monument") ||
-    text.includes("historical") ||
-    text.includes("place")
-  ) {
-    return "Karnataka has a remarkable heritage, from the ruins of Hampi and the temples of Belur and Halebidu to the royal architecture of Mysuru. Which place would you like to explore?";
-  }
-
-  if (
-    text.includes("temple") ||
-    text.includes("architecture")
-  ) {
-    return "Karnataka is known for its distinctive temple architecture. The Hoysala temples at Belur and Halebidu are celebrated for their detailed stone carvings and intricate sculptures.";
-  }
-
-  if (
-    text.includes("food") ||
-    text.includes("cuisine") ||
-    text.includes("dish")
-  ) {
-    return "Karnataka's food traditions are wonderfully diverse. Some favourites include bisi bele bath, ragi mudde, Mysore masala dosa, akki rotti and Dharwad peda.";
-  }
-
-  if (
-    text.includes("karnataka") ||
-    text.includes("namma") ||
-    text.includes("hello") ||
-    text.includes("hi")
-  ) {
-    return "Namaskara! Karnataka is a land of rich languages, living traditions, magnificent architecture and diverse landscapes. Ask me about its history, art, food or remarkable places.";
-  }
-
-  return "That's an interesting question! I can currently share introductory information about Karnataka's heritage, historical places, traditional art forms and cuisine. A connected AI knowledge base will be needed for detailed answers to a wider range of questions.";
+  return (
+    typeof value.answer === "string" &&
+    Array.isArray(value.sources) &&
+    value.sources.every(
+      (source) =>
+        typeof source === "object" &&
+        source !== null &&
+        "url" in source &&
+        "title" in source &&
+        typeof source.url === "string" &&
+        typeof source.title === "string",
+    )
+  );
 }
 
 export default function HeritageChatbot() {
@@ -91,7 +88,7 @@ export default function HeritageChatbot() {
     return () => window.removeEventListener("sarvam:open-chat", openChat);
   }, []);
 
-  function sendMessage(text = message) {
+  async function sendMessage(text = message) {
     const trimmed = text.trim();
 
     if (!trimmed || isTyping) return;
@@ -106,18 +103,64 @@ export default function HeritageChatbot() {
     setMessage("");
     setIsTyping(true);
 
-    // Demo responses for the frontend.
-    // Connect this function to your backend API when it is ready.
-    window.setTimeout(() => {
+    const conversation = [...messages, userMessage]
+      .filter((item, index) => !(index === 0 && item.sender === "bot"))
+      .slice(-8)
+      .map((item) => ({
+        role: item.sender === "bot" ? "assistant" : "user",
+        content: item.text,
+      }));
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: conversation }),
+      });
+      let payload: unknown;
+
+      try {
+        payload = await response.json();
+      } catch {
+        throw new Error(`The knowledge service returned an invalid response (${response.status}).`);
+      }
+
+      if (!response.ok) {
+        const detail =
+          typeof payload === "object" &&
+          payload !== null &&
+          "detail" in payload &&
+          typeof payload.detail === "string"
+            ? payload.detail
+            : `The knowledge service returned an error (${response.status}).`;
+        throw new Error(detail);
+      }
+
+      if (!isChatResponse(payload)) {
+        throw new Error("The knowledge service returned an invalid response.");
+      }
+
       const botMessage: Message = {
         id: Date.now() + 1,
         sender: "bot",
-        text: getReply(trimmed),
+        text: payload.answer,
+        sources: payload.sources,
       };
-
       setMessages((previous) => [...previous, botMessage]);
+    } catch (error) {
+      const botMessage: Message = {
+        id: Date.now() + 1,
+        sender: "bot",
+        text:
+          error instanceof Error
+            ? error.message
+            : "The knowledge service could not answer this question.",
+        error: true,
+      };
+      setMessages((previous) => [...previous, botMessage]);
+    } finally {
       setIsTyping(false);
-    }, 650);
+    }
   }
 
   return (
@@ -183,9 +226,30 @@ export default function HeritageChatbot() {
                     <div className="bot-avatar">ನ</div>
                   )}
 
-                  <div className="message-bubble">
-                    {item.text}
-                  </div>
+                  {item.sender === "bot" ? (
+                    <div className="bot-message-content">
+                      <div className={`message-bubble ${item.error ? "error" : ""}`}>
+                        {item.text}
+                      </div>
+                      {item.sources && item.sources.length > 0 && (
+                        <div className="message-sources">
+                          <p>Sources</p>
+                          {item.sources.map((source) => (
+                            <a
+                              key={`${item.id}-${source.id}`}
+                              href={source.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              [{source.citation}] {source.title} · {source.district}
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="message-bubble">{item.text}</div>
+                  )}
                 </div>
               ))}
 
@@ -487,6 +551,10 @@ export default function HeritageChatbot() {
           margin-bottom: 13px;
         }
 
+        .message-row.bot {
+          align-items: flex-start;
+        }
+
         .message-row.user {
           justify-content: flex-end;
         }
@@ -514,6 +582,52 @@ export default function HeritageChatbot() {
           font-size: 12px;
           line-height: 1.65;
           overflow-wrap: anywhere;
+          white-space: pre-line;
+        }
+
+        .bot-message-content {
+          display: flex;
+          flex-direction: column;
+          gap: 7px;
+          max-width: 83%;
+          min-width: 0;
+        }
+
+        .bot-message-content .message-bubble {
+          max-width: 100%;
+        }
+
+        .message-bubble.error {
+          border-color: #d7a29a;
+          background: #fff3f0;
+          color: #7d332a;
+        }
+
+        .message-sources {
+          display: grid;
+          gap: 4px;
+          padding: 2px 3px 4px;
+        }
+
+        .message-sources p {
+          margin: 0 0 2px;
+          color: #8d7655;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.8px;
+          text-transform: uppercase;
+        }
+
+        .message-sources a {
+          color: #755426;
+          font-size: 10px;
+          line-height: 1.45;
+          text-decoration: underline;
+          text-underline-offset: 2px;
+        }
+
+        .message-sources a:hover {
+          color: #3e2d17;
         }
 
         .user .message-bubble {

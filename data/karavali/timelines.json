@@ -1,0 +1,48 @@
+{
+  "timelines": [
+    {
+      "id": "udupi-matha-foundation",
+      "district_id": "udupi",
+      "place_id": "sri-krishna-matha",
+      "period": "13th century CE",
+      "sort_order": 10,
+      "title": "Sri Krishna Matha and the Ashta Mathas",
+      "description": "Karnataka Tourism dates the foundation of Udupi Sri Krishna Matha to the 13th century and associates it with Madhvacharya. The Ashta Mathas and Paryaya tradition continue to shape the institution's life.",
+      "details": "The temple and surrounding mathas developed as a religious and learning centre. The Kanakana Kindi story is a temple legend and is not presented here as an independently documented event.",
+      "source_ids": ["karnataka-tourism-udupi-temple"]
+    },
+    {
+      "id": "st-marys-geological-history",
+      "district_id": "udupi",
+      "place_id": "st-marys-islands",
+      "period": "Geological time",
+      "sort_order": 20,
+      "title": "Columnar basalt forms offshore",
+      "description": "Karnataka Tourism describes the islands' hexagonal basalt columns as formations created by sub-aerial sub-volcanic activity, millions of years ago.",
+      "details": "This is a geological record rather than a dated human event. No specific age is assigned in this timeline.",
+      "source_ids": ["karnataka-tourism-st-marys"]
+    },
+    {
+      "id": "mirjan-fort-laterite",
+      "district_id": "uttara-kannada",
+      "place_id": "mirjan-fort",
+      "period": "Early modern coastal history",
+      "sort_order": 30,
+      "title": "Mirjan Fort and the coast's political networks",
+      "description": "Mirjan Fort is associated with the regional history of Gersoppa. The Uttara Kannada district portal documents the laterite construction but does not state a definitive construction date.",
+      "details": "The often-repeated association with Queen Chennabhairadevi should be treated as a regional historical tradition unless a more specific archival or archaeological source is cited.",
+      "source_ids": ["mirjan-fort-uttara-kannada"]
+    },
+    {
+      "id": "mangaluru-port-modern",
+      "district_id": "dakshina-kannada",
+      "place_id": "panambur-beach",
+      "period": "Modern era",
+      "sort_order": 40,
+      "title": "A modern port reshapes the Mangaluru waterfront",
+      "description": "The New Mangalore Port Authority documents the continuing development and operations of the port, a major part of the region's contemporary maritime landscape.",
+      "details": "This entry is intentionally undated because a verified establishment milestone has not been included in the cited source set.",
+      "source_ids": ["new-mangalore-port-authority"]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "region": {
+    "id": "karavali",
+    "name": "Karavali (Coastal Karnataka)",
+    "subtitle": "Arabian Sea Shoreline, Estuaries, and Tuluva-Konkani Heritage",
+    "districts": [
+      {
+        "id": "dakshina-kannada",
+        "name": "Dakshina Kannada",
+        "headquarters": "Mangaluru",
+        "primary_languages": ["Tulu", "Kannada", "Beary", "Konkani"],
+        "description": "Vibrant Tuluva culture, bustling coastal ports, ancient temples, traditional Yakshagana theatre, and rich maritime heritage."
+      },
+      {
+        "id": "udupi",
+        "name": "Udupi",
+        "headquarters": "Udupi",
+        "primary_languages": ["Tulu", "Kannada", "Konkani"],
+        "description": "Sacred temple towns, volcanic basalt pillar islands, lighthouses, world-renowned culinary tradition (Udupi cuisine), and pristine beaches."
+      },
+      {
+        "id": "uttara-kannada",
+        "name": "Uttara Kannada",
+        "headquarters": "Karwar",
+        "primary_languages": ["Konkani", "Kannada", "Marathi", "Havyaka Kannada"],
+        "description": "Forested Western Ghat hills, historical sea forts, pristine estuaries, revered pilgrim centers like Gokarna, and ancient cave formations."
+      }
+    ],
+    "geography": {
+      "coastal_length": "approx. 320 km",
+      "boundaries": "Arabian Sea to the West, Western Ghats (Sahyadri) to the East",
+      "rivers": ["Netravathi", "Gurupura", "Nandini", "Shambhavi", "Papanashini", "Swarna", "Sita", "Pelj", "Sharavathi", "Aghanashini", "Gangavali", "Kali"]
+    },
+    "cultural_highlights": [
+      "Yakshagana (Tenku Thittu & Badaga Thittu)",
+      "Bhuta Kola & Nema (Spirit Worship)",
+      "Pili Vesha (Tiger Dance during Dasara/Krishna Janmashtami)",
+      "Kambala (Traditional Buffalo Race in Paddy Fields)",
+      "Traditional Guttu Mane architecture"
+    ]
+  }
+}
