@@ -1,0 +1,32 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+.pytest_cache/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Node and Next.js
+node_modules/
+.next/
+out/
+dist/
+build/
+.turbo/
+
+# Logs
+*.log
+npm-debug.log*
+
+# IDE and operating system
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# User uploads and generated data
+backend/data/uploads/
