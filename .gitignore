@@ -5,13 +5,19 @@ venv/
 .venv/
 .pytest_cache/
 
-# Environment and secrets
+# Environment variables and secrets
 .env
 .env.*
 !.env.example
 
-# Node and Next.js
+# Node.js
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Next.js
 .next/
 out/
 dist/
@@ -20,7 +26,6 @@ build/
 
 # Logs
 *.log
-npm-debug.log*
 
 # IDE and operating system
 .vscode/
@@ -28,5 +33,5 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 
-# User uploads and generated data
+# LEGACYOS user uploads
 backend/data/uploads/
