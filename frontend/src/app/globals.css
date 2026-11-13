@@ -1163,6 +1163,52 @@ button:focus-visible,a:focus-visible {
   line-height: 1.75;
 }
 
+.district-region-picker {
+  justify-content: flex-start;
+  padding-top: 54px;
+}
+
+.district-picker-list {
+  width: 100%;
+  max-height: 320px;
+  margin: 0 0 22px;
+  padding: 0;
+  overflow: auto;
+  list-style: none;
+}
+
+.district-picker-list li+li {
+  border-top: 1px solid var(--sand-dark);
+}
+
+.district-picker-list button {
+  width: 100%;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 12px 0;
+  display: grid;
+  gap: 4px;
+}
+
+.district-picker-list button:hover span:first-child,
+.district-picker-list button:focus-visible span:first-child {
+  color: var(--red);
+}
+
+.district-picker-list button span:first-child {
+  font-family: Playfair Display,Georgia,serif;
+  font-size: 18px;
+}
+
+.district-picker-list button span:last-child {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
 .district-dialog-close {
   border: 1px solid var(--sand-dark);
   width: 34px;

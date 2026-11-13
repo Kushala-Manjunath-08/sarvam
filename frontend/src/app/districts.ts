@@ -218,6 +218,18 @@ export const districts = [
   },
 ] as const;
 
+export const bengaluruDivisionDistrictNames = [
+  "Bengaluru Rural",
+  "Bengaluru Urban",
+  "Chikkaballapur",
+  "Chitradurga",
+  "Davanagere",
+  "Kolar",
+  "Ramanagara",
+  "Shivamogga",
+  "Tumakuru",
+] as const;
+
 export type District = (typeof districts)[number];
 
 export function districtSlug(name: string) {
