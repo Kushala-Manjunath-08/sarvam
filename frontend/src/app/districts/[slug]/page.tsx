@@ -22,6 +22,8 @@ export default async function DistrictPage({ params }: DistrictPageProps) {
     <main className="landing-page district-page-active">
       <section className="district-detail-page">
         <nav className="district-breadcrumb" aria-label="Breadcrumb">
+          <Link href="/map">Karnataka map</Link>
+          <span aria-hidden="true">/</span>
           <Link href="/search">All districts</Link>
           <span aria-hidden="true">/</span>
           <span aria-current="page">{district.name}</span>
@@ -42,6 +44,9 @@ export default async function DistrictPage({ params }: DistrictPageProps) {
               <p>{district.tradition}</p>
             </div>
             <div className="district-detail-actions">
+              <Link className="district-detail-map-link" href="/map">
+                Back to the map <span aria-hidden="true">↗</span>
+              </Link>
               <Link className="district-detail-search-link" href="/search">
                 Browse all districts
               </Link>
