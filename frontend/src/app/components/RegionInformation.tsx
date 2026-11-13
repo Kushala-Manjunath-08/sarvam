@@ -2,13 +2,23 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   regionCategories,
-  type RegionCategoryId,
   type RegionPageContent,
+  type RegionCategoryItem,
+  type RegionCategoryContent,
 } from "../region-content";
 import type { RegionDetail } from "../regions";
+import KaravaliDistrictExplorer from "./KaravaliDistrictExplorer";
+import KaravaliCommunityGallery from "./KaravaliCommunityGallery";
+import KaravaliContributions from "./KaravaliContributions";
+import KaravaliKnowledgeNetwork from "./KaravaliKnowledgeNetwork";
+import KaravaliPlaceExplorer from "./KaravaliPlaceExplorer";
+import KaravaliPhotoCredit from "./KaravaliPhotoCredit";
+import KaravaliTimeline from "./KaravaliTimeline";
+
+const API = "http://127.0.0.1:8000";
 
 type RegionInformationProps = {
   region: RegionDetail;
@@ -30,10 +40,13 @@ const iconPaths: Record<"land" | "history" | "community" | "language" | "festiva
   people: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8m-7 9a7 7 0 0 1 14 0m-3-15a4 4 0 0 1 0 7m3 2a6 6 0 0 1 3 6",
 };
 
-function CategoryIcon({ name }: { name: keyof typeof iconPaths }) {
+function CategoryIcon({ name }: { name: string }) {
+  const iconPath =
+    Object.entries(iconPaths).find(([key]) => key === name)?.[1] ??
+    iconPaths.land;
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d={iconPaths[name]} />
+      <path d={iconPath} />
     </svg>
   );
 }
@@ -43,11 +56,72 @@ export default function RegionInformation({
   content,
 }: RegionInformationProps) {
   const [query, setQuery] = useState("");
+  const [karavaliContent, setKaravaliContent] = useState(content);
+  const [karavaliCategories, setKaravaliCategories] = useState<
+    (RegionCategoryItem & RegionCategoryContent)[]
+  >(() =>
+    regionCategories.flatMap((item) => {
+      const details = content.categories[item.id];
+      return details
+        ? [{ ...item, image: details.image ?? item.image, ...details }]
+        : [];
+    }),
+  );
+  const [categoryLoadError, setCategoryLoadError] = useState("");
+
+  useEffect(() => {
+    if (region.id !== "karavali") return;
+    let active = true;
+
+    async function loadKaravaliCategories() {
+      try {
+        const response = await fetch(`${API}/api/karavali/categories`, {
+          cache: "no-store",
+        });
+        if (!response.ok) {
+          throw new Error("The live Karavali heritage sections could not be loaded.");
+        }
+        const data = (await response.json()) as {
+          introduction: string;
+          categories: (RegionCategoryItem & RegionCategoryContent)[];
+        };
+        if (active) {
+          setKaravaliCategories(data.categories);
+          setKaravaliContent((current) => ({
+            ...current,
+            introduction: data.introduction,
+            categories: Object.fromEntries(
+              data.categories.map(({ id, ...details }) => [id, details]),
+            ),
+          }));
+          setCategoryLoadError("");
+        }
+      } catch (loadError) {
+        if (active) {
+          setCategoryLoadError(
+            loadError instanceof Error
+              ? loadError.message
+              : "The live Karavali heritage sections could not be loaded.",
+          );
+        }
+      }
+    }
+
+    void loadKaravaliCategories();
+    return () => {
+      active = false;
+    };
+  }, [region.id]);
+
+  const activeContent = region.id === "karavali" ? karavaliContent : content;
+  const categoryItems =
+    region.id === "karavali" ? karavaliCategories : regionCategories;
   const normalizedQuery = query.trim().toLocaleLowerCase();
   const visibleCategories = useMemo(
     () =>
-      regionCategories.filter((item) => {
-        const details = content.categories[item.id as RegionCategoryId];
+      categoryItems.filter((item) => {
+        const details = activeContent.categories[item.id];
+        if (!details) return false;
         const searchableText = [
           item.title,
           details.overview,
@@ -59,7 +133,7 @@ export default function RegionInformation({
           .toLocaleLowerCase();
         return searchableText.includes(normalizedQuery);
       }),
-    [content.categories, normalizedQuery],
+    [activeContent.categories, categoryItems, normalizedQuery],
   );
 
   return (
@@ -70,20 +144,24 @@ export default function RegionInformation({
             <span aria-hidden="true">←</span> Back to all divisions
           </Link>
 
-          <header className="region-hero">
+          <header className={`region-hero ${region.id === "karavali" ? "karavali-editorial-hero" : ""}`}>
             <div className="region-hero-copy">
               <p className="district-explorer-kicker">LEGACYOS / REGIONAL ATLAS</p>
               <h1 id="region-heading">{region.name}</h1>
               <p className="region-hero-subtitle">{region.subtitle}</p>
-              <p className="region-hero-introduction">{content.introduction}</p>
-              <div className="region-districts">
-                <h2>Districts in this division</h2>
-                <ul>
-                  {region.districts.map((district) => (
-                    <li key={district}>{district}</li>
-                  ))}
-                </ul>
-              </div>
+              <p className="region-hero-introduction">{activeContent.introduction}</p>
+              {region.id === "karavali" ? (
+                <KaravaliDistrictExplorer />
+              ) : (
+                <div className="region-districts">
+                  <h2>Districts in this division</h2>
+                  <ul>
+                    {region.districts.map((district) => (
+                      <li key={district}>{district}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
             <div className="region-hero-art">
               <Image
@@ -94,8 +172,13 @@ export default function RegionInformation({
                 sizes="(max-width: 760px) 100vw, 48vw"
               />
               <span className="region-image-caption">A living landscape</span>
+              {region.id === "karavali" && (
+                <KaravaliPhotoCredit image={content.heroImage} />
+              )}
             </div>
           </header>
+
+          {region.id === "karavali" && <KaravaliPlaceExplorer />}
 
           <div className="region-content-heading">
             <div>
@@ -125,20 +208,27 @@ export default function RegionInformation({
               </a>
             ))}
           </nav>
+          {region.id === "karavali" && categoryLoadError && (
+            <p className="karavali-inline-error" role="alert">
+              {categoryLoadError} The last available editorial copy remains visible.
+            </p>
+          )}
 
           {visibleCategories.length > 0 ? (
-            <div className="region-category-grid">
+            <div className={`region-category-grid ${region.id === "karavali" ? "karavali-category-exhibition" : ""}`}>
               {visibleCategories.map((item, index) => {
-                const details = content.categories[item.id as RegionCategoryId];
+                const details = activeContent.categories[item.id];
+                if (!details) return null;
+                const d = details;
                 return (
                   <article
-                    className="region-category-card"
+                    className={region.id === "karavali" ? "karavali-exhibition-section" : "region-category-card"}
                     id={item.id}
                     key={item.id}
                   >
                     <div className="region-category-image">
                       <Image
-                        src={item.image}
+                        src={region.id === "karavali" ? d.image ?? item.image : item.image}
                         alt=""
                         fill
                         sizes="(max-width: 700px) 100vw, (max-width: 1050px) 50vw, 33vw"
@@ -147,6 +237,9 @@ export default function RegionInformation({
                         {String(index + 1).padStart(2, "0")}
                       </span>
                     </div>
+                    {region.id === "karavali" && (
+                      <KaravaliPhotoCredit image={d.image ?? item.image} />
+                    )}
                     <div className="region-category-copy">
                       <div className="region-category-title">
                         <span className="region-category-icon">
@@ -154,26 +247,35 @@ export default function RegionInformation({
                         </span>
                         <h3>{item.title}</h3>
                       </div>
-                      <p className="region-category-overview">{details.overview}</p>
-                      <details className="region-read-more">
-                        <summary>Read more</summary>
-                        <div className="region-category-details">
-                          {details.details.map((paragraph) => (
-                            <p key={paragraph}>{paragraph}</p>
-                          ))}
-                          <h4>In focus</h4>
-                          <ul>
-                            {details.highlights.map((highlight) => (
-                              <li key={highlight}>{highlight}</li>
+                      <p className="region-category-overview">{d.overview}</p>
+                      {region.id === "karavali" ? (
+                        <Link
+                          className="region-category-read-more"
+                          href={`/regions/karavali/categories/${item.id}`}
+                        >
+                          Read more <span aria-hidden="true">→</span>
+                        </Link>
+                      ) : (
+                        <details className="region-read-more">
+                          <summary>Read more</summary>
+                          <div className="region-category-details">
+                            {d.details.map((paragraph) => (
+                              <p key={paragraph}>{paragraph}</p>
                             ))}
-                          </ul>
-                          {details.verificationNote && (
-                            <p className="region-verification-note">
-                              <strong>Context note:</strong> {details.verificationNote}
-                            </p>
-                          )}
-                        </div>
-                      </details>
+                            <h4>In focus</h4>
+                            <ul>
+                              {d.highlights.map((highlight) => (
+                                <li key={highlight}>{highlight}</li>
+                              ))}
+                            </ul>
+                            {d.verificationNote && (
+                              <p className="region-verification-note">
+                                <strong>Context note:</strong> {d.verificationNote}
+                              </p>
+                            )}
+                          </div>
+                        </details>
+                      )}
                     </div>
                   </article>
                 );
@@ -184,6 +286,11 @@ export default function RegionInformation({
               No categories match “{query}”. Try another word or phrase.
             </p>
           )}
+
+          {region.id === "karavali" && <KaravaliTimeline />}
+          {region.id === "karavali" && <KaravaliKnowledgeNetwork />}
+          {region.id === "karavali" && <KaravaliContributions />}
+          {region.id === "karavali" && <KaravaliCommunityGallery />}
         </div>
       </section>
     </main>

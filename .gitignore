@@ -35,3 +35,4 @@ Thumbs.db
 
 # LEGACYOS user uploads
 backend/data/uploads/
+backend/data/knowledge_index.sqlite3

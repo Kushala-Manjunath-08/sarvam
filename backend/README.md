@@ -28,6 +28,42 @@ is at `http://127.0.0.1:8000/docs`. The SQLite schema is initialized and
 existing review tables are extended without deleting their records when the
 service starts.
 
+## Karnataka knowledge assistant
+
+The chat assistant reads source-backed JSONL records from
+`../data/karnataka-knowledge-base/documents.jsonl`. The corpus uses the four
+fixed regions and their 31 district assignments. Only records marked
+`verification_status: "verified"` are searchable; every answer includes links
+to the records' sources. Region names and district assignments are in
+`../data/karnataka-knowledge-base/regions.json`. The source registry is
+generated from the corpus at
+`../data/karnataka-knowledge-base/source-registry.json`; it includes review
+status and links to primary and additional sources. The local SQLite/FTS index
+is rebuilt incrementally when the corpus changes and is stored in
+`backend/data/knowledge_index.sqlite3`.
+
+| Purpose | Route |
+|---|---|
+| Grounded chat and source citations | `POST /api/chat` |
+| Corpus and retrieval status | `GET /api/knowledge/status` |
+| Incremental reindex | `POST /api/knowledge/reindex` |
+
+With no `GROQ_API_KEY`, chat returns the retrieved evidence excerpts directly
+with citations. To enable generated answers, set `GROQ_API_KEY` and an active
+`GROQ_MODEL` in the backend process environment. The key stays server-side; a
+configured provider error is returned explicitly rather than replaced with a
+demo answer.
+
+Keyword retrieval is available by default. To enable hybrid semantic and
+keyword retrieval, install `sentence-transformers` and set
+`SARVAM_EMBEDDING_MODEL` to a model available to the backend. The model is loaded
+only when configured, and the index reports whether semantic embeddings are
+active.
+
+The reindex route requires the existing `X-Admin-Token` header and
+`KARAVALI_ADMIN_TOKEN`. Keep all backend environment values private; see
+`.env.example` for the supported settings.
+
 ## Karavali routes
 
 | Purpose | Route |

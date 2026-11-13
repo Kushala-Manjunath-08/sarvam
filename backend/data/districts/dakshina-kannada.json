@@ -1,0 +1,95 @@
+{
+  "district": {
+    "id": "dakshina-kannada",
+    "name": "Dakshina Kannada",
+    "state": "Karnataka",
+    "region": "Karavali",
+    "headquarters": "Mangaluru",
+    "primary_language": "Tulu, Kannada, Konkani, Beary",
+    "geographic_features": "Bounded by Western Ghats in the east and Arabian Sea in the west, traversed by Netravathi and Gurupura rivers.",
+    "climate": "Tropical monsoon climate with heavy rainfall from June to September."
+  },
+  "records": [
+    {
+      "id": "mangaluru-port-history",
+      "title": "Mangaluru Maritime & Port History",
+      "category": "History",
+      "description": "Historical spice trading port connecting coastal Karnataka with the Persian Gulf, Rome, and East Africa.",
+      "location": "Mangaluru",
+      "period": "Ancient to Colonial Era",
+      "language": ["Tulu", "English"],
+      "source": {
+        "name": "Dakshina Kannada District Gazetteers",
+        "url": "https://dk.nic.in/en/"
+      }
+    },
+    {
+      "id": "yakshagana-tenku-thittu",
+      "title": "Yakshagana - Tenku Thittu Style",
+      "category": "Performing Arts",
+      "description": "The vibrant southern school of Yakshagana theatre, celebrated for vigorous dance steps, fast-paced rhythm, and elaborate traditional costumes.",
+      "location": "Dakshina Kannada & Udupi",
+      "period": "Classical Folk Tradition",
+      "language": ["Tulu", "Kannada"],
+      "source": {
+        "name": "IGNCA Cultural Archives",
+        "url": "https://ignca.gov.in/"
+      }
+    },
+    {
+      "id": "kadri-manjunatha-temple",
+      "title": "Kadri Manjunatha Temple",
+      "category": "Architecture",
+      "description": "An ancient 10th-century temple featuring Lokeshwara bronze statue and Vijayanagara architectural elements.",
+      "location": "Kadri, Mangaluru",
+      "period": "10th Century CE",
+      "language": ["Kannada", "Tulu"],
+      "source": {
+        "name": "Karnataka Archaeology Department",
+        "url": "https://archaeology.karnataka.gov.in/"
+      }
+    }
+  ],
+  "places": [
+    {
+      "id": "kadri-hills",
+      "name": "Kadri Manjunatha Temple & Hills",
+      "category": "Architecture & Heritage",
+      "description": "Historic hill temple complex with ancient water ponds (Kandri/Kadri) and Buddhist-Hindu syncretic art heritage.",
+      "coordinates": "12.8804° N, 74.8540° E",
+      "highlights": ["10th Century Bronze Sculpture", "Natural Springs (Goumukhi)", "Historic Hillside Park"]
+    },
+    {
+      "id": "st-aloysius-chapel",
+      "name": "St. Aloysius Chapel",
+      "category": "Architecture",
+      "description": "Renowned 19th-century chapel featuring breathtaking interior ceiling paintings and frescoes by Italian Jesuit artist Antonio Moscheni.",
+      "coordinates": "12.8732° N, 74.8430° E",
+      "highlights": ["Masterpiece Frescoes", "Historic Lighthouse Hill view", "Architectural Heritage"]
+    },
+    {
+      "id": "panambur-beach",
+      "name": "Panambur Beach",
+      "category": "Geography & Tourism",
+      "description": "One of India's best-managed golden sand beaches known for the annual International Kite Festival and stunning Arabian Sea sunsets.",
+      "coordinates": "12.9238° N, 74.8028° E",
+      "highlights": ["Clean Shoreline", "Water Sports", "International Kite Festival"]
+    }
+  ],
+  "media_references": [
+    {
+      "id": "dk-media-1",
+      "title": "Traditional Guttu Mane Architecture",
+      "subject": "Vernacular coastal housing",
+      "location": "Dakshina Kannada interior",
+      "catalogue_url": "https://karnatakatourism.org/en/",
+      "rights_status": "Public Educational Asset",
+      "availability": "Open Access"
+    }
+  ],
+  "future_research": [
+    "Epigraphical survey of Tulu inscriptions",
+    "Documentation of traditional sea-salt farming in estuarine villages",
+    "Oral history preservation of Beary folk songs and maritime traditions"
+  ]
+}

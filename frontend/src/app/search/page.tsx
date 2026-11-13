@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import DistrictIllustration from "../components/DistrictIllustration";
 import {
-  bengaluruDivisionDistrictNames,
   districts,
   type District,
 } from "../districts";
+import { karnatakaRegions } from "../regions";
 
 interface HeritageRecord {
   id: string;
@@ -50,49 +51,10 @@ interface DistrictData {
   future_research: string[];
 }
 
-interface Region {
-  name: string;
-  description: string;
-  districtNames: readonly string[];
-}
-
-const regions: Region[] = [
-  {
-    name: "Bengaluru Division",
-    description:
-      "Explore the city and surrounding districts through their local heritage and traditions.",
-    districtNames: bengaluruDivisionDistrictNames,
-  },
-  {
-    name: "Coastal Region",
-    description:
-      "Discover Karnataka's coastal customs, cuisine and performance traditions.",
-    districtNames: ["Dakshina Kannada", "Udupi", "Uttara Kannada"],
-  },
-  {
-    name: "Uttara Karnataka",
-    description:
-      "Find stories of Deccan architecture, craft, music and northern Karnataka heritage.",
-    districtNames: districts
-      .filter((district) => district.region === "North Karnataka")
-      .map((district) => district.name),
-  },
-  {
-    name: "Malnad",
-    description:
-      "Explore the hill country, coffee traditions, forests and folk heritage of Malnad.",
-    districtNames: districts
-      .filter((district) => district.region === "Malnad")
-      .map((district) => district.name),
-  },
-];
-import Link from "next/link";
-import { karnatakaRegions } from "../regions";
-
 export default function DistrictSearchPage() {
   const [query, setQuery] = useState("");
   const [selectedRegion, setSelectedRegion] = useState<
-    (typeof regions)[number] | null
+    (typeof karnatakaRegions)[number] | null
   >(null);
   const [selectedDistrict, setSelectedDistrict] =
     useState<District | null>(null);
@@ -177,23 +139,8 @@ export default function DistrictSearchPage() {
   }
 
   const normalizedQuery = query.trim().toLowerCase();
-  const matchingRegionNames = regions.filter((region) =>
-    region.name.toLowerCase().startsWith(normalizedQuery)
-  );
-  const regionsToSearch =
-    matchingRegionNames.length > 0 ? matchingRegionNames : regions;
-  const filteredRegions = regionsToSearch.filter((region) => {
-    const regionDistricts = districts.filter((district) =>
-      region.districtNames.includes(district.name)
-    );
-    const searchableText = [
-      region.name,
-      region.description,
-      ...regionDistricts.flatMap((district) => [
-        district.name,
-        district.tradition,
-      ]),
-    ]
+  const filteredRegions = karnatakaRegions.filter((region) => {
+    const searchableText = [region.name, region.subtitle, ...region.districts]
       .join(" ")
       .toLowerCase();
 
@@ -202,7 +149,7 @@ export default function DistrictSearchPage() {
 
   const selectedRegionDistricts = selectedRegion
     ? districts.filter((district) =>
-        selectedRegion.districtNames.includes(district.name)
+        selectedRegion.districts.includes(district.name)
       )
     : [];
   const selectedDistrictIndex = selectedDistrict
@@ -227,8 +174,7 @@ export default function DistrictSearchPage() {
           </h1>
 
           <p className="district-explorer-intro">
-            Explore Karnataka through the customs, craft and heritage
-            that make each place its own.
+            Explore Karnataka through four cultural regions.
           </p>
 
           <label className="district-search">
@@ -242,94 +188,41 @@ export default function DistrictSearchPage() {
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search a district or tradition"
-              aria-label="Search districts and traditions"
+              placeholder="Search a region or district"
+              aria-label="Search regions and districts"
             />
           </label>
-          <h1 id="district-heading">Karnataka Regional Search</h1>
           <p className="district-explorer-description">
-            Choose a cultural region to explore its districts and heritage.
+            Choose a region to explore its stories and heritage.
           </p>
         </header>
 
-        <div className="district-grid">
-          {filteredRegions.map((region) => {
-            const representative = districts.find((district) =>
-              region.districtNames.includes(district.name)
-            );
-
-            if (!representative) {
-              return null;
-            }
-
-        {/* Four Regional Cards ONLY */}
         <div className="region-cards-grid">
-          {karnatakaRegions.map((region) => {
+          {filteredRegions.map((region) => {
             return (
-              <button
-                className="district-card"
-                type="button"
-                key={region.name}
-                onClick={() => {
-                  if (region.name === "Bengaluru Division") {
-                    window.location.href = "/divisions/bengaluru";
-                    return;
-                  }
-
-                  setSelectedRegion(region);
-                }}
-                aria-label={`Explore ${region.name}`}
               <Link
                 key={region.id}
                 href={`/regions/${region.slug}`}
                 className="region-card"
                 aria-label={`Explore ${region.name}: ${region.subtitle}`}
               >
-                <DistrictIllustration
-                  district={representative}
-                  index={districts.indexOf(representative)}
-                />
-
-                <span className="district-card-shade" />
-
-                <span className="district-card-content">
-                  <span className="district-card-region">
-                    Karnataka heritage
-                  </span>
-
-                  <span className="district-card-name">
-                    {region.name}
-                  </span>
-
-                  <span className="district-card-tradition">
-                    {region.description}
-                <div>
-                  <div className="region-card-top">
-                    <div className="region-card-title-group">
-                      <span className="region-card-subtitle">
-                        {region.subtitle}
-                      </span>
-                      <h2 className="region-card-name">
-                        {region.name}
-                      </h2>
-                    </div>
-                    <span className="region-card-count">
-                      {region.districts.length} districts
+                <div className="region-card-top">
+                  <div className="region-card-title-group">
+                    <span className="region-card-subtitle">
+                      {region.subtitle}
                     </span>
+                    <h2 className="region-card-name">{region.name}</h2>
                   </div>
+                  <span className="region-card-count">
+                    {region.districts.length} districts
+                  </span>
                 </div>
 
                 <div className="region-card-footer">
-                  <span>Explore region districts</span>
+                  <span>Explore region</span>
                   <span className="region-card-arrow" aria-hidden="true">
                     →
                   </span>
-
-                  <span className="district-card-link">
-                    Explore the region →
-                  </span>
-                </span>
-              </button>
                 </div>
               </Link>
             );
@@ -442,7 +335,7 @@ export default function DistrictSearchPage() {
                   </>
                 ) : (
                   <>
-                    <p>{selectedRegion?.description}</p>
+                    <p>{selectedRegion?.subtitle}</p>
                     <ul className="district-picker-list">
                       {selectedRegionDistricts.map((district) => (
                         <li key={district.name}>

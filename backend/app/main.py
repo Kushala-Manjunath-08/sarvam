@@ -1,11 +1,22 @@
 
 
-from fastapi import FastAPI, HTTPException, UploadFile, File, Form
+from fastapi import (
+    FastAPI,
+    HTTPException,
+    UploadFile,
+    File,
+    Form,
+    Body,
+    Depends,
+    Header,
+    Request,
+)
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import Optional
+from app.knowledge_base import router as knowledge_router
 import hashlib
 import hmac
 import json
@@ -32,6 +43,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.include_router(knowledge_router)
 
 # Backend folders
 BASE_DIR = Path(__file__).resolve().parents[1]
@@ -45,6 +57,21 @@ KARAVALI_DISTRICT_IDS = frozenset({
     "uttara-kannada",
 })
 KARAVALI_ADMIN_TOKEN = os.environ.get("KARAVALI_ADMIN_TOKEN", "").strip()
+
+
+def require_karavali_admin(
+    x_admin_token: Optional[str] = Header(default=None),
+) -> None:
+    if not KARAVALI_ADMIN_TOKEN:
+        raise HTTPException(
+            status_code=503,
+            detail="Karavali administration is unavailable until an admin token is configured.",
+        )
+    if not x_admin_token or not hmac.compare_digest(
+        x_admin_token, KARAVALI_ADMIN_TOKEN
+    ):
+        raise HTTPException(status_code=401, detail="Invalid admin token.")
+
 
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 DISTRICT_DIR.mkdir(parents=True, exist_ok=True)
