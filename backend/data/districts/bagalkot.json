@@ -1,0 +1,176 @@
+﻿{
+  "district": {
+    "id": "bagalkot",
+    "name": "Bagalkot",
+    "state": "Karnataka",
+    "primary_language": "Kannada",
+    "collection_status": "starter_dataset"
+  },
+  "records": [
+    {
+      "id": "bagalkot-history-001",
+      "title": "History of Bagalkot and the Badami Chalukyas",
+      "category": "History",
+      "description": "The official district history documents prehistoric archaeological discoveries, the Badami Chalukya dynasty, Pulakeshin I and II, later dynasties and the formation of Bagalkot district in 1997.",
+      "location": "Bagalkot district",
+      "period": "Prehistoric period to modern era",
+      "language": ["English", "Kannada"],
+      "source": {
+        "name": "Bagalkot District Administration",
+        "url": "https://bagalkot.nic.in/en/history/",
+        "type": "official_government_website"
+      },
+      "verification_status": "source_documented"
+    },
+    {
+      "id": "bagalkot-badami-001",
+      "title": "Badami Cave Temples",
+      "category": "Architecture and Heritage",
+      "description": "Badami is known for its rock-cut cave temples, sculptures and Chalukya-era architecture. The district tourism source also describes Badami Fort and temples around Agastya Tirtha.",
+      "location": "Badami",
+      "period": "Early Chalukya period",
+      "language": ["Kannada", "English"],
+      "source": {
+        "name": "Bagalkot District Administration",
+        "url": "https://bagalkot.nic.in/en/tourist-place/badami-caves/",
+        "type": "official_government_website"
+      },
+      "verification_status": "source_documented"
+    },
+    {
+      "id": "bagalkot-aihole-001",
+      "title": "Aihole - Cradle of Indian Temple Architecture",
+      "category": "Architecture and Heritage",
+      "description": "Aihole was an important early Chalukya centre. The district tourism source describes approximately 125 temples divided into 22 groups. It also records local legends associated with Parashurama; these legends should be presented as local tradition rather than verified historical events.",
+      "location": "Aihole, Hungund taluk",
+      "period": "6th to 8th century CE",
+      "language": ["Kannada", "English"],
+      "source": {
+        "name": "Bagalkot District Administration",
+        "url": "https://bagalkot.nic.in/en/tourist-place/aihole/",
+        "type": "official_government_website"
+      },
+      "verification_status": "source_documented"
+    },
+    {
+      "id": "bagalkot-pattadakal-001",
+      "title": "Pattadakal Group of Monuments",
+      "category": "World Heritage",
+      "description": "Pattadakal represents a blend of northern Nagara and southern Dravidian architectural traditions. The UNESCO record describes nine Hindu temples and a Jain sanctuary. The Virupaksha Temple was commissioned by Queen Lokamahadevi around 740 CE.",
+      "location": "Pattadakal",
+      "period": "7th to 8th century CE",
+      "language": ["Kannada", "English"],
+      "source": {
+        "name": "UNESCO World Heritage Centre",
+        "url": "https://whc.unesco.org/en/list/239/",
+        "type": "international_heritage_record",
+        "additional_source": "https://culture.gov.in/group-monuments-pattadakal"
+      },
+      "verification_status": "source_documented"
+    },
+    {
+      "id": "bagalkot-mahakuta-001",
+      "title": "Mahakuta Temple Complex",
+      "category": "Religious and Architectural Heritage",
+      "description": "Mahakuta is a Shaiva temple complex associated with the early Badami Chalukyas. The district tourism record describes inscriptions including the Mahakuta Pillar inscription and an inscription associated with Vinapoti.",
+      "location": "Mahakuta",
+      "period": "6th to 8th century CE",
+      "language": ["Kannada", "Sanskrit", "English"],
+      "source": {
+        "name": "Bagalkot District Administration",
+        "url": "https://bagalkot.nic.in/en/places-of-interest/",
+        "type": "official_government_website"
+      },
+      "verification_status": "source_documented"
+    },
+    {
+      "id": "bagalkot-kudalasangama-001",
+      "title": "Kudalasangama and Basavanna Heritage",
+      "category": "Spiritual and Cultural Heritage",
+      "description": "Kudalasangama is an important pilgrimage centre associated with Basavanna and Lingayat heritage. It is situated at the confluence of the Krishna and Malaprabha rivers.",
+      "location": "Kudalasangama",
+      "period": "12th century CE heritage and continuing traditions",
+      "language": ["Kannada", "English"],
+      "source": {
+        "name": "Bagalkot District Administration",
+        "url": "https://bagalkot.nic.in/en/places-of-interest/",
+        "type": "official_government_website"
+      },
+      "verification_status": "source_documented"
+    },
+    {
+      "id": "bagalkot-festival-001",
+      "title": "Banashankari Temple Festival",
+      "category": "Festival and Local Customs",
+      "description": "The district tourism source identifies the Banashankari Temple festival near Badami as a local cultural event held around January to February. Exact annual dates and associated practices should be verified separately.",
+      "location": "Banashankari, near Badami",
+      "period": "Annual festival",
+      "language": ["Kannada"],
+      "source": {
+        "name": "Bagalkot District Administration",
+        "url": "https://bagalkot.nic.in/en/tourist-place/badami-caves/",
+        "type": "official_government_website"
+      },
+      "verification_status": "source_documented"
+    },
+    {
+      "id": "bagalkot-festival-002",
+      "title": "Pattadakal Temple Car Festival",
+      "category": "Festival and Local Customs",
+      "description": "The district tourism source mentions the Virupaksha Temple car festival at Pattadakal around March. Current dates, rituals and community accounts need additional verification.",
+      "location": "Pattadakal",
+      "period": "Annual festival",
+      "language": ["Kannada"],
+      "source": {
+        "name": "Bagalkot District Administration",
+        "url": "https://bagalkot.nic.in/en/tourist-place/badami-caves/",
+        "type": "official_government_website"
+      },
+      "verification_status": "source_documented"
+    }
+  ],
+  "media_references": [
+    {
+      "id": "bagalkot-video-001",
+      "title": "The Talking Rocks of Badami",
+      "media_type": "documentary",
+      "subject": "Badami cave sculptures and Chalukya heritage",
+      "location": "Badami",
+      "catalogue_url": "https://ignca.gov.in/divisionss/media-centre/outreach/published-dvds/",
+      "inventory_url": "https://ignca.gov.in/list-of-digitized-material-available-in-media-centre-in-dvd-format/",
+      "rights_status": "check_permission_before_reuse",
+      "availability": "catalogue_reference"
+    },
+    {
+      "id": "bagalkot-video-002",
+      "title": "Aihole - Cradle of Indian Architecture",
+      "media_type": "documentary",
+      "subject": "Aihole temple architecture",
+      "location": "Aihole",
+      "catalogue_url": "https://ignca.gov.in/divisionss/media-centre/outreach/published-dvds/",
+      "inventory_url": "https://ignca.gov.in/list-of-digitized-material-available-in-media-centre-in-dvd-format/",
+      "rights_status": "check_permission_before_reuse",
+      "availability": "catalogue_reference"
+    },
+    {
+      "id": "bagalkot-video-003",
+      "title": "Sacred Excellence - Pattadakal Temples",
+      "media_type": "documentary",
+      "subject": "Pattadakal temple heritage",
+      "location": "Pattadakal",
+      "catalogue_url": "https://ignca.gov.in/divisionss/media-centre/outreach/published-dvds/",
+      "inventory_url": "https://ignca.gov.in/list-of-digitized-material-available-in-media-centre-in-dvd-format/",
+      "rights_status": "check_permission_before_reuse",
+      "availability": "catalogue_reference"
+    }
+  ],
+  "future_research": [
+    "Bagalkot folk songs and oral histories",
+    "Traditional agriculture and irrigation practices",
+    "Local food traditions and recipes",
+    "Handloom and traditional crafts",
+    "Village festivals and community customs",
+    "Elder interviews in Kannada and regional dialects",
+    "Historic photographs and archival footage"
+  ]
+}

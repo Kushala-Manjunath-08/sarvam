@@ -1,89 +1,37 @@
-# ============================================================
-# LEGACYOS — .gitignore
-# ============================================================
+﻿# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+.pytest_cache/
 
-# ----- Node.js / Frontend -----
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Node.js
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnp
-.pnp.js
+.pnpm-debug.log*
 
-# ----- Next.js -----
+# Next.js
 .next/
 out/
-build/
-dist/
-
-# ----- Environment Variables (NEVER COMMIT THESE) -----
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# ----- Python / Backend -----
-__pycache__/
-*.py[cod]
-*$py.class
-*.pyo
-*.pyd
-.venv/
-venv/
-env/
-ENV/
-*.egg-info/
-*.egg
 dist/
 build/
-.eggs/
-pip-log.txt
-pip-delete-this-directory.txt
-.tox/
-.cache/
-.pytest_cache/
-htmlcov/
-.coverage
-.coverage.*
-coverage.xml
-*.cover
+.turbo/
 
-# ----- Database -----
-*.sqlite3
-*.db
-
-# ----- AI / ML -----
-*.pt
-*.pth
-*.onnx
-chroma_db/
-chromadb/
-
-# ----- IDE and Editor -----
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.project
-.classpath
-.settings/
-
-# ----- OS Generated -----
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-Desktop.ini
-
-# ----- Logs -----
-logs/
+# Logs
 *.log
 
-# ----- Uploads and Media (do not commit user data) -----
-uploads/
-media/
+# IDE and operating system
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# LEGACYOS user uploads
+backend/data/uploads/
