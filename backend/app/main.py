@@ -1,4 +1,5 @@
 
+
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -8,7 +9,7 @@ from typing import Optional
 import json
 import uuid
 import shutil
-
+import sqlite3
 app = FastAPI(
     title="LEGACYOS API",
     description="Human Knowledge Preservation System",
@@ -44,6 +45,45 @@ ALLOWED_EXTENSIONS = {
 }
 
 MAX_FILE_SIZE = 100 * 1024 * 1024  # 100 MB
+
+# SQLite database for community interactions
+DATABASE_FILE = DATA_DIR / "community.db"
+
+
+def get_db_connection():
+    connection = sqlite3.connect(DATABASE_FILE)
+    connection.row_factory = sqlite3.Row
+    return connection
+
+
+def initialize_database():
+    connection = get_db_connection()
+
+    connection.execute("""
+        CREATE TABLE IF NOT EXISTS likes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            post_id TEXT NOT NULL,
+            user_id TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            UNIQUE(post_id, user_id)
+        )
+    """)
+
+    connection.execute("""
+        CREATE TABLE IF NOT EXISTS comments (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            post_id TEXT NOT NULL,
+            contributor TEXT NOT NULL,
+            message TEXT NOT NULL,
+            created_at TEXT NOT NULL
+        )
+    """)
+
+    connection.commit()
+    connection.close()
+
+
+initialize_database()
 
 
 def read_json(path: Path):
@@ -265,7 +305,157 @@ def add_bagalkot_feedback(
     }
 
 
+# Like or unlike a Bagalkot community post
+@app.post("/api/districts/bagalkot/posts/{post_id}/like")
+def toggle_post_like(
+    post_id: str,
+    user_id: str = Form(...)
+):
+    user_id = user_id.strip()
+
+    if not user_id or len(user_id) > 100:
+        raise HTTPException(status_code=400, detail="Invalid user ID.")
+
+    uploads = read_json(UPLOADS_FILE)
+
+    if not any(
+        item.get("id") == post_id
+        and item.get("district_id") == "bagalkot"
+        for item in uploads
+    ):
+        raise HTTPException(status_code=404, detail="Post not found.")
+
+    connection = get_db_connection()
+
+    existing = connection.execute(
+        "SELECT id FROM likes WHERE post_id = ? AND user_id = ?",
+        (post_id, user_id)
+    ).fetchone()
+
+    if existing:
+        connection.execute(
+            "DELETE FROM likes WHERE post_id = ? AND user_id = ?",
+            (post_id, user_id)
+        )
+        liked = False
+    else:
+        connection.execute(
+            "INSERT INTO likes (post_id, user_id, created_at) VALUES (?, ?, ?)",
+            (post_id, user_id, datetime.now(timezone.utc).isoformat())
+        )
+        liked = True
+
+    connection.commit()
+
+    count = connection.execute(
+        "SELECT COUNT(*) FROM likes WHERE post_id = ?",
+        (post_id,)
+    ).fetchone()[0]
+
+    connection.close()
+
+    return {"liked": liked, "likes_count": count}
+
+
+# Get likes for a post
+@app.get("/api/districts/bagalkot/posts/{post_id}/likes")
+def get_post_likes(post_id: str, user_id: str):
+    connection = get_db_connection()
+
+    count = connection.execute(
+        "SELECT COUNT(*) FROM likes WHERE post_id = ?",
+        (post_id,)
+    ).fetchone()[0]
+
+    existing = connection.execute(
+        "SELECT id FROM likes WHERE post_id = ? AND user_id = ?",
+        (post_id, user_id)
+    ).fetchone()
+
+    connection.close()
+
+    return {
+        "likes_count": count,
+        "liked": existing is not None
+    }
+
+
+# Add a comment to a Bagalkot community post
+@app.post("/api/districts/bagalkot/posts/{post_id}/comments")
+def add_post_comment(
+    post_id: str,
+    contributor: str = Form(...),
+    message: str = Form(...)
+):
+    contributor = contributor.strip()
+    message = message.strip()
+
+    if not contributor or not message:
+        raise HTTPException(
+            status_code=400,
+            detail="Please enter your name and comment."
+        )
+
+    if len(contributor) > 80 or len(message) > 1000:
+        raise HTTPException(
+            status_code=400,
+            detail="Name or comment is too long."
+        )
+
+    uploads = read_json(UPLOADS_FILE)
+
+    if not any(
+        item.get("id") == post_id
+        and item.get("district_id") == "bagalkot"
+        for item in uploads
+    ):
+        raise HTTPException(status_code=404, detail="Post not found.")
+
+    connection = get_db_connection()
+
+    cursor = connection.execute(
+        """INSERT INTO comments
+        (post_id, contributor, message, created_at)
+        VALUES (?, ?, ?, ?)""",
+        (
+            post_id,
+            contributor,
+            message,
+            datetime.now(timezone.utc).isoformat()
+        )
+    )
+
+    connection.commit()
+
+    comment = connection.execute(
+        "SELECT * FROM comments WHERE id = ?",
+        (cursor.lastrowid,)
+    ).fetchone()
+
+    result = dict(comment)
+    connection.close()
+
+    return {"message": "Comment added.", "comment": result}
+
+
+# Get comments for a post
+@app.get("/api/districts/bagalkot/posts/{post_id}/comments")
+def get_post_comments(post_id: str):
+    connection = get_db_connection()
+
+    rows = connection.execute(
+        """SELECT * FROM comments
+        WHERE post_id = ?
+        ORDER BY created_at DESC""",
+        (post_id,)
+    ).fetchall()
+
+    connection.close()
+
+    return {"comments": [dict(row) for row in rows]}
+
 # Publicly serve uploaded media
+
 app.mount(
     "/media",
     StaticFiles(directory=str(UPLOAD_DIR)),

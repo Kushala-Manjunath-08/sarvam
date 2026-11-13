@@ -24,10 +24,22 @@ export default function SiteNavigation() {
         </svg>
       </Link>
       <Link
-        className={`site-nav-button${pathname === "/search" || pathname.startsWith("/districts/") ? " is-active" : ""}`}
+        className={`site-nav-button${pathname === "/map" || pathname.startsWith("/districts/") ? " is-active" : ""}`}
+        href="/map"
+        aria-label="Karnataka district map"
+        aria-current={pathname === "/map" || pathname.startsWith("/districts/") ? "page" : undefined}
+        title="District map"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3Z" />
+          <path d="M9 3v15m6-12v15" />
+        </svg>
+      </Link>
+      <Link
+        className={`site-nav-button${pathname === "/search" ? " is-active" : ""}`}
         href="/search"
         aria-label="Search Karnataka districts"
-        aria-current={pathname === "/search" || pathname.startsWith("/districts/") ? "page" : undefined}
+        aria-current={pathname === "/search" ? "page" : undefined}
         title="Search districts"
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
