@@ -1,0 +1,95 @@
+{
+  "sources": [
+    {
+      "id": "dk-nic",
+      "title": "Dakshina Kannada District Official Portal",
+      "url": "https://dk.nic.in/en/",
+      "category": "Government",
+      "access_date": "2026-11-13"
+    },
+    {
+      "id": "udupi-nic",
+      "title": "Udupi District Official Portal",
+      "url": "https://udupi.nic.in/en/",
+      "category": "Government",
+      "access_date": "2026-11-13"
+    },
+    {
+      "id": "uk-nic",
+      "title": "Uttara Kannada District Official Portal",
+      "url": "https://uttarakannada.nic.in/en/",
+      "category": "Government",
+      "access_date": "2026-11-13"
+    },
+    {
+      "id": "karnataka-tourism",
+      "title": "Karnataka State Tourism Development Corporation",
+      "url": "https://karnatakatourism.org/en/",
+      "category": "Government Tourism",
+      "access_date": "2026-11-13"
+    },
+    {
+      "id": "ignca-cultural",
+      "title": "Indira Gandhi National Centre for the Arts - Regional Repository",
+      "url": "https://ignca.gov.in/",
+      "category": "Cultural Heritage Institution",
+      "access_date": "2026-11-13"
+    },
+    {
+      "id": "karnataka-tourism-udupi",
+      "title": "Karnataka Tourism - Udupi destination guide",
+      "url": "https://karnatakatourism.org/en/destinations/udupi/",
+      "category": "Government Tourism",
+      "access_date": "2026-11-13"
+    },
+    {
+      "id": "karnataka-tourism-udupi-temple",
+      "title": "Karnataka Tourism - Udupi Sri Krishna Temple",
+      "url": "https://karnatakatourism.org/en/attractions/udupi-sri-krishna-temple/",
+      "category": "Government Tourism",
+      "access_date": "2026-11-13"
+    },
+    {
+      "id": "karnataka-tourism-st-marys",
+      "title": "Karnataka Tourism - St. Mary's Island",
+      "url": "https://karnatakatourism.org/en/attractions/st-marys-island/",
+      "category": "Government Tourism",
+      "access_date": "2026-11-13"
+    },
+    {
+      "id": "karnataka-tourism-mangaluru",
+      "title": "Karnataka Tourism - Mangaluru",
+      "url": "https://karnatakatourism.org/en/destinations/mangaluru/",
+      "category": "Government Tourism",
+      "access_date": "2026-11-13"
+    },
+    {
+      "id": "mirjan-fort-uttara-kannada",
+      "title": "Uttara Kannada District Portal - Mirjan Fort",
+      "url": "https://uttarakannada.nic.in/en/tourist-place/mirjan-fort-kumta/",
+      "category": "Government",
+      "access_date": "2026-11-13"
+    },
+    {
+      "id": "st-aloysius-university",
+      "title": "St. Aloysius (Deemed to be University)",
+      "url": "https://staloysius.edu.in/",
+      "category": "Institutional",
+      "access_date": "2026-11-13"
+    },
+    {
+      "id": "new-mangalore-port-authority",
+      "title": "New Mangalore Port Authority",
+      "url": "https://newmangaloreport.gov.in/",
+      "category": "Government",
+      "access_date": "2026-11-13"
+    },
+    {
+      "id": "karnataka-archaeology",
+      "title": "Department of Archaeology, Museums and Heritage, Karnataka",
+      "url": "https://archaeology.karnataka.gov.in/",
+      "category": "Government",
+      "access_date": "2026-11-13"
+    }
+  ]
+}
