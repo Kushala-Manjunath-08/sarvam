@@ -3,7 +3,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import DistrictIllustration from "../components/DistrictIllustration";
-import { districts, type District } from "../districts";
+import {
+  bengaluruDivisionDistrictNames,
+  districts,
+  type District,
+} from "../districts";
 
 interface HeritageRecord {
   id: string;
@@ -47,8 +51,48 @@ interface DistrictData {
   future_research: string[];
 }
 
+interface Region {
+  name: string;
+  description: string;
+  districtNames: readonly string[];
+}
+
+const regions: Region[] = [
+  {
+    name: "Bengaluru Division",
+    description:
+      "Explore the city and surrounding districts through their local heritage and traditions.",
+    districtNames: bengaluruDivisionDistrictNames,
+  },
+  {
+    name: "Coastal Region",
+    description:
+      "Discover Karnataka's coastal customs, cuisine and performance traditions.",
+    districtNames: ["Dakshina Kannada", "Udupi", "Uttara Kannada"],
+  },
+  {
+    name: "Uttara Karnataka",
+    description:
+      "Find stories of Deccan architecture, craft, music and northern Karnataka heritage.",
+    districtNames: districts
+      .filter((district) => district.region === "North Karnataka")
+      .map((district) => district.name),
+  },
+  {
+    name: "Malnad",
+    description:
+      "Explore the hill country, coffee traditions, forests and folk heritage of Malnad.",
+    districtNames: districts
+      .filter((district) => district.region === "Malnad")
+      .map((district) => district.name),
+  },
+];
+
 export default function DistrictSearchPage() {
   const [query, setQuery] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState<
+    (typeof regions)[number] | null
+  >(null);
   const [selectedDistrict, setSelectedDistrict] =
     useState<District | null>(null);
 
@@ -68,14 +112,14 @@ export default function DistrictSearchPage() {
   useEffect(() => {
     const dialog = detailDialogRef.current;
 
-    if (selectedDistrict) {
+    if (selectedRegion || selectedDistrict) {
       if (!dialog?.open) {
         dialog?.showModal();
       }
     } else if (dialog?.open) {
       dialog.close();
     }
-  }, [selectedDistrict]);
+  }, [selectedRegion, selectedDistrict]);
 
   // Fetch Bagalkot data when needed
   useEffect(() => {
@@ -127,18 +171,44 @@ export default function DistrictSearchPage() {
 
   function closeDistrict() {
     detailDialogRef.current?.close();
+    setSelectedRegion(null);
     setSelectedDistrict(null);
   }
 
-  const filteredDistricts = districts.filter((district) =>
-    `${district.name} ${district.region} ${district.tradition}`
-      .toLowerCase()
-      .includes(query.trim().toLowerCase())
+  const normalizedQuery = query.trim().toLowerCase();
+  const matchingRegionNames = regions.filter((region) =>
+    region.name.toLowerCase().startsWith(normalizedQuery)
   );
+  const regionsToSearch =
+    matchingRegionNames.length > 0 ? matchingRegionNames : regions;
+  const filteredRegions = regionsToSearch.filter((region) => {
+    const regionDistricts = districts.filter((district) =>
+      region.districtNames.includes(district.name)
+    );
+    const searchableText = [
+      region.name,
+      region.description,
+      ...regionDistricts.flatMap((district) => [
+        district.name,
+        district.tradition,
+      ]),
+    ]
+      .join(" ")
+      .toLowerCase();
 
+    return searchableText.includes(normalizedQuery);
+  });
+
+  const selectedRegionDistricts = selectedRegion
+    ? districts.filter((district) =>
+        selectedRegion.districtNames.includes(district.name)
+      )
+    : [];
   const selectedDistrictIndex = selectedDistrict
     ? districts.indexOf(selectedDistrict)
-    : 0;
+    : selectedRegion
+      ? districts.indexOf(selectedRegionDistricts[0])
+      : 0;
 
   return (
     <main className="landing-page district-page-active">
@@ -152,7 +222,7 @@ export default function DistrictSearchPage() {
           </p>
 
           <h1 id="district-heading">
-            Find a story in every district.
+            Find a story across Karnataka.
           </h1>
 
           <p className="district-explorer-intro">
@@ -178,46 +248,52 @@ export default function DistrictSearchPage() {
         </header>
 
         <div className="district-grid">
-          {filteredDistricts.map((district) => {
-            const index = districts.indexOf(district);
+          {filteredRegions.map((region) => {
+            const representative = districts.find((district) =>
+              region.districtNames.includes(district.name)
+            );
+
+            if (!representative) {
+              return null;
+            }
 
             return (
               <button
                 className="district-card"
                 type="button"
-                key={district.name}
+                key={region.name}
                 onClick={() => {
-                  if (district.name.toLowerCase() === "bagalkot") {
-                    window.location.href = "/districts/bagalkot";
+                  if (region.name === "Bengaluru Division") {
+                    window.location.href = "/divisions/bengaluru";
                     return;
                   }
 
-                  setSelectedDistrict(district);
+                  setSelectedRegion(region);
                 }}
-                aria-label={`Explore ${district.name}: ${district.tradition}`}
+                aria-label={`Explore ${region.name}`}
               >
                 <DistrictIllustration
-                  district={district}
-                  index={index}
+                  district={representative}
+                  index={districts.indexOf(representative)}
                 />
 
                 <span className="district-card-shade" />
 
                 <span className="district-card-content">
                   <span className="district-card-region">
-                    {district.region}
+                    Karnataka heritage
                   </span>
 
                   <span className="district-card-name">
-                    {district.name}
+                    {region.name}
                   </span>
 
                   <span className="district-card-tradition">
-                    {district.tradition}
+                    {region.description}
                   </span>
 
                   <span className="district-card-link">
-                    Discover the story →
+                    Explore the region →
                   </span>
                 </span>
               </button>
@@ -225,9 +301,9 @@ export default function DistrictSearchPage() {
           })}
         </div>
 
-        {filteredDistricts.length === 0 && (
+        {filteredRegions.length === 0 && (
           <p className="no-district-results" role="status">
-            No districts match that search. Try another place or tradition.
+            No regions match that search. Try another place or tradition.
           </p>
         )}
 
@@ -235,23 +311,31 @@ export default function DistrictSearchPage() {
           ref={detailDialogRef}
           className="district-dialog"
           aria-labelledby="district-dialog-title"
-          onClose={() => setSelectedDistrict(null)}
+          onClose={() => {
+            setSelectedDistrict(null);
+            setSelectedRegion(null);
+          }}
           onClick={(event) => {
             if (event.target === event.currentTarget) {
               closeDistrict();
             }
           }}
         >
-          {selectedDistrict && (
+          {(selectedRegion || selectedDistrict) && (
             <div className="district-dialog-content">
               <div className="district-dialog-image">
                 <DistrictIllustration
-                  district={selectedDistrict}
+                  district={
+                    selectedDistrict ??
+                    selectedRegionDistricts[0]
+                  }
                   index={selectedDistrictIndex}
                 />
               </div>
 
-              <div className="district-dialog-copy">
+              <div
+                className={`district-dialog-copy${selectedDistrict ? "" : " district-region-picker"}`}
+              >
                 <button
                   className="district-dialog-close"
                   type="button"
@@ -262,62 +346,97 @@ export default function DistrictSearchPage() {
                 </button>
 
                 <p className="district-explorer-kicker">
-                  {selectedDistrict.region}
+                  {selectedDistrict?.region ?? selectedRegion?.name}
                 </p>
 
                 <h2 id="district-dialog-title">
-                  {selectedDistrict.name}
+                  {selectedDistrict?.name ?? selectedRegion?.name}
                 </h2>
 
-                <p>{selectedDistrict.tradition}</p>
-
-                <p>
-                  Detailed heritage records for this district will be
-                  added to the LEGACYOS collection.
-                </p>
-
-                {loading && (
-                  <p>Loading district information...</p>
-                )}
-
-                {apiError && (
-                  <p role="alert">{apiError}</p>
-                )}
-
-                {districtData && (
-                  <section>
-                    <h3>Heritage Collection</h3>
+                {selectedDistrict ? (
+                  <>
+                    <p>{selectedDistrict.tradition}</p>
 
                     <p>
-                      {districtData.records.length} heritage records
-                      {" · "}
-                      {districtData.media_references.length} media references
+                      Detailed heritage records for this district will be
+                      added to the LEGACYOS collection.
                     </p>
 
-                    {districtData.records.map((record) => (
-                      <article key={record.id}>
-                        <h4>{record.title}</h4>
-                        <p>{record.description}</p>
-                        <p>Location: {record.location}</p>
-                        <a
-                          href={record.source.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {record.source.name}
-                        </a>
-                      </article>
-                    ))}
-                  </section>
-                )}
+                    {loading && (
+                      <p>Loading district information...</p>
+                    )}
 
-                <button
-                  className="district-dialog-chat"
-                  type="button"
-                  onClick={closeDistrict}
-                >
-                  Back to districts
-                </button>
+                    {apiError && (
+                      <p role="alert">{apiError}</p>
+                    )}
+
+                    {districtData && (
+                      <section>
+                        <h3>Heritage Collection</h3>
+
+                        <p>
+                          {districtData.records.length} heritage records
+                          {" · "}
+                          {districtData.media_references.length} media references
+                        </p>
+
+                        {districtData.records.map((record) => (
+                          <article key={record.id}>
+                            <h4>{record.title}</h4>
+                            <p>{record.description}</p>
+                            <p>Location: {record.location}</p>
+                            <a
+                              href={record.source.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {record.source.name}
+                            </a>
+                          </article>
+                        ))}
+                      </section>
+                    )}
+
+                    <button
+                      className="district-dialog-chat"
+                      type="button"
+                      onClick={() => setSelectedDistrict(null)}
+                    >
+                      Back to districts
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <p>{selectedRegion?.description}</p>
+                    <ul className="district-picker-list">
+                      {selectedRegionDistricts.map((district) => (
+                        <li key={district.name}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (district.name === "Bagalkot") {
+                                window.location.href = "/districts/bagalkot";
+                                return;
+                              }
+
+                              setSelectedDistrict(district);
+                            }}
+                          >
+                            <span>{district.name}</span>
+                            <span>{district.tradition}</span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                    <button
+                      className="district-dialog-chat"
+                      type="button"
+                      onClick={closeDistrict}
+                    >
+                      Back to regions
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           )}

@@ -1,6 +1,7 @@
 
 import type { Metadata } from "next";
 import "./globals.css";
+import "./bagalkot.css";
 import HeritageChatbot from "./components/HeritageChatbot";
 import SiteNavigation from "./components/SiteNavigation";
 

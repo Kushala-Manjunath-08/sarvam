@@ -1,6 +1,6 @@
 
 
-from fastapi import FastAPI, HTTPException, UploadFile, File, Form
+from fastapi import FastAPI, HTTPException, Request, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
@@ -48,6 +48,17 @@ MAX_FILE_SIZE = 100 * 1024 * 1024  # 100 MB
 
 # SQLite database for community interactions
 DATABASE_FILE = DATA_DIR / "community.db"
+BENGALURU_DIVISION_DISTRICTS = {
+    "bengaluru-rural",
+    "bengaluru-urban",
+    "chikkaballapur",
+    "chitradurga",
+    "davanagere",
+    "kolar",
+    "ramanagara",
+    "shivamogga",
+    "tumakuru",
+}
 
 
 def get_db_connection():
@@ -102,6 +113,40 @@ def write_json(path: Path, data):
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 
+def community_collection_id(request: Request) -> str:
+    if request.url.path.startswith("/api/regions/bengaluru-division/"):
+        return "bengaluru-division"
+    return "bagalkot"
+
+
+def validate_community_district(
+    request: Request,
+    district_id: Optional[str]
+) -> Optional[str]:
+    if district_id is None:
+        return None
+
+    normalized_id = district_id.strip().lower()
+    if (
+        community_collection_id(request) != "bengaluru-division"
+        or normalized_id not in BENGALURU_DIVISION_DISTRICTS
+    ):
+        raise HTTPException(status_code=400, detail="Invalid Bengaluru division district.")
+
+    return normalized_id
+
+
+def belongs_to_collection(item, collection_id: str) -> bool:
+    return item.get("collection_id", item.get("district_id")) == collection_id
+
+
+def collection_post_exists(collection_id: str, post_id: str) -> bool:
+    return any(
+        item.get("id") == post_id and belongs_to_collection(item, collection_id)
+        for item in read_json(UPLOADS_FILE)
+    )
+
+
 @app.get("/")
 def home():
     return {"message": "LEGACYOS Backend is running"}
@@ -140,28 +185,41 @@ def get_district(district_id: str):
 
 
 @app.get("/api/districts/bagalkot/community")
-def get_bagalkot_community():
+@app.get("/api/regions/bengaluru-division/community")
+def get_bagalkot_community(
+    request: Request,
+    district_id: Optional[str] = None
+):
+    collection_id = community_collection_id(request)
+    district_id = validate_community_district(request, district_id)
     uploads = read_json(UPLOADS_FILE)
     feedback = read_json(FEEDBACK_FILE)
 
     return {
         "uploads": [
             item for item in uploads
-            if item.get("district_id") == "bagalkot"
+            if belongs_to_collection(item, collection_id)
+            and (district_id is None or item.get("district_id") == district_id)
         ],
         "feedback": [
             item for item in feedback
-            if item.get("district_id") == "bagalkot"
+            if belongs_to_collection(item, collection_id)
+            and (district_id is None or item.get("district_id") == district_id)
         ]
     }
 
 
 @app.post("/api/districts/bagalkot/uploads")
+@app.post("/api/regions/bengaluru-division/uploads")
 async def upload_bagalkot_media(
+    request: Request,
     file: UploadFile = File(...),
     contributor: str = Form(...),
-    caption: str = Form("")
+    caption: str = Form(""),
+    district_id: Optional[str] = Form(None)
 ):
+    collection_id = community_collection_id(request)
+    district_id = validate_community_district(request, district_id)
     original_name = Path(file.filename or "").name
     extension = Path(original_name).suffix.lower()
 
@@ -245,7 +303,7 @@ async def upload_bagalkot_media(
 
     item = {
         "id": upload_id,
-        "district_id": "bagalkot",
+        "collection_id": collection_id,
         "contributor": contributor,
         "caption": caption,
         "filename": original_name,
@@ -256,6 +314,10 @@ async def upload_bagalkot_media(
         "created_at": datetime.now(timezone.utc).isoformat(),
         "status": "published"
     }
+    if collection_id == "bagalkot":
+        item["district_id"] = "bagalkot"
+    elif district_id is not None:
+        item["district_id"] = district_id
 
     uploads.insert(0, item)
     write_json(UPLOADS_FILE, uploads)
@@ -267,10 +329,15 @@ async def upload_bagalkot_media(
 
 
 @app.post("/api/districts/bagalkot/feedback")
+@app.post("/api/regions/bengaluru-division/feedback")
 def add_bagalkot_feedback(
+    request: Request,
     contributor: str = Form(...),
-    message: str = Form(...)
+    message: str = Form(...),
+    district_id: Optional[str] = Form(None)
 ):
+    collection_id = community_collection_id(request)
+    district_id = validate_community_district(request, district_id)
     contributor = contributor.strip()
     message = message.strip()
 
@@ -290,11 +357,15 @@ def add_bagalkot_feedback(
 
     item = {
         "id": str(uuid.uuid4()),
-        "district_id": "bagalkot",
+        "collection_id": collection_id,
         "contributor": contributor,
         "message": message,
         "created_at": datetime.now(timezone.utc).isoformat()
     }
+    if collection_id == "bagalkot":
+        item["district_id"] = "bagalkot"
+    elif district_id is not None:
+        item["district_id"] = district_id
 
     feedback.insert(0, item)
     write_json(FEEDBACK_FILE, feedback)
@@ -307,22 +378,19 @@ def add_bagalkot_feedback(
 
 # Like or unlike a Bagalkot community post
 @app.post("/api/districts/bagalkot/posts/{post_id}/like")
+@app.post("/api/regions/bengaluru-division/posts/{post_id}/like")
 def toggle_post_like(
+    request: Request,
     post_id: str,
     user_id: str = Form(...)
 ):
+    collection_id = community_collection_id(request)
     user_id = user_id.strip()
 
     if not user_id or len(user_id) > 100:
         raise HTTPException(status_code=400, detail="Invalid user ID.")
 
-    uploads = read_json(UPLOADS_FILE)
-
-    if not any(
-        item.get("id") == post_id
-        and item.get("district_id") == "bagalkot"
-        for item in uploads
-    ):
+    if not collection_post_exists(collection_id, post_id):
         raise HTTPException(status_code=404, detail="Post not found.")
 
     connection = get_db_connection()
@@ -359,7 +427,12 @@ def toggle_post_like(
 
 # Get likes for a post
 @app.get("/api/districts/bagalkot/posts/{post_id}/likes")
-def get_post_likes(post_id: str, user_id: str):
+@app.get("/api/regions/bengaluru-division/posts/{post_id}/likes")
+def get_post_likes(request: Request, post_id: str, user_id: str):
+    collection_id = community_collection_id(request)
+    if not collection_post_exists(collection_id, post_id):
+        raise HTTPException(status_code=404, detail="Post not found.")
+
     connection = get_db_connection()
 
     count = connection.execute(
@@ -382,11 +455,14 @@ def get_post_likes(post_id: str, user_id: str):
 
 # Add a comment to a Bagalkot community post
 @app.post("/api/districts/bagalkot/posts/{post_id}/comments")
+@app.post("/api/regions/bengaluru-division/posts/{post_id}/comments")
 def add_post_comment(
+    request: Request,
     post_id: str,
     contributor: str = Form(...),
     message: str = Form(...)
 ):
+    collection_id = community_collection_id(request)
     contributor = contributor.strip()
     message = message.strip()
 
@@ -402,13 +478,7 @@ def add_post_comment(
             detail="Name or comment is too long."
         )
 
-    uploads = read_json(UPLOADS_FILE)
-
-    if not any(
-        item.get("id") == post_id
-        and item.get("district_id") == "bagalkot"
-        for item in uploads
-    ):
+    if not collection_post_exists(collection_id, post_id):
         raise HTTPException(status_code=404, detail="Post not found.")
 
     connection = get_db_connection()
@@ -440,7 +510,12 @@ def add_post_comment(
 
 # Get comments for a post
 @app.get("/api/districts/bagalkot/posts/{post_id}/comments")
-def get_post_comments(post_id: str):
+@app.get("/api/regions/bengaluru-division/posts/{post_id}/comments")
+def get_post_comments(request: Request, post_id: str):
+    collection_id = community_collection_id(request)
+    if not collection_post_exists(collection_id, post_id):
+        raise HTTPException(status_code=404, detail="Post not found.")
+
     connection = get_db_connection()
 
     rows = connection.execute(

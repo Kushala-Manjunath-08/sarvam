@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import DistrictIllustration from "../../components/DistrictIllustration";
-import { districts, districtSlug } from "../../districts";
+import { bengaluruDivisionDistrictNames, districts, districtSlug } from "../../districts";
+import { CommunityHeritagePage } from "../bagalkot/BagalkotCommunityPage";
 
 type DistrictPageProps = {
   params: Promise<{ slug: string }>;
@@ -17,6 +18,15 @@ export default async function DistrictPage({ params }: DistrictPageProps) {
   const district = districts[districtIndex];
 
   if (!district) notFound();
+
+  if (bengaluruDivisionDistrictNames.some((name) => name === district.name)) {
+    return (
+      <CommunityHeritagePage
+        collection="bengaluru-division"
+        districtName={district.name}
+      />
+    );
+  }
 
   return (
     <main className="landing-page district-page-active">
