@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -87,6 +86,8 @@ const regions: Region[] = [
       .map((district) => district.name),
   },
 ];
+import Link from "next/link";
+import { karnatakaRegions } from "../regions";
 
 export default function DistrictSearchPage() {
   const [query, setQuery] = useState("");
@@ -218,7 +219,7 @@ export default function DistrictSearchPage() {
       >
         <header className="district-explorer-header">
           <p className="district-explorer-kicker">
-            LEGACYOS / FIELD NOTES
+            LEGACYOS / REGIONAL ATLAS
           </p>
 
           <h1 id="district-heading">
@@ -245,6 +246,10 @@ export default function DistrictSearchPage() {
               aria-label="Search districts and traditions"
             />
           </label>
+          <h1 id="district-heading">Karnataka Regional Search</h1>
+          <p className="district-explorer-description">
+            Choose a cultural region to explore its districts and heritage.
+          </p>
         </header>
 
         <div className="district-grid">
@@ -257,6 +262,9 @@ export default function DistrictSearchPage() {
               return null;
             }
 
+        {/* Four Regional Cards ONLY */}
+        <div className="region-cards-grid">
+          {karnatakaRegions.map((region) => {
             return (
               <button
                 className="district-card"
@@ -271,6 +279,11 @@ export default function DistrictSearchPage() {
                   setSelectedRegion(region);
                 }}
                 aria-label={`Explore ${region.name}`}
+              <Link
+                key={region.id}
+                href={`/regions/${region.slug}`}
+                className="region-card"
+                aria-label={`Explore ${region.name}: ${region.subtitle}`}
               >
                 <DistrictIllustration
                   district={representative}
@@ -290,6 +303,26 @@ export default function DistrictSearchPage() {
 
                   <span className="district-card-tradition">
                     {region.description}
+                <div>
+                  <div className="region-card-top">
+                    <div className="region-card-title-group">
+                      <span className="region-card-subtitle">
+                        {region.subtitle}
+                      </span>
+                      <h2 className="region-card-name">
+                        {region.name}
+                      </h2>
+                    </div>
+                    <span className="region-card-count">
+                      {region.districts.length} districts
+                    </span>
+                  </div>
+                </div>
+
+                <div className="region-card-footer">
+                  <span>Explore region districts</span>
+                  <span className="region-card-arrow" aria-hidden="true">
+                    →
                   </span>
 
                   <span className="district-card-link">
@@ -297,6 +330,8 @@ export default function DistrictSearchPage() {
                   </span>
                 </span>
               </button>
+                </div>
+              </Link>
             );
           })}
         </div>
