@@ -1,12 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import { districts, districtSlug } from "../districts";
+import { karnatakaRegions } from "../regions";
 
 function getDistrict(name: string) {
   const district = districts.find((item) => item.name === name);
   if (!district) throw new Error(`Unknown district in map stories: ${name}`);
   return district;
 }
+
+const regionPositions: Record<string, { left: number; top: number }> = {
+  "old-mysuru": { left: 57, top: 79 },
+  "uttara-karnataka": { left: 65, top: 25 },
+  karavali: { left: 16, top: 53 },
+  "malenadu-kodagu": { left: 37, top: 64 },
+};
+
+const regions = karnatakaRegions.map((region) => ({
+  region,
+  ...regionPositions[region.slug],
+}));
 
 const customs = [
   { district: getDistrict("Bidar"), label: "Bidriware", left: 73, top: 19 },
@@ -27,8 +40,8 @@ export default function DistrictMapPage() {
           <p className="district-explorer-kicker">SARVAM&nbsp; / &nbsp;KARNATAKA</p>
           <h1 id="map-heading">A map of living customs.</h1>
           <p>
-            Tap a landmark to read its story, or tap the map background to browse all
-            Karnataka stories.
+            Choose a regional label to explore its districts, or tap a landmark to read
+            its story.
           </p>
         </header>
 
@@ -58,6 +71,20 @@ export default function DistrictMapPage() {
               title={`Explore ${label}`}
             >
               <span className="map-custom-label">{label}</span>
+            </Link>
+          ))}
+
+          {regions.map(({ region, left, top }) => (
+            <Link
+              className="map-region-hotspot"
+              href={`/regions/${region.slug}`}
+              key={region.id}
+              style={{ left: `${left}%`, top: `${top}%` }}
+              aria-label={`Explore ${region.name}: ${region.subtitle}, ${region.districts.length} districts`}
+              title={`Explore ${region.name}`}
+            >
+              <span className="map-region-name">{region.name}</span>
+              <span className="map-region-count">{region.districts.length} districts</span>
             </Link>
           ))}
         </div>
