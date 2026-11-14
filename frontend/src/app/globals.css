@@ -2724,9 +2724,62 @@ button:focus-visible,a:focus-visible {
   display: block;
 }
 
+.map-region-hotspot {
+  position: absolute;
+  z-index: 2;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: min(174px, calc(100vw - 48px));
+  padding: 8px 11px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgb(125 41 50 / 48%);
+  border-radius: 999px;
+  background: rgb(255 250 240 / 96%);
+  color: var(--red);
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 5px 16px rgb(52 43 29 / 22%);
+  transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+}
+
+.map-region-hotspot:hover,
+.map-region-hotspot:focus-visible {
+  z-index: 4;
+  background: var(--red);
+  color: #fffaf0;
+  box-shadow: 0 7px 20px rgb(52 43 29 / 30%);
+}
+
+.map-region-hotspot:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.map-region-name {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.045em;
+  line-height: 1.2;
+}
+
+.map-region-count {
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
 @media (max-width: 600px) {
   .map-explorer {
     padding: 94px 16px 48px;
+  }
+
+  .map-region-hotspot {
+    padding: 7px 9px;
+  }
+
+  .map-region-name {
+    font-size: 9px;
   }
 }
 

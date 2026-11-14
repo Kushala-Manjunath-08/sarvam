@@ -26,12 +26,18 @@ import re
 import secrets
 import uuid
 import sqlite3
+<<<<<<< HEAD
+from app.knowledge_base import router as knowledge_router
+
+=======
 logger = logging.getLogger(__name__)
+>>>>>>> origin/main
 app = FastAPI(
     title="LEGACYOS API",
     description="Human Knowledge Preservation System",
     version="1.0.0"
 )
+app.include_router(knowledge_router)
 
 app.add_middleware(
     CORSMiddleware,
