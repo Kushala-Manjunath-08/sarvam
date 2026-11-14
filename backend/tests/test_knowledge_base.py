@@ -246,3 +246,300 @@ def test_chat_endpoint_returns_grounded_answer_and_citations(tmp_path, monkeypat
     assert result["grounded"] is True
     assert result["sources"][0]["url"] == "https://example.gov.in/heritage"
     index.close()
+
+
+def test_extractive_answer_is_brief_and_cited() -> None:
+    documents = [
+        {
+            "content": (
+                "Mandya's Agriculture page says irrigation from the K.R. Sagar "
+                "reservoir, beginning in the 1930s, substantially changed the "
+                "district's cropping pattern and crop yields. This second sentence "
+                "adds details that are not needed for a short response."
+            )
+        },
+        {
+            "content": (
+                "Mysuru district describes Dasara as a state festival with a "
+                "Chamundeshwari procession and cultural programmes."
+            )
+        },
+    ]
+
+    answer = knowledge_base._format_extractive_answer(
+        documents,
+        "What changed Mandya's cropping pattern?",
+    )
+
+    assert "K.R. Sagar" in answer
+    assert "[1]" in answer
+    assert len(answer.split()) <= 63
+    assert "not needed" not in answer
+
+
+def test_retrieval_query_ignores_assistant_claims() -> None:
+    messages = [
+        knowledge_base.ChatMessage(role="user", content="Tell me about Mysuru Dasara."),
+        knowledge_base.ChatMessage(
+            role="assistant",
+            content="An unsupported answer about coastal fishing.",
+        ),
+        knowledge_base.ChatMessage(role="user", content="When is it celebrated?"),
+    ]
+
+    query = knowledge_base._retrieval_query(messages)
+
+    assert "Mysuru Dasara" in query
+    assert "When is it celebrated?" in query
+    assert "unsupported answer" not in query
+
+
+def test_current_question_region_overrides_browsed_region_context(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    corpus = tmp_path / "documents.jsonl"
+    _write_corpus(
+        corpus,
+        [
+            _record(
+                "bidar-heritage",
+                "uttara-karnataka",
+                "bidar",
+                "Bidar heritage",
+                "Bidar is known for its historical heritage and Bidriware craft.",
+            ),
+            _record(
+                "kodagu-coffee",
+                "malenadu-kodagu",
+                "kodagu",
+                "Kodagu coffee",
+                "Kodagu is known for coffee cultivation in its highlands.",
+            ),
+        ],
+    )
+    index = KnowledgeIndex(corpus, ":memory:", embedding_model_name="")
+    monkeypatch.setattr(knowledge_base, "INDEX", index)
+    monkeypatch.delenv("GROQ_API_KEY", raising=False)
+
+    response = TestClient(app).post(
+        "/api/chat",
+        json={
+            "messages": [
+                {"role": "user", "content": "Tell me about Bidar's heritage"}
+            ],
+            "context_region": "malenadu-kodagu",
+        },
+    )
+
+    assert response.status_code == 200
+    result = response.json()
+    assert "Bidar" in result["answer"]
+    assert result["sources"][0]["region"] == "Uttara Karnataka"
+    index.close()
+
+
+def test_district_question_does_not_use_unscoped_regional_food_record(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    corpus = tmp_path / "documents.jsonl"
+    regional_food = _record(
+        "kodava-foodways",
+        "malenadu-kodagu",
+        None,
+        "Kodava pork cuisine",
+        "A regional guide lists Kodava pork delicacies.",
+    )
+    regional_food["keywords"] = ["Kodava", "food", "pork", "cuisine"]
+    district_food = _record(
+        "shivamogga-appe-midi",
+        "malenadu-kodagu",
+        "shivamogga",
+        "Appe Midi tender mango pickle in Sagar",
+        "Shivamogga's tourism guide highlights Appe Midi, a tender mango pickle prepared in Sagar.",
+    )
+    district_food["keywords"] = ["Appe Midi", "food", "pickle", "Sagar"]
+    _write_corpus(corpus, [regional_food, district_food])
+    index = KnowledgeIndex(corpus, ":memory:", embedding_model_name="")
+    monkeypatch.setattr(knowledge_base, "INDEX", index)
+    monkeypatch.delenv("GROQ_API_KEY", raising=False)
+    client = TestClient(app)
+
+    district_response = client.post(
+        "/api/chat",
+        json={
+            "messages": [
+                {"role": "user", "content": "Tell me about Shivamogga's food"}
+            ],
+            "context_region": "malenadu-kodagu",
+        },
+    )
+    regional_response = client.post(
+        "/api/chat",
+        json={
+            "messages": [
+                {"role": "user", "content": "Tell me about Kodava pork"}
+            ],
+            "context_region": "malenadu-kodagu",
+        },
+    )
+
+    assert district_response.status_code == 200
+    district_result = district_response.json()
+    assert district_result["grounded"] is True
+    assert "Appe Midi" in district_result["answer"]
+    assert {source["district"] for source in district_result["sources"]} == {
+        "Shivamogga"
+    }
+
+    assert regional_response.status_code == 200
+    regional_result = regional_response.json()
+    assert regional_result["grounded"] is True
+    assert regional_result["sources"][0]["district"] == "Multiple districts"
+    index.close()
+
+
+def test_chat_does_not_claim_grounding_without_evidence(tmp_path, monkeypatch) -> None:
+    corpus = tmp_path / "documents.jsonl"
+    _write_corpus(
+        corpus,
+        [
+            _record(
+                "mysuru-dasara",
+                "old-mysuru",
+                "mysuru",
+                "Mysuru Dasara",
+                "Mysuru Dasara is an annual festival with public cultural programmes.",
+            )
+        ],
+    )
+    index = KnowledgeIndex(corpus, ":memory:", embedding_model_name="")
+    monkeypatch.setattr(knowledge_base, "INDEX", index)
+    monkeypatch.delenv("GROQ_API_KEY", raising=False)
+
+    response = TestClient(app).post(
+        "/api/chat",
+        json={
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "Explain quantum mechanics and black holes.",
+                }
+            ]
+        },
+    )
+
+    assert response.status_code == 200
+    result = response.json()
+    assert result["grounded"] is False
+    assert result["sources"] == []
+    index.close()
+
+
+def test_chat_retrieves_huthri_when_asked_with_an_event_verb(tmp_path, monkeypatch) -> None:
+    corpus = tmp_path / "documents.jsonl"
+    _write_corpus(
+        corpus,
+        [
+            _record(
+                "kodava-huthri",
+                "malenadu-kodagu",
+                "kodagu",
+                "Huthri, a Kodava harvest festival",
+                "Huthri is associated with the new paddy crop, generally when it is ready for harvest in November and December.",
+            )
+        ],
+    )
+    index = KnowledgeIndex(corpus, ":memory:", embedding_model_name="")
+    monkeypatch.setattr(knowledge_base, "INDEX", index)
+    monkeypatch.delenv("GROQ_API_KEY", raising=False)
+
+    response = TestClient(app).post(
+        "/api/chat",
+        json={
+            "messages": [
+                {"role": "user", "content": "When is Huthri celebrated?"}
+            ]
+        },
+    )
+
+    assert response.status_code == 200
+    result = response.json()
+    assert result["grounded"] is True
+    assert result["sources"][0]["district"] == "Kodagu"
+    index.close()
+
+
+def test_regional_crop_question_matches_source_topic_terms(tmp_path, monkeypatch) -> None:
+    corpus = tmp_path / "documents.jsonl"
+    crop_record = _record(
+        "shivamogga-crops",
+        "malenadu-kodagu",
+        "shivamogga",
+        "Shivamogga horticulture crops",
+        "The department lists arecanut and ginger cultivated in Malnad regions.",
+    )
+    crop_record["keywords"] = ["crops", "cultivation", "arecanut", "ginger"]
+    _write_corpus(corpus, [crop_record])
+    index = KnowledgeIndex(corpus, ":memory:", embedding_model_name="")
+    monkeypatch.setattr(knowledge_base, "INDEX", index)
+    monkeypatch.delenv("GROQ_API_KEY", raising=False)
+
+    response = TestClient(app).post(
+        "/api/chat",
+        json={
+            "messages": [
+                {"role": "user", "content": "Which crops are grown in this region?"}
+            ],
+            "context_region": "malenadu-kodagu",
+        },
+    )
+
+    assert response.status_code == 200
+    result = response.json()
+    assert result["grounded"] is True
+    assert result["sources"][0]["id"] == "shivamogga-crops"
+    index.close()
+
+
+def test_chat_rejects_a_single_incidental_keyword_match(tmp_path, monkeypatch) -> None:
+    corpus = tmp_path / "documents.jsonl"
+    _write_corpus(
+        corpus,
+        [
+            _record(
+                "coffee-black-pepper",
+                "malenadu-kodagu",
+                "kodagu",
+                "Coffee and black pepper",
+                "Kodagu farms grow coffee and black pepper in mixed gardens.",
+            ),
+            _record(
+                "krishna-temple-window",
+                "karavali",
+                "udupi",
+                "Krishna temple window",
+                "A decorated temple window has nine holes.",
+            ),
+        ],
+    )
+    index = KnowledgeIndex(corpus, ":memory:", embedding_model_name="")
+    monkeypatch.setattr(knowledge_base, "INDEX", index)
+    monkeypatch.delenv("GROQ_API_KEY", raising=False)
+
+    client = TestClient(app)
+    for question in (
+        "Explain quantum mechanics and black holes.",
+        "Explain black holes.",
+    ):
+        response = client.post(
+            "/api/chat",
+            json={"messages": [{"role": "user", "content": question}]},
+        )
+
+        assert response.status_code == 200
+        result = response.json()
+        assert result["grounded"] is False
+        assert result["sources"] == []
+    index.close()

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fill="none">
+  <defs>
+    <linearGradient id="estateSky" x1="600" y1="0" x2="600" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D9E7DF"/>
+      <stop offset="1" stop-color="#E8E2C8"/>
+    </linearGradient>
+    <linearGradient id="estateHill" x1="600" y1="230" x2="600" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#77926B"/>
+      <stop offset="1" stop-color="#2C4E3A"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#estateSky)" d="M0 0h1200v800H0z"/>
+  <path d="M0 358c127-67 227-64 345-13 121 53 214 48 337-23 147-85 269-75 389 7 47 32 86 43 129 35v268H0V358Z" fill="#AFC6AA"/>
+  <path d="M0 477c133-86 272-92 411-20 115 59 213 59 338 1 173-81 312-52 451 35v307H0V477Z" fill="url(#estateHill)"/>
+  <path d="M0 631c147-52 256-39 363 24 107 64 211 71 337 18 136-57 274-54 500 48v79H0v-169Z" fill="#244637"/>
+  <path d="M110 800c30-128 65-193 106-193s76 65 106 193m262 0c29-150 66-226 112-226s83 76 112 226m200 0c24-113 54-170 90-170s66 57 90 170" stroke="#BDD092" stroke-width="11"/>
+  <path d="M188 670c-51-37-84-39-126-15m150 50c48-35 82-35 128 0m-34-84c-39-42-43-79-11-121m354 197c-54-42-88-43-133-9m200 25c51-42 91-46 142-15m-64-79c-39-52-40-91-6-127m253 222c-44-35-75-37-117-8" stroke="#527447" stroke-width="13" stroke-linecap="round"/>
+  <path d="M177 627c-20-18-28-39-20-59 25 4 41 18 46 42m87 91c19-20 40-28 60-20-4 25-18 41-42 46m451-48c-19-20-25-42-15-61 24 7 38 22 40 47" fill="#B94E39"/>
+  <path d="M177 627c-20-18-28-39-20-59 25 4 41 18 46 42m87 91c19-20 40-28 60-20-4 25-18 41-42 46m451-48c-19-20-25-42-15-61 24 7 38 22 40 47" stroke="#8E3B31" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M0 800h1200" stroke="#D7C184" stroke-opacity=".7" stroke-width="5"/>
+</svg>

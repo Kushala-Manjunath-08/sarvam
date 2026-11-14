@@ -3,8 +3,8 @@
 The FastAPI service provides district content, community media, Karavali places
 and timelines, visitor reviews, and moderated community contributions. The
 Karavali place and timeline records are maintained in `../data/karavali/`; user
-submissions and review records are stored in `data/community.db`, and uploaded
-files are stored in `data/uploads/`.
+submissions, regional media records, and review records are stored in
+`data/community.db`, and uploaded files are stored in `data/uploads/`.
 
 ## Run locally
 
@@ -42,6 +42,19 @@ status and links to primary and additional sources. The local SQLite/FTS index
 is rebuilt incrementally when the corpus changes and is stored in
 `backend/data/knowledge_index.sqlite3`.
 
+The chat uses retrieval-augmented generation, not model training: it retrieves
+verified records and cites their sources. At the current corpus snapshot, 97
+verified records cover 31 districts; records needing review are excluded.
+Frontend descriptions without claim-level sources are not treated as verified
+evidence. The chat uses the current region or district page as a retrieval hint,
+but a place explicitly named in the question takes precedence. Without a
+configured answer model, it returns a brief extractive answer from the retrieved
+evidence. If evidence is weak or missing, it says so rather than guessing.
+District-specific questions only use records assigned to or explicitly
+mentioning that district. For example, the Shivamogga food answer is sourced
+from the Karnataka Tourism guide to Appe Midi in Sagar; broader Kodava food
+records are reserved for broader regional questions.
+
 | Purpose | Route |
 |---|---|
 | Grounded chat and source citations | `POST /api/chat` |
@@ -63,6 +76,25 @@ active.
 The reindex route requires the existing `X-Admin-Token` header and
 `KARAVALI_ADMIN_TOKEN`. Keep all backend environment values private; see
 `.env.example` for the supported settings.
+
+## Regional visitor gallery
+
+All four regional pages share the same photo/video archive. Published
+contributions are stored in SQLite and uploaded media is served from the
+backend's persistent `data/uploads/` directory.
+
+| Purpose | Route |
+|---|---|
+| Load up to 100 published memories for a region | `GET /api/regions/{region_id}/contributions` |
+| Save a visitor story with optional photograph or video | `POST /api/regions/{region_id}/contributions` |
+
+The upload requires a valid division district, visit location, display name,
+experience description, and confirmation that the contributor has permission
+to share the content. Photo/video upload is optional for text-only memories.
+Uploads are limited to 100 MB and validated by extension, MIME type, and file
+signature. The API returns the saved contribution so the page can display the
+media immediately; subsequent visits load it from SQLite. Legacy published
+Karavali district uploads remain visible in the shared gallery.
 
 ## Karavali routes
 

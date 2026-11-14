@@ -3,12 +3,14 @@ import time
 import sys
 import os
 import urllib.request
+from pathlib import Path
 
-backend_dir = r"c:\Users\dell\OneDrive\Attachments\ドキュメント\BUILD_WITH_SARVAM\sarvam\backend"
-frontend_dir = r"c:\Users\dell\OneDrive\Attachments\ドキュメント\BUILD_WITH_SARVAM\sarvam\frontend"
+ROOT = Path(__file__).resolve().parent
+backend_dir = ROOT / "backend"
+frontend_dir = ROOT / "frontend"
 
-be_log = open(r"c:\Users\dell\OneDrive\Attachments\ドキュメント\BUILD_WITH_SARVAM\sarvam\backend.log", "w")
-fe_log = open(r"c:\Users\dell\OneDrive\Attachments\ドキュメント\BUILD_WITH_SARVAM\sarvam\frontend.log", "w")
+be_log = open(ROOT / "backend.log", "w")
+fe_log = open(ROOT / "frontend.log", "w")
 
 print("Starting FastAPI Backend on port 8000...")
 backend_process = subprocess.Popen(

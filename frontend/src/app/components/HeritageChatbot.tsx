@@ -2,12 +2,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
 type Message = {
   id: number;
   sender: "bot" | "user";
   text: string;
   sources?: ChatSource[];
+  grounded?: boolean;
   error?: boolean;
 };
 
@@ -30,14 +32,78 @@ type ChatResponse = {
   grounded: boolean;
 };
 
+type KnowledgeStatus = {
+  document_count: number;
+  districts_covered: number;
+  retrieval_mode: string;
+};
+
+type ChatPageContext = {
+  region?: string;
+  district?: string;
+};
+
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
-const suggestions = [
+const generalSuggestions = [
   "What crops are grown in Old Mysuru?",
   "Tell me about Bidar's heritage",
   "What is Yakshagana in Karavali?",
 ];
+const regionSuggestions: Record<string, string[]> = {
+  "old-mysuru": [
+    "What does the source say about Mysuru Dasara?",
+    "Which crops are documented in Mandya?",
+    "What is known about Hassan's heritage?",
+  ],
+  "uttara-karnataka": [
+    "What is documented about Bidar's heritage?",
+    "Which crops are grown in this region?",
+    "Tell me about the Ilkal saree tradition",
+  ],
+  karavali: [
+    "What is Yakshagana in Karavali?",
+    "What does the source say about Udupi's Paryaya?",
+    "What is recorded about coastal Karnataka's heritage?",
+  ],
+  "malenadu-kodagu": [
+    "What does the source say about Huthri?",
+    "What food is documented in Shivamogga?",
+    "What is known about Kuvempu?",
+  ],
+};
+
+const regionNames: Record<string, string> = {
+  "old-mysuru": "Old Mysuru",
+  "uttara-karnataka": "Uttara Karnataka",
+  karavali: "Karavali",
+  "malenadu-kodagu": "Malenadu & Kodagu",
+};
+
+function getChatPageContext(pathname: string): ChatPageContext {
+  const [section, slug] = pathname.split("/").filter(Boolean);
+  if (section === "regions" && slug && regionNames[slug]) {
+    return { region: slug };
+  }
+  if (section === "districts" && slug) {
+    return { district: slug };
+  }
+  return {};
+}
+
+function isKnowledgeStatus(value: unknown): value is KnowledgeStatus {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "document_count" in value &&
+    typeof value.document_count === "number" &&
+    "districts_covered" in value &&
+    typeof value.districts_covered === "number" &&
+    "retrieval_mode" in value &&
+    typeof value.retrieval_mode === "string"
+  );
+}
 
 function isChatResponse(value: unknown): value is ChatResponse {
   if (typeof value !== "object" || value === null || !("answer" in value) || !("sources" in value)) {
@@ -46,6 +112,10 @@ function isChatResponse(value: unknown): value is ChatResponse {
 
   return (
     typeof value.answer === "string" &&
+    "grounded" in value &&
+    typeof value.grounded === "boolean" &&
+    "retrieval_mode" in value &&
+    typeof value.retrieval_mode === "string" &&
     Array.isArray(value.sources) &&
     value.sources.every(
       (source) =>
@@ -60,9 +130,14 @@ function isChatResponse(value: unknown): value is ChatResponse {
 }
 
 export default function HeritageChatbot() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [knowledgeStatus, setKnowledgeStatus] =
+    useState<KnowledgeStatus | null>(null);
+  const [knowledgeServiceAvailable, setKnowledgeServiceAvailable] =
+    useState<boolean | null>(null);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
@@ -73,6 +148,13 @@ export default function HeritageChatbot() {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messageInputRef = useRef<HTMLInputElement>(null);
+  const pageContext = getChatPageContext(pathname);
+  const currentRegion = pageContext.region
+    ? regionNames[pageContext.region]
+    : undefined;
+  const suggestions = pageContext.region
+    ? regionSuggestions[pageContext.region] ?? generalSuggestions
+    : generalSuggestions;
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -87,6 +169,34 @@ export default function HeritageChatbot() {
     window.addEventListener("sarvam:open-chat", openChat);
     return () => window.removeEventListener("sarvam:open-chat", openChat);
   }, []);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    let active = true;
+    setKnowledgeServiceAvailable(null);
+    void fetch(`${API_BASE_URL}/api/knowledge/status`, { cache: "no-store" })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error("The knowledge service is unavailable.");
+        }
+        const payload: unknown = await response.json();
+        if (!isKnowledgeStatus(payload)) {
+          throw new Error("The knowledge service returned invalid status.");
+        }
+        return payload;
+      })
+      .then((status) => {
+        if (!active) return;
+        setKnowledgeStatus(status);
+        setKnowledgeServiceAvailable(true);
+      })
+      .catch(() => {
+        if (active) setKnowledgeServiceAvailable(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, [isOpen]);
 
   async function sendMessage(text = message) {
     const trimmed = text.trim();
@@ -115,7 +225,11 @@ export default function HeritageChatbot() {
       const response = await fetch(`${API_BASE_URL}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: conversation }),
+        body: JSON.stringify({
+          messages: conversation,
+          context_region: pageContext.region,
+          context_district: pageContext.district,
+        }),
       });
       let payload: unknown;
 
@@ -145,6 +259,7 @@ export default function HeritageChatbot() {
         sender: "bot",
         text: payload.answer,
         sources: payload.sources,
+        grounded: payload.grounded,
       };
       setMessages((previous) => [...previous, botMessage]);
     } catch (error) {
@@ -195,8 +310,14 @@ export default function HeritageChatbot() {
                 <div>
                   <h2>Namma Heritage</h2>
                   <p>
-                    <span className="online-dot" />
-                    Discover Karnataka
+                    <span
+                      className={`online-dot${knowledgeServiceAvailable === false ? " is-offline" : ""}`}
+                    />
+                    {knowledgeServiceAvailable === true && knowledgeStatus
+                      ? `${knowledgeStatus.document_count} verified records · ${knowledgeStatus.districts_covered} districts`
+                      : knowledgeServiceAvailable === false
+                        ? "Knowledge service unavailable"
+                        : "Connecting to the knowledge library…"}
                   </p>
                 </div>
               </div>
@@ -212,8 +333,12 @@ export default function HeritageChatbot() {
 
             <div className="chat-welcome">
               <span className="welcome-kicker">A LIVING ATLAS OF INDIA</span>
-              <h3>Every place has a story.</h3>
-              <p>Let's discover the stories of Karnataka together.</p>
+              <h3>{currentRegion ? `Explore ${currentRegion}` : "Every place has a story."}</h3>
+              <p>
+                Ask about Karnataka's places, history, culture and traditions.
+                Answers are brief and linked to verified sources; if evidence is
+                missing, the chat will say so.
+              </p>
             </div>
 
             <div className="chat-messages">
@@ -231,6 +356,13 @@ export default function HeritageChatbot() {
                       <div className={`message-bubble ${item.error ? "error" : ""}`}>
                         {item.text}
                       </div>
+                      {typeof item.grounded === "boolean" && (
+                        <span className={`message-grounding${item.grounded ? "" : " is-unverified"}`}>
+                          {item.grounded
+                            ? `${item.sources?.length ?? 0} cited source${item.sources?.length === 1 ? "" : "s"}`
+                            : "No verified source found"}
+                        </span>
+                      )}
                       {item.sources && item.sources.length > 0 && (
                         <div className="message-sources">
                           <p>Sources</p>
@@ -498,6 +630,10 @@ export default function HeritageChatbot() {
           background: #9dbb78;
         }
 
+        .online-dot.is-offline {
+          background: #d58e76;
+        }
+
         .close-chat {
           width: 31px;
           height: 31px;
@@ -607,6 +743,16 @@ export default function HeritageChatbot() {
           display: grid;
           gap: 4px;
           padding: 2px 3px 4px;
+        }
+
+        .message-grounding {
+          padding: 0 3px;
+          color: #63814f;
+          font-size: 9px;
+        }
+
+        .message-grounding.is-unverified {
+          color: #98633d;
         }
 
         .message-sources p {

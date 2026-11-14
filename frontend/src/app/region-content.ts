@@ -22,12 +22,21 @@ export const regionCategories = [
   { id: "education-reformers", title: "Education, Literature & Social Reformers", icon: "people", image: "/images/karavali/st-aloysius-chapel.svg" },
 ] as const;
 
+export const sharedRegionCategories = regionCategories.slice(0, 12);
+
 export type RegionCategoryId = (typeof regionCategories)[number]["id"];
 export type RegionSlug =
   | "old-mysuru"
   | "uttara-karnataka"
   | "karavali"
   | "malenadu-kodagu";
+
+export interface ImageAttribution {
+  author: string;
+  sourceUrl: string;
+  license: string;
+  licenseUrl: string;
+}
 
 export interface RegionCategoryContent {
   overview: string;
@@ -36,6 +45,8 @@ export interface RegionCategoryContent {
   verificationNote?: string;
   sources?: { label: string; url: string }[];
   image?: string;
+  imageAlt?: string;
+  imageAttribution?: ImageAttribution;
 }
 
 export interface RegionCategoryItem {
@@ -49,6 +60,7 @@ export interface RegionPageContent {
   introduction: string;
   heroImage: string;
   heroImageAlt: string;
+  heroImageAttribution?: ImageAttribution;
   categories: Partial<Record<string, RegionCategoryContent>>;
 }
 
@@ -59,6 +71,8 @@ const category = (
   verificationNote?: string,
   sources?: { label: string; url: string }[],
   image?: string,
+  imageAttribution?: ImageAttribution,
+  imageAlt?: string,
 ): RegionCategoryContent => ({
   overview,
   details,
@@ -66,7 +80,94 @@ const category = (
   verificationNote,
   sources,
   image,
+  imageAlt,
+  imageAttribution,
 });
+
+const malenaduPhotos = {
+  highlands: {
+    src: "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Ye_Haseen_Vadiyan_%28145070917%29.jpeg/1280px-Ye_Haseen_Vadiyan_%28145070917%29.jpeg",
+    author: "Sanjeet Singh",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Ye_Haseen_Vadiyan_(145070917).jpeg",
+    license: "CC BY 3.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/3.0/",
+  },
+  iruppuFalls: {
+    src: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/Iruppu_Waterfalls.jpg/1280px-Iruppu_Waterfalls.jpg",
+    author: "Csheik",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Iruppu_Waterfalls.jpg",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+  },
+  coffeeFields: {
+    src: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Coffee_Shade_Trees_Paddy_Fields_Coorg_Feb24_R16_07670.jpg/1280px-Coffee_Shade_Trees_Paddy_Fields_Coorg_Feb24_R16_07670.jpg",
+    author: "Timothy A. Gonsalves",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Coffee_Shade_Trees_Paddy_Fields_Coorg_Feb24_R16_07670.jpg",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+  },
+  pandiCurry: {
+    src: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Pandi_Curry.jpg/1280px-Pandi_Curry.jpg",
+    author: "Rupak76",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Pandi_Curry.jpg",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+  },
+  kappekali: {
+    src: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Kappekali_by_Kodava_Youth-26-10-2013-P_M_Muthanna_%282%29.jpg/1280px-Kappekali_by_Kodava_Youth-26-10-2013-P_M_Muthanna_%282%29.jpg",
+    author: "P. M. Muthanna",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Kappekali_by_Kodava_Youth-26-10-2013-P_M_Muthanna_(2).jpg",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+  },
+  kathiyath: {
+    src: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/Kathiyath_by_Kodava_Youth-26-10-2013-P_M_Muthanna_%281%29.jpg/1280px-Kathiyath_by_Kodava_Youth-26-10-2013-P_M_Muthanna_%281%29.jpg",
+    author: "P. M. Muthanna",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Kathiyath_by_Kodava_Youth-26-10-2013-P_M_Muthanna_(1).jpg",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+  },
+  kodavaScript: {
+    src: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Kod_thakk.svg/1280px-Kod_thakk.svg.png",
+    author: "Symphonicallyu",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Kod_thakk.svg",
+    license: "CC0",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+  },
+  ummathaat: {
+    src: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/Kodava_Women_Performing_%22Ummathaat%22.jpg/1280px-Kodava_Women_Performing_%22Ummathaat%22.jpg",
+    author: "Jagath Ponnanna PM",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Kodava_Women_Performing_%22Ummathaat%22.jpg",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+  },
+  deshakattPaat: {
+    src: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Deshakatt_Paat.png/1280px-Deshakatt_Paat.png",
+    author: "RaithaPade",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Deshakatt_Paat.png",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+  },
+  madikeriFort: {
+    src: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Madikeri_Fort_%2821%29.jpg/1280px-Madikeri_Fort_%2821%29.jpg",
+    author: "Vinayaraj",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Madikeri_Fort_(21).jpg",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+  },
+  kuvempu: {
+    src: "https://upload.wikimedia.org/wikipedia/commons/b/be/Kuvempu.jpg",
+    author: "Unknown author",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Kuvempu.jpg",
+    license: "Public domain",
+    licenseUrl: "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  },
+};
 
 export const regionalContent = {
   "old-mysuru": {
@@ -399,80 +500,157 @@ export const regionalContent = {
   },
   "malenadu-kodagu": {
     introduction: "The rain-rich Malenadu highlands and Kodagu's coffee-growing hills are connected by forested slopes, river headwaters and distinctive agrarian and community traditions.",
-    heroImage: "/images/karnataka-heritage.svg",
-    heroImageAlt: "Illustration celebrating Karnataka's highland heritage",
+    heroImage: malenaduPhotos.highlands.src,
+    heroImageAlt: "Green highland slopes in Kudremukh, Karnataka",
+    heroImageAttribution: malenaduPhotos.highlands,
     categories: {
       geography: category(
         "The Western Ghats rise into cloud forests, plantations and river headwaters across Malenadu and Kodagu.",
-        ["Heavy monsoon rain feeds the Tunga, Bhadra, Hemavati and Kaveri river systems. The region includes evergreen forests, shola-grassland landscapes and cultivated slopes; Kodagu's Talakaveri is traditionally identified as the Kaveri's source."],
-        ["Western Ghats forests and high-rainfall slopes", "Tunga, Bhadra, Hemavati and Kaveri headwaters", "Talakaveri and Kodagu's uplands"],
-        "Ecological boundaries and river-source descriptions should be checked against current conservation and hydrological sources.",
+        [
+          "Chikkamagaluru's district profile places the district in the Western Ghats and names Mullayanagiri as its highest point. It also identifies the Tunga and Bhadra among rivers sourced in the district's mountains.",
+          "Kodagu's Talacauvery is a sacred landscape associated with the Kaveri's origin. The sacred-origin account records religious tradition and is not a hydrological assessment.",
+          "Jog Falls is often approached from Shivamogga, but the falls themselves are in Siddapura taluk, Uttara Kannada district. The district tourism page distinguishes the Shivamogga viewpoint from the waterfall's location.",
+        ],
+        ["Mullayanagiri and the Chikkamagaluru highlands", "Tunga and Bhadra source landscapes", "Talacauvery's religious significance and the Jog Falls viewpoint"],
+        "A comprehensive list of peaks, protected-area boundaries, species, river courses and waterfall locations needs current site-specific sources. Candidate records include Baba Budangiri, Kudremukha, Tadiandamol, Pushpagiri, Brahmagiri, Kodachadri, Agumbe, Abbey, Iruppu, Hebbe, Kalhatti and Unchalli Falls; Hemavathi, Sharavathi, Harangi and Lakshmanatirtha; and Nagarahole, Kudremukh, Bhadra, Pushpagiri, Brahmagiri and Sharavathi Valley protected landscapes. Verify each location, district boundary and current protection status before presenting it as regional fact.",
+        [
+          { label: "About District — Chikkamagaluru District Administration", url: "https://chikkamagaluru.nic.in/en/about-district/" },
+          { label: "Talacauvery — Kodagu District Administration", url: "https://kodagu.nic.in/en/tourist-place/talacauvery/" },
+          { label: "Jog Falls Viewpoint — Shivamogga District Administration", url: "https://shivamogga.nic.in/en/tourist-place/jogfalls/" },
+        ],
+        malenaduPhotos.iruppuFalls.src,
+        malenaduPhotos.iruppuFalls,
+        "Iruppu Falls flowing through a forested landscape in Kodagu, Karnataka",
       ),
       history: category(
         "Hill polities, local chieftaincies, princely-era rule and plantation economies have shaped this diverse upland region.",
         ["The Keladi Nayakas were influential in parts of the Malenadu. Kodagu was governed by the Haleri dynasty before its annexation by the British in 1834; later plantation development transformed land use and labour across the hills."],
         ["Keladi Nayaka histories", "Haleri dynasty and Kodagu", "Colonial-era coffee and plantation change"],
-        "The histories of Malenadu and Kodagu are related but distinct; avoid treating them as one political unit.",
+        "The histories of Malenadu and Kodagu are related but distinct; period-specific claims and local freedom-movement accounts need further archival verification.",
+        [
+          { label: "About District — Kodagu District Administration", url: "https://kodagu.nic.in/en/about-district/" },
+          { label: "About District — Shivamogga District Administration", url: "https://shivamogga.nic.in/en/about-district/" },
+          { label: "About District — Chikkamagaluru District Administration", url: "https://chikkamagaluru.nic.in/en/about-district/" },
+        ],
+        malenaduPhotos.madikeriFort.src,
+        malenaduPhotos.madikeriFort,
+        "Madikeri Fort in Kodagu, Karnataka",
       ),
       communities: category(
         "Kodava, Arebhashe, Havyaka, Kannada-speaking and many other communities sustain distinct identities across the hills.",
         ["Kodagu is home to Kodava communities as well as Arebhashe-speaking Gowdas, Havyakas, Yeravas, Jenu Kurubas and others. Malenadu districts are similarly diverse; community-specific customs and histories should be described on their own terms."],
         ["Kodava cultural traditions", "Arebhashe, Havyaka and other local identities", "Forest, farming and plantation communities"],
-        "Community categories and self-identification vary; further community-led documentation is essential.",
+        "This is not a complete community list. Language groups, caste identities and Indigenous communities are distinct; further community-led documentation is essential.",
+        [
+          { label: "Arebhashe Academy — Government of Karnataka", url: "https://arebhasheacademy.karnataka.gov.in/11/academy/en" },
+          { label: "Coorg — Karnataka Tourism", url: "https://karnatakatourism.org/en/destinations/coorg/" },
+        ],
+        malenaduPhotos.kappekali.src,
+        malenaduPhotos.kappekali,
+        "Kodava youths performing Kappekali, a traditional competitive folk dance",
       ),
       languages: category(
         "Kodava takk, Kannada varieties and Arebhashe are among the languages and speech forms of the uplands.",
         ["Kodava takk is spoken in Kodagu and has a rich oral tradition. Kannada varieties are widespread; Tulu, Malayalam and other languages are also present in border and plantation communities."],
         ["Kodava takk", "Malenadu and Kodagu Kannada varieties", "Arebhashe and neighbouring languages"],
-        "Language vitality and preferred names vary by community; this overview is not a complete language survey.",
+        "Do not infer vocabulary, pronunciation or language vitality from this overview. Verified recordings and community-reviewed linguistic references are still needed.",
+        [
+          { label: "Arebhashe language — Karnataka Arebhashe Samskruthi and Sahitya Academy", url: "https://arebhasheacademy.karnataka.gov.in/12/arebashe/kn" },
+        ],
+        malenaduPhotos.kodavaScript.src,
+        malenaduPhotos.kodavaScript,
+        "Kodava takk written in Kodava lipi",
       ),
       festivals: category(
         "Harvest, ancestor remembrance and seasonal river observances are central to many highland celebrations.",
-        ["Kodava festivals include Kailpodh, Kaveri Sankramana and Puthari, each with distinctive local practices. Harvest celebrations and temple jatres across Malenadu follow their own community calendars."],
-        ["Kailpodh and Puthari", "Kaveri Sankramana", "Local harvest and temple celebrations"],
-        "Ritual details and dates differ between families and localities; seek community guidance before describing ceremonies.",
+        ["Kodagu District Administration describes Huthri as a Kodava harvest observance associated with the new paddy crop. Karnataka Tourism documents Kaveri Sankramana at Talakaveri and Bhagamandala. Kailpodh is described in the tourism account as a Kodava practice; none of these records should be generalized to all communities in the region."],
+        ["Huthri and the paddy harvest", "Kaveri Sankramana at Talakaveri", "Kailpodh and community-specific observances"],
+        "Sources use Huthri; whether and where Puthari is used as an alternative name needs confirmation. Ritual details and dates differ between families and localities.",
+        [
+          { label: "Fairs & Festivals — Kodagu District Administration", url: "https://kodagu.nic.in/en/tourism/culture-heritage/" },
+          { label: "Kaveri Sankramana — Karnataka Tourism", url: "https://karnatakatourism.org/en/events/kaveri-sankramana/" },
+          { label: "Coorg — Karnataka Tourism", url: "https://karnatakatourism.org/en/destinations/coorg/" },
+        ],
+        malenaduPhotos.ummathaat.src,
+        malenaduPhotos.ummathaat,
+        "Kodava women performing Ummathaat after the Puthari harvest festival",
       ),
       "performing-arts": category(
         "Dance, song and ritual performance express community histories and seasonal celebration in the highlands.",
-        ["Kodava performance traditions include Ummathat, Bolakat and Kolat, performed in particular social and ceremonial contexts. Yakshagana is also popular in some Malenadu areas, especially toward the coastal-facing districts."],
-        ["Ummathat and Bolakat", "Kolat and community dance", "Yakshagana in western Malenadu"],
-        "Names, costume and performance contexts should be verified with practitioners from the specific locality.",
+        ["Candidate practitioner-led records include Kodava Ummathaat, Bolakaat and Kolaat, Hase Chittara, folk music and Yakshagana where locally practised. Record local names and performance contexts with the practitioners rather than assuming a single regional form."],
+        ["Ummathaat and Bolakaat — practitioner verification needed", "Kolaat and Hase Chittara — locality-specific records needed", "Yakshagana only where documented locally"],
+        "Names, costume, community associations and performance contexts require practitioner-led verification. No recordings are presented as authentic community testimony without consent.",
+        undefined,
+        malenaduPhotos.kathiyath.src,
+        malenaduPhotos.kathiyath,
+        "Kodava men performing Kathiyath, a traditional sword dance",
       ),
       food: category(
         "Rice, forest and garden produce, pork and coffee are prominent in many—but not all—highland food traditions.",
-        ["Kodava cuisine is known for pandi curry and kadambuttu; akki rotti and seasonal greens are also common in the broader highlands. Coffee is a major crop and social presence, while meals vary across communities and households."],
-        ["Pandi curry and kadambuttu", "Rice-based meals and seasonal produce", "Coffee-growing and coffee-drinking traditions"],
-        "Foodways are not uniform across Kodagu and Malenadu; document recipes with the people who make them.",
+        ["Potential community recipe records include names such as pandi curry, kadambuttu, noolputtu, bamboo-shoot preparations, akki rotti, pathrode and tambuli. This archive does not yet verify individual recipes, ingredients, or which communities and localities identify with them; those details should be collected with cooks."],
+        ["Kodava pork-food traditions (broad source association)", "Rice-based meals and seasonal produce", "Recipes awaiting cook-led documentation"],
+        "The cited tourism overview supports only a broad Kodava pork-food association; specific recipes, ingredients and community ownership need cook-led documentation and verification.",
+        [
+          { label: "Food & Culinary — Karnataka Tourism", url: "https://karnatakatourism.org/en/experiences/food-culinary/" },
+        ],
+        malenaduPhotos.pandiCurry.src,
+        malenaduPhotos.pandiCurry,
+        "Pandi curry, a pork dish associated with Kodagu cuisine",
       ),
       architecture: category(
         "Large family homes, sloping roofs and plantation-era buildings respond to steep terrain and intense rainfall.",
         ["The Kodava ainmane is a traditional ancestral home with particular social significance. In Malenadu, timber structures, deep verandas and steep tiled roofs are adapted to monsoon conditions; styles vary by community, period and wealth."],
         ["Kodava ainmane houses", "Steep roofs and sheltered verandas", "Plantation bungalows and village homes"],
         "Architectural terms and house customs are community-specific and should be confirmed with local families and historians.",
+        undefined,
+        "/images/kodava-ainmane.svg",
+        undefined,
+        "Illustration of a Kodava ainmane ancestral home",
       ),
       agriculture: category(
         "Coffee, pepper, cardamom and paddy are cultivated across a landscape of forest edges and rain-fed slopes.",
         ["Coffee and pepper are major plantation crops in Kodagu and parts of Chikkamagaluru. Paddy is grown in valley fields, while arecanut, cardamom and other crops vary by elevation and locality; farming systems are affected by changing rainfall and land use."],
         ["Coffee and pepper", "Paddy in valley fields", "Cardamom, arecanut and mixed gardens"],
-        "Crop practices and ecological effects are changing; district-level agricultural sources are needed for current details.",
+        "Crop descriptions come from undated district pages and should not be read as current production statistics. Traditional observations are not presented as scientific recommendations.",
+        [
+          { label: "About District — Kodagu District Administration", url: "https://kodagu.nic.in/en/about-district/" },
+          { label: "About District — Chikkamagaluru District Administration", url: "https://chikkamagaluru.nic.in/en/about-district/" },
+          { label: "Horticulture Department — Shivamogga District Administration", url: "https://shivamogga.nic.in/en/horticulture-department/" },
+          { label: "Coffee in India — Coffee Board of India", url: "https://coffeeboard.gov.in/IndexContent.html" },
+        ],
+        malenaduPhotos.coffeeFields.src,
+        malenaduPhotos.coffeeFields,
+        "Coffee shade trees and paddy fields in Balamuri, Coorg",
       ),
       "oral-history": category(
         "Ancestral narratives, place-based legends and songs carry memory through family and community gatherings.",
         ["Kodava oral narratives often connect families to landscapes, ancestors and the Kaveri. Malenadu storytelling also includes forest and river legends; versions are local and should be recorded with the storyteller's own context."],
         ["Kodava family and ancestral narratives", "Kaveri and Talakaveri legends", "Malenadu forest and river stories"],
         "These are living traditions, not a single canonical text; record locality, storyteller and version.",
+        undefined,
+        malenaduPhotos.deshakattPaat.src,
+        malenaduPhotos.deshakattPaat,
+        "Deshakatt Paat, a Kodava folk verse in Kodava script about Kodagu and its provinces",
       ),
       knowledge: category(
         "Highland skills include coffee cultivation, forest stewardship, spice processing and construction suited to heavy rain.",
         ["Farmers maintain practical knowledge of shade-grown coffee, pepper vines and mixed gardens. Local expertise also includes managing monsoon water, building and repairing steep-roofed houses, and gathering forest products where permitted."],
         ["Coffee and mixed-garden cultivation", "Monsoon water and hillside management", "Timber, roof and spice-processing skills"],
         "Traditional ecological knowledge belongs to its communities; document it with consent and alongside current conservation guidance.",
+        undefined,
+        "/images/malenadu-coffee-estate.svg",
+        undefined,
+        "Illustration of a coffee estate in the Malenadu highlands",
       ),
       personalities: category(
         "Military leaders, writers and public figures from the hills have contributed to India's civic, literary and cultural history.",
         ["Field Marshal K. M. Cariappa and General K. S. Thimayya were born in Kodagu and became prominent leaders of the Indian Army. Kuvempu, born in Shivamogga district, is a major Kannada literary figure associated with the Malenadu landscape."],
         ["Field Marshal K. M. Cariappa", "General K. S. Thimayya", "Kuvempu and Malenadu's literary legacy"],
         "Confirm biographical details and distinguish birthplace, upbringing and later regional association.",
+        undefined,
+        malenaduPhotos.kuvempu.src,
+        malenaduPhotos.kuvempu,
+        "Portrait of Kannada poet Kuvempu",
       ),
     },
   },

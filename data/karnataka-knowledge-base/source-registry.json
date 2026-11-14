@@ -918,6 +918,30 @@
       "verification_status": "verified"
     },
     {
+      "source_id": "ca3415800d8c5127",
+      "url": "https://karnatakatourism.org/en/destinations/shivamogga/",
+      "title": "Shivamogga",
+      "organization": "Karnataka Tourism, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "malenadu-kodagu"
+      ],
+      "districts": [
+        "shivamogga"
+      ],
+      "record_ids": [
+        "shivamogga-appe-midi-tourism"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
       "source_id": "e3956f2e61a5c7a1",
       "url": "https://karnatakatourism.org/en/destinations/udupi/",
       "title": "Udupi: Culture Meets Coast",

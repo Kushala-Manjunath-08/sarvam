@@ -84,10 +84,54 @@ ALLOWED_EXTENSIONS = {
     ".mp4", ".webm"
 }
 
+ALLOWED_CONTENT_TYPES = {
+    "image/jpeg", "image/png", "image/webp", "video/mp4", "video/webm"
+}
+
 MAX_FILE_SIZE = 100 * 1024 * 1024  # 100 MB
 
 # SQLite database for community interactions
 DATABASE_FILE = DATA_DIR / "community.db"
+REGION_DISTRICTS = {
+    "old-mysuru": {
+        "Mysuru", "Mandya", "Chamarajanagar", "Hassan", "Tumakuru",
+        "Bengaluru Urban", "Bengaluru Rural", "Ramanagara", "Kolar",
+        "Chikkaballapura",
+    },
+    "uttara-karnataka": {
+        "Belagavi", "Dharwad", "Gadag", "Bagalkot", "Vijayapura",
+        "Haveri", "Davangere", "Chitradurga", "Kalaburagi", "Bidar",
+        "Yadgir", "Raichur", "Koppal", "Ballari", "Vijayanagara",
+    },
+    "karavali": {"Dakshina Kannada", "Udupi", "Uttara Kannada"},
+    "malenadu-kodagu": {"Kodagu", "Chikkamagaluru", "Shivamogga"},
+}
+REGIONAL_STORY_TOPICS = {
+    "stay", "culture", "communities", "history", "languages", "festivals",
+    "performing-arts", "food", "weather", "climate", "nature",
+    "architecture", "agriculture", "oral-history", "traditional-knowledge",
+    "personalities", "other",
+}
+
+
+def valid_media_signature(extension: str, content: bytes) -> bool:
+    if extension in {".jpg", ".jpeg"}:
+        return content.startswith(b"\xff\xd8\xff")
+    if extension == ".png":
+        return content.startswith(b"\x89PNG\r\n\x1a\n")
+    if extension == ".webp":
+        return (
+            len(content) >= 12
+            and content.startswith(b"RIFF")
+            and content[8:12] == b"WEBP"
+        )
+    if extension == ".mp4":
+        return len(content) >= 12 and content[4:8] == b"ftyp"
+    if extension == ".webm":
+        return content.startswith(b"\x1a\x45\xdf\xa3")
+    return False
+
+
 BENGALURU_DIVISION_DISTRICTS = {
     "bengaluru-rural",
     "bengaluru-urban",
@@ -168,6 +212,28 @@ def initialize_database():
         )
     """)
 
+    connection.execute("""
+        CREATE TABLE IF NOT EXISTS regional_media (
+            id TEXT PRIMARY KEY,
+            region_id TEXT NOT NULL,
+            district TEXT NOT NULL,
+            location TEXT NOT NULL,
+            contributor TEXT NOT NULL,
+            experience TEXT NOT NULL,
+            topics_json TEXT NOT NULL,
+            filename TEXT,
+            media_type TEXT,
+            url TEXT,
+            permission_confirmed INTEGER NOT NULL,
+            created_at TEXT NOT NULL,
+            status TEXT NOT NULL DEFAULT 'published'
+        )
+    """)
+    connection.execute(
+        "CREATE INDEX IF NOT EXISTS idx_regional_media_public "
+        "ON regional_media(region_id, status, created_at DESC)"
+    )
+
     review_columns = {
         row["name"] for row in connection.execute("PRAGMA table_info(reviews)")
     }
@@ -232,6 +298,42 @@ def write_json(path: Path, data):
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 
+def community_collection_id(request: Request) -> str:
+    if request.url.path.startswith("/api/regions/bengaluru-division/"):
+        return "bengaluru-division"
+    return "bagalkot"
+
+
+def validate_community_district(
+    request: Request,
+    district_id: Optional[str],
+) -> Optional[str]:
+    if district_id is None:
+        return None
+
+    normalized_id = district_id.strip().lower()
+    if (
+        community_collection_id(request) != "bengaluru-division"
+        or normalized_id not in BENGALURU_DIVISION_DISTRICTS
+    ):
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid Bengaluru division district.",
+        )
+    return normalized_id
+
+
+def belongs_to_collection(item: dict, collection_id: str) -> bool:
+    return item.get("collection_id", item.get("district_id")) == collection_id
+
+
+def collection_post_exists(collection_id: str, post_id: str) -> bool:
+    return any(
+        item.get("id") == post_id and belongs_to_collection(item, collection_id)
+        for item in read_json(UPLOADS_FILE)
+    )
+
+
 @app.get("/")
 def home():
     return {"message": "LEGACYOS Backend is running"}
@@ -269,30 +371,262 @@ def get_district(district_id: str):
         return json.load(file)
 
 
+def _legacy_karavali_media() -> list[dict]:
+    district_names = {
+        "dakshina-kannada": "Dakshina Kannada",
+        "udupi": "Udupi",
+        "uttara-kannada": "Uttara Kannada",
+    }
+    return [
+        {
+            "id": item["id"],
+            "region_id": "karavali",
+            "district": district_names[item["district_id"]],
+            "location": district_names[item["district_id"]],
+            "contributor": item.get("contributor", "Community member"),
+            "experience": item.get("caption", ""),
+            "topics": [],
+            "media_type": item.get("media_type"),
+            "url": item.get("url"),
+            "created_at": item.get("created_at", ""),
+        }
+        for item in read_json(UPLOADS_FILE)
+        if item.get("district_id") in district_names
+        and item.get("status") == "published"
+        and item.get("url")
+    ]
+
+
+@app.get("/api/regions/{region_id}/contributions")
+def get_region_contributions(region_id: str):
+    if region_id not in REGION_DISTRICTS:
+        raise HTTPException(status_code=404, detail="Region not found.")
+
+    connection = get_db_connection()
+    try:
+        rows = connection.execute(
+            """
+            SELECT id, region_id, district, location, contributor, experience,
+                   topics_json, media_type, url, created_at
+            FROM regional_media
+            WHERE region_id = ? AND status = 'published'
+            ORDER BY created_at DESC
+            LIMIT 100
+            """,
+            (region_id,),
+        ).fetchall()
+    finally:
+        connection.close()
+
+    contributions = []
+    for row in rows:
+        item = dict(row)
+        item["topics"] = json.loads(item.pop("topics_json"))
+        contributions.append(item)
+
+    if region_id == "karavali":
+        contributions.extend(_legacy_karavali_media())
+        contributions.sort(
+            key=lambda item: item.get("created_at", ""),
+            reverse=True,
+        )
+
+    return {"contributions": contributions[:100]}
+
+
+@app.post("/api/regions/{region_id}/contributions")
+async def add_region_contribution(
+    region_id: str,
+    district: str = Form(...),
+    location: str = Form(...),
+    contributor: str = Form(...),
+    experience: str = Form(...),
+    topics: str = Form("[]"),
+    rights_confirmation: bool = Form(...),
+    file: Optional[UploadFile] = File(default=None),
+):
+    if region_id not in REGION_DISTRICTS:
+        raise HTTPException(status_code=404, detail="Region not found.")
+
+    district = district.strip()
+    location = location.strip()
+    contributor = contributor.strip()
+    experience = experience.strip()
+    if district not in REGION_DISTRICTS[region_id]:
+        raise HTTPException(status_code=400, detail="Choose a district in this region.")
+    if not all((location, contributor, experience)):
+        raise HTTPException(
+            status_code=400,
+            detail="Enter your name, visit location, and experience.",
+        )
+    if (
+        len(location) > 160
+        or len(contributor) > 80
+        or len(experience) > 3000
+        or len(topics) > 500
+    ):
+        raise HTTPException(status_code=400, detail="One or more fields are too long.")
+    if not rights_confirmation:
+        raise HTTPException(
+            status_code=400,
+            detail="Confirm that you have permission to share this contribution.",
+        )
+
+    try:
+        selected_topics = json.loads(topics)
+    except json.JSONDecodeError as error:
+        raise HTTPException(status_code=400, detail="Invalid topic selection.") from error
+    if (
+        not isinstance(selected_topics, list)
+        or len(selected_topics) > len(REGIONAL_STORY_TOPICS)
+        or any(
+            not isinstance(topic, str) or topic not in REGIONAL_STORY_TOPICS
+            for topic in selected_topics
+        )
+    ):
+        raise HTTPException(status_code=400, detail="Unsupported experience topic.")
+    selected_topics = list(dict.fromkeys(selected_topics))
+
+    media_type = None
+    media_url = None
+    original_name = None
+    contribution_id = str(uuid.uuid4())
+    saved_path = None
+    if file and file.filename:
+        original_name = Path(file.filename).name
+        extension = Path(original_name).suffix.lower()
+        expected_content_types = {
+            ".jpg": "image/jpeg",
+            ".jpeg": "image/jpeg",
+            ".png": "image/png",
+            ".webp": "image/webp",
+            ".mp4": "video/mp4",
+            ".webm": "video/webm",
+        }
+        if extension not in ALLOWED_EXTENSIONS:
+            raise HTTPException(
+                status_code=400,
+                detail="Allowed media: JPG, PNG, WEBP, MP4, or WEBM.",
+            )
+        if file.content_type != expected_content_types[extension]:
+            raise HTTPException(status_code=400, detail="Unsupported media type.")
+
+        try:
+            content = await file.read(MAX_FILE_SIZE + 1)
+        finally:
+            await file.close()
+        if not content:
+            raise HTTPException(status_code=400, detail="The selected file is empty.")
+        if len(content) > MAX_FILE_SIZE:
+            raise HTTPException(status_code=413, detail="Media exceeds the 100 MB limit.")
+        if not valid_media_signature(extension, content):
+            raise HTTPException(
+                status_code=400,
+                detail="The file content does not match its extension.",
+            )
+
+        saved_name = f"regional_{contribution_id}{extension}"
+        saved_path = UPLOAD_DIR / saved_name
+        try:
+            saved_path.write_bytes(content)
+        except OSError as error:
+            raise HTTPException(
+                status_code=500, detail="Could not store the uploaded media."
+            ) from error
+        media_type = "video" if extension in {".mp4", ".webm"} else "image"
+        media_url = f"/media/{saved_name}"
+
+    created_at = datetime.now(timezone.utc).isoformat()
+    connection = get_db_connection()
+    try:
+        with connection:
+            connection.execute(
+                """
+                INSERT INTO regional_media (
+                    id, region_id, district, location, contributor, experience,
+                    topics_json, filename, media_type, url,
+                    permission_confirmed, created_at, status
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'published')
+                """,
+                (
+                    contribution_id,
+                    region_id,
+                    district,
+                    location,
+                    contributor,
+                    experience,
+                    json.dumps(selected_topics, ensure_ascii=False),
+                    original_name,
+                    media_type,
+                    media_url,
+                    int(rights_confirmation),
+                    created_at,
+                ),
+            )
+    except sqlite3.Error as error:
+        if saved_path and saved_path.exists():
+            saved_path.unlink()
+        raise HTTPException(
+            status_code=500,
+            detail="Could not save your regional experience.",
+        ) from error
+    finally:
+        connection.close()
+
+    contribution = {
+        "id": contribution_id,
+        "region_id": region_id,
+        "district": district,
+        "location": location,
+        "contributor": contributor,
+        "experience": experience,
+        "topics": selected_topics,
+        "media_type": media_type,
+        "url": media_url,
+        "created_at": created_at,
+    }
+    return {
+        "message": "Your regional experience has been added to the archive.",
+        "contribution": contribution,
+    }
+
+
 @app.get("/api/districts/bagalkot/community")
-def get_bagalkot_community():
+@app.get("/api/regions/bengaluru-division/community")
+def get_bagalkot_community(
+    request: Request,
+    district_id: Optional[str] = None,
+):
+    collection_id = community_collection_id(request)
+    district_id = validate_community_district(request, district_id)
     uploads = read_json(UPLOADS_FILE)
     feedback = read_json(FEEDBACK_FILE)
 
     return {
         "uploads": [
             item for item in uploads
-            if item.get("district_id") == "bagalkot"
+            if belongs_to_collection(item, collection_id)
+            and (district_id is None or item.get("district_id") == district_id)
         ],
         "feedback": [
             item for item in feedback
-            if item.get("district_id") == "bagalkot"
+            if belongs_to_collection(item, collection_id)
+            and (district_id is None or item.get("district_id") == district_id)
         ]
     }
 
 
 @app.post("/api/districts/bagalkot/uploads")
+@app.post("/api/regions/bengaluru-division/uploads")
 async def upload_bagalkot_media(
+    request: Request,
     file: UploadFile = File(...),
     contributor: str = Form(...),
     caption: str = Form(""),
     district_id: Optional[str] = Form(None)
 ):
+    collection_id = community_collection_id(request)
+    district_id = validate_community_district(request, district_id)
     original_name = Path(file.filename or "").name
     extension = Path(original_name).suffix.lower()
 
@@ -362,7 +696,8 @@ async def upload_bagalkot_media(
 
     item = {
         "id": upload_id,
-        "district_id": "bagalkot",
+        "district_id": "bagalkot" if collection_id == "bagalkot" else district_id,
+        "collection_id": collection_id,
         "contributor": contributor,
         "caption": caption,
         "filename": original_name,
@@ -373,11 +708,6 @@ async def upload_bagalkot_media(
         "created_at": datetime.now(timezone.utc).isoformat(),
         "status": "published"
     }
-    if collection_id == "bagalkot":
-        item["district_id"] = "bagalkot"
-    elif district_id is not None:
-        item["district_id"] = district_id
-
     uploads.insert(0, item)
     write_json(UPLOADS_FILE, uploads)
 
@@ -388,11 +718,15 @@ async def upload_bagalkot_media(
 
 
 @app.post("/api/districts/bagalkot/feedback")
+@app.post("/api/regions/bengaluru-division/feedback")
 def add_bagalkot_feedback(
+    request: Request,
     contributor: str = Form(...),
     message: str = Form(...),
     district_id: Optional[str] = Form(None)
 ):
+    collection_id = community_collection_id(request)
+    district_id = validate_community_district(request, district_id)
     contributor = contributor.strip()
     message = message.strip()
 
@@ -412,16 +746,12 @@ def add_bagalkot_feedback(
 
     item = {
         "id": str(uuid.uuid4()),
-        "district_id": "bagalkot",
+        "district_id": "bagalkot" if collection_id == "bagalkot" else district_id,
+        "collection_id": collection_id,
         "contributor": contributor,
         "message": message,
         "created_at": datetime.now(timezone.utc).isoformat()
     }
-    if collection_id == "bagalkot":
-        item["district_id"] = "bagalkot"
-    elif district_id is not None:
-        item["district_id"] = district_id
-
     feedback.insert(0, item)
     write_json(FEEDBACK_FILE, feedback)
 

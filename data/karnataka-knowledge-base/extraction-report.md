@@ -12,15 +12,19 @@
 | Old Mysuru | 10 | 21 | 21 | 0 |
 | Uttara Karnataka | 15 | 43 | 43 | 0 |
 | Karavali | 3 | 18 | 16 | 2 |
-| Malenadu & Kodagu | 3 | 16 | 16 | 0 |
-| **Total** | **31** | **98** | **96** | **2** |
+| Malenadu & Kodagu | 3 | 17 | 17 | 0 |
+| **Total** | **31** | **99** | **97** | **2** |
 
-The corpus contains 72 distinct primary-source URLs. The generated registry
-contains 76 unique source URLs after adding references to related sources; 74
+The corpus contains 73 distinct primary-source URLs. The generated registry
+contains 77 unique source URLs after adding references to related sources; 75
 sources support searchable records and 2 are associated with records retained
 for review. Search uses verified records only. Current retrieval is keyword
 based; semantic embeddings and generated answers are optional backend
 configurations.
+
+The Shivamogga food record is limited to Karnataka Tourism's description of
+Appe Midi pickle prepared in Sagar; it does not claim that the food is common
+across the district.
 
 The corpus includes 40 agriculture records, including 2022–23 crop estimates
 and five Government of Karnataka proposed crop-target records for 2025–26.
