@@ -1,0 +1,63 @@
+{
+  "regions": [
+    {
+      "slug": "old-mysuru",
+      "name": "Old Mysuru",
+      "subtitle": "Southern Royal & Agrarian Culture",
+      "districts": [
+        "Mysuru",
+        "Mandya",
+        "Chamarajanagar",
+        "Hassan",
+        "Tumakuru",
+        "Bengaluru Urban",
+        "Bengaluru Rural",
+        "Ramanagara",
+        "Kolar",
+        "Chikkaballapura"
+      ]
+    },
+    {
+      "slug": "uttara-karnataka",
+      "name": "Uttara Karnataka",
+      "subtitle": "Northern Deccan Culture",
+      "districts": [
+        "Belagavi",
+        "Dharwad",
+        "Gadag",
+        "Bagalkot",
+        "Vijayapura",
+        "Haveri",
+        "Davangere",
+        "Chitradurga",
+        "Kalaburagi",
+        "Bidar",
+        "Yadgir",
+        "Raichur",
+        "Koppal",
+        "Ballari",
+        "Vijayanagara"
+      ]
+    },
+    {
+      "slug": "karavali",
+      "name": "Karavali",
+      "subtitle": "Coastal Tuluva-Konkani Culture",
+      "districts": [
+        "Dakshina Kannada",
+        "Udupi",
+        "Uttara Kannada"
+      ]
+    },
+    {
+      "slug": "malenadu-kodagu",
+      "name": "Malenadu & Kodagu",
+      "subtitle": "Hill & Plantation Culture",
+      "districts": [
+        "Kodagu",
+        "Chikkamagaluru",
+        "Shivamogga"
+      ]
+    }
+  ]
+}

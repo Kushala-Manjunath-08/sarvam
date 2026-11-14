@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420">
+  <defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#dbe9e8"/><stop offset="1" stop-color="#f7e8d0"/></linearGradient></defs>
+  <rect width="640" height="420" fill="url(#sky)"/>
+  <circle cx="512" cy="76" r="35" fill="#fff4cd"/>
+  <path d="M0 330q116-72 230-18t205-9 205 18v99H0Z" fill="#72866e"/>
+  <path d="M158 340V182h326v158Z" fill="#f1dfbf"/>
+  <path d="m143 186 177-94 178 94Z" fill="#b86245"/>
+  <path d="M266 184V99h108v85Z" fill="#f1dfbf"/>
+  <path d="m254 105 63-53 68 53Z" fill="#a84f3e"/>
+  <path d="M300 52V24h22v28" fill="#7d493d"/>
+  <g fill="#437b7c"><path d="M190 219h38v65h-38z"/><path d="M268 219h38v65h-38z"/><path d="M346 219h38v65h-38z"/><path d="M424 219h38v65h-38z"/></g>
+  <g fill="#d8a55e"><circle cx="209" cy="237" r="7"/><circle cx="287" cy="237" r="7"/><circle cx="365" cy="237" r="7"/><circle cx="443" cy="237" r="7"/></g>
+  <path d="M286 340v-67q34-45 68 0v67Z" fill="#70504a"/>
+</svg>

@@ -1,0 +1,376 @@
+{
+  "introduction": "Along Karnataka's Arabian Sea coast, Karavali's estuaries, ports and monsoon landscape sustain a rich mix of Tulu, Kannada, Konkani and other cultural traditions.",
+  "heroImage": "/images/karavali/yakshagana-performance.jpg",
+  "heroImageAlt": "Yakshagana performers on stage in coastal Karnataka",
+  "categories": [
+    {
+      "id": "geography",
+      "title": "Geography & Natural Heritage",
+      "icon": "land",
+      "image": "/images/karavali/st-marys-islands.jpg",
+      "overview": "A narrow coastal plain meets the Arabian Sea on one side and the steep, rain-fed Western Ghats on the other.",
+      "details": [
+        "Rivers such as the Netravati, Sharavathi, Kali and Aghanashini flow westward into estuaries and the sea. Beaches, laterite plateaus, mangroves and hill forests create varied habitats along the districts."
+      ],
+      "highlights": [
+        "Arabian Sea coastline and estuaries",
+        "Western Ghats foothills",
+        "Monsoon rivers, laterite and coastal wetlands"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History & Historical Events",
+      "icon": "history",
+      "image": "/images/karavali/mirjan-fort.jpg",
+      "overview": "Coastal Karnataka's history has been shaped by maritime trade, local dynasties, pilgrimage centres and colonial-era encounters.",
+      "details": [
+        "The Alupa dynasty is associated with early medieval rule in parts of the southern coast. Ports and river routes connected the coast to Indian Ocean trade; later histories include Vijayanagara influence, local chiefs and Portuguese and British presence."
+      ],
+      "highlights": [
+        "Alupa-era coastal history",
+        "Port towns and Indian Ocean trade",
+        "Layered local and colonial histories"
+      ],
+      "verificationNote": "Dynastic influence and port histories differ along the coast; precise site-level timelines need local historical sources."
+    },
+    {
+      "id": "communities",
+      "title": "Communities & Cultural Identity",
+      "icon": "community",
+      "image": "/images/karavali/kambala-race.jpg",
+      "overview": "Tulu, Kannada, Konkani and Beary-speaking communities, among many others, shape the coast's plural identities.",
+      "details": [
+        "Bunts, Billava, Mogaveera, Beary, Konkani-speaking, Havyaka and many other communities have distinct histories and practices. Coastal identity is not singular: language, livelihood and ritual traditions vary from taluk to taluk."
+      ],
+      "highlights": [
+        "Fishing, farming and trading communities",
+        "Tulu, Konkani and Beary cultural traditions",
+        "Plural religious and linguistic life"
+      ],
+      "verificationNote": "Community names are examples, not a complete list; seek community-led accounts and avoid flattening distinct identities."
+    },
+    {
+      "id": "languages",
+      "title": "Languages & Dialects",
+      "icon": "language",
+      "image": "/images/karavali/yakshagana-performance.jpg",
+      "overview": "Tulu, Kannada, Konkani and Beary are among the languages heard across the coast, alongside many local varieties.",
+      "details": [
+        "Language use changes along the coastline and inland foothills. Tulu is widely spoken in Dakshina Kannada and Udupi; Konkani has multiple local varieties, and Beary is a distinct language with a strong coastal presence."
+      ],
+      "highlights": [
+        "Tulu and regional Kannada",
+        "Konkani varieties",
+        "Beary and multilingual coastal towns"
+      ],
+      "verificationNote": "The number and naming of Konkani and other speech varieties should be confirmed with language communities."
+    },
+    {
+      "id": "festivals",
+      "title": "Festivals & Celebrations",
+      "icon": "festival",
+      "image": "/images/karavali/kambala-race.jpg",
+      "overview": "Temple festivals, seasonal rituals, pilgrimage and community celebrations follow both regional and local calendars.",
+      "details": [
+        "Bhuta Kola/Tambila traditions are important in parts of Tulu Nadu. Udupi's Krishna Matha Paryaya is a major institutional festival cycle; Kambala buffalo races are held at seasonal venues, and Aati Kalenja is associated with the monsoon season."
+      ],
+      "highlights": [
+        "Bhuta Kola and related spirit worship traditions",
+        "Udupi Paryaya",
+        "Kambala and Aati Kalenja"
+      ],
+      "verificationNote": "Ritual names, meanings and participation differ among communities; document them with local practitioners."
+    },
+    {
+      "id": "performing-arts",
+      "title": "Traditional Art & Performing Arts",
+      "icon": "performance",
+      "image": "/images/karavali/yakshagana-performance.jpg",
+      "overview": "Elaborate folk theatre, ritual performance and music are central to the coast's cultural memory.",
+      "details": [
+        "Yakshagana combines singing, percussion, dialogue and stylised costume in performances drawing on epic narratives. Other traditions include Tulu theatre and ritual forms such as Pili Vesha, which is performed during some local celebrations."
+      ],
+      "highlights": [
+        "Yakshagana and its regional styles",
+        "Tulu theatre traditions",
+        "Pili Vesha and community performance"
+      ],
+      "verificationNote": "Performance forms evolve and differ between troupes; credit performers and record local terminology."
+    },
+    {
+      "id": "food",
+      "title": "Food & Culinary Heritage",
+      "icon": "food",
+      "image": "/images/karavali/neer-dosa.jpg",
+      "overview": "Rice, coconut, seafood and locally grown spices anchor a cuisine with distinct Tulu, Konkani and other community traditions.",
+      "details": [
+        "Neer dosa, kori rotti and a range of fish curries are associated with parts of the coast. Coconut-based preparations and seasonal ingredients are common, while vegetarian and festival foods vary by community."
+      ],
+      "highlights": [
+        "Neer dosa and kori rotti",
+        "Fish and coconut-based curries",
+        "Distinct Konkani and vegetarian festival foods"
+      ],
+      "verificationNote": "Food traditions are community-specific; recipes and dish origins should be credited to their cooks and local sources."
+    },
+    {
+      "id": "architecture",
+      "title": "Architecture & Traditional Lifestyle",
+      "icon": "home",
+      "image": "/images/karavali/coastal-home.jpg",
+      "overview": "Coastal homes and sacred buildings respond to heavy monsoon rain, timber availability and local ritual practice.",
+      "details": [
+        "Traditional houses often use steep tiled roofs, shaded verandas and internal courtyards. Temple architecture and older port-town buildings reflect distinct periods and communities; surviving examples should be documented locally rather than treated as one uniform coastal style."
+      ],
+      "highlights": [
+        "Deep eaves and tiled roofs",
+        "Courtyard homes and laterite construction",
+        "Temple and port-town architecture"
+      ],
+      "verificationNote": "Architectural forms vary across the coast and have changed over time; site-specific documentation is needed."
+    },
+    {
+      "id": "agriculture",
+      "title": "Agriculture & Traditional Practices",
+      "icon": "harvest",
+      "image": "/images/karavali/kambala-race.jpg",
+      "overview": "Paddy, arecanut, coconut, cashew and fishing livelihoods reflect the coastal climate and its riverine landscapes.",
+      "details": [
+        "Rice paddies occupy low-lying fields; arecanut and coconut gardens are common inland from the shore. Fishing and small-scale processing support many coastal livelihoods, while cashew and horticulture are important in some areas."
+      ],
+      "highlights": [
+        "Paddy cultivation in lowlands",
+        "Arecanut, coconut and cashew",
+        "Marine and estuarine fishing knowledge"
+      ],
+      "verificationNote": "Livelihoods differ by coast, estuary and upland; avoid assuming the same crop or fishing practice across districts."
+    },
+    {
+      "id": "oral-history",
+      "title": "Folk Stories, Legends & Oral History",
+      "icon": "oral",
+      "image": "/images/karavali/yakshagana-performance.jpg",
+      "overview": "Epic ballads, ritual narratives and community histories keep coastal stories in circulation.",
+      "details": [
+        "The Siri epic is an important Tulu oral narrative carried through recitation and performance. Koti and Chennaya are remembered as heroic figures in Tulu ballad traditions; local versions and interpretations differ."
+      ],
+      "highlights": [
+        "The Siri epic",
+        "Koti and Chennaya ballads",
+        "Bhuta narratives and family histories"
+      ],
+      "verificationNote": "These traditions have multiple versions and meanings; preserve narrators' own framing and permissions."
+    },
+    {
+      "id": "knowledge",
+      "title": "Traditional Knowledge & Skills",
+      "icon": "craft",
+      "image": "/images/karavali/malpe-harbour.jpg",
+      "overview": "Fishing, boatbuilding, food preservation and craft skills reflect generations of adaptation to sea and monsoon.",
+      "details": [
+        "Traditional knowledge includes reading tides and seasonal fish movements, maintaining nets and boats, and processing arecanut and coconut. Yakshagana costume and instrument-making skills are also sustained by specialist practitioners."
+      ],
+      "highlights": [
+        "Boat, net and navigation skills",
+        "Coconut, arecanut and food processing",
+        "Yakshagana costume and instrument craft"
+      ]
+    },
+    {
+      "id": "personalities",
+      "title": "Important Personalities & Contributions",
+      "icon": "people",
+      "image": "/images/karavali/yakshagana-performance.jpg",
+      "overview": "Coastal Karnataka has produced writers, reformers, artists and leaders whose influence extends well beyond the shoreline.",
+      "details": [
+        "Kota Shivarama Karanth, born in Kota in present-day Udupi district, was a major Kannada writer and cultural figure. Rani Abbakka of Ullal is remembered for resisting Portuguese power; accounts of her life combine historical record and later popular memory."
+      ],
+      "highlights": [
+        "Kota Shivarama Karanth and Kannada letters",
+        "Rani Abbakka and the history of Ullal",
+        "Writers and performers from coastal districts"
+      ],
+      "verificationNote": "Some celebrated historical biographies blend archival evidence and oral tradition; consult both and distinguish them."
+    },
+    {
+      "id": "iconic-places",
+      "title": "Iconic Places & Landmarks",
+      "icon": "land",
+      "image": "/images/karavali/st-marys-islands.jpg",
+      "overview": "Karavali's landmarks connect sacred towns, working harbours, laterite forts, islands and forested rock formations.",
+      "details": [
+        "Explore a district-scoped selection of places across Dakshina Kannada, Udupi and Uttara Kannada. Each place page distinguishes documented information from oral tradition and links to the source material used."
+      ],
+      "highlights": [
+        "St. Mary's Islands and Udupi Sri Krishna Matha",
+        "Kadri and Mangaluru's coastal heritage",
+        "Mirjan Fort, Gokarna and Yana"
+      ],
+      "sources": [
+        {
+          "label": "Karnataka Tourism - Udupi",
+          "url": "https://karnatakatourism.org/en/destinations/udupi/"
+        },
+        {
+          "label": "Uttara Kannada District Portal - Mirjan Fort",
+          "url": "https://uttarakannada.nic.in/en/tourist-place/mirjan-fort-kumta/"
+        }
+      ]
+    },
+    {
+      "id": "ancient-history",
+      "title": "Ancient & Historical Places",
+      "icon": "history",
+      "image": "/images/karavali/mirjan-fort.jpg",
+      "overview": "Coastal history is layered: living sacred sites, regional polities, port networks and laterite fortifications all have distinct chronologies.",
+      "details": [
+        "Udupi Sri Krishna Matha is dated to the 13th century by Karnataka Tourism. Mirjan Fort is associated with regional coastal history and is built with local laterite; the Uttara Kannada district portal does not establish a definitive construction date. The page timelines therefore avoid treating traditional accounts as settled dates."
+      ],
+      "highlights": [
+        "Udupi's 13th-century Matha tradition",
+        "Mirjan Fort's laterite construction",
+        "Site histories with dates and traditions separated"
+      ],
+      "sources": [
+        {
+          "label": "Karnataka Tourism - Udupi Sri Krishna Temple",
+          "url": "https://karnatakatourism.org/en/attractions/udupi-sri-krishna-temple/"
+        },
+        {
+          "label": "Uttara Kannada District Portal - Mirjan Fort",
+          "url": "https://uttarakannada.nic.in/en/tourist-place/mirjan-fort-kumta/"
+        }
+      ]
+    },
+    {
+      "id": "maritime-ports",
+      "title": "Maritime Heritage & Historical Ports",
+      "icon": "craft",
+      "image": "/images/karavali/malpe-harbour.jpg",
+      "overview": "Ports, fishing harbours and ferry routes make the sea a lived landscape as well as a historic trade corridor.",
+      "details": [
+        "Mangaluru is a coastal port city; Malpe serves as a harbour and a departure point for St. Mary's Islands. New Mangalore Port Authority publishes current port operations and notices. This guide does not infer a single uninterrupted trade history from the presence of today's port."
+      ],
+      "highlights": [
+        "Mangaluru's port-city setting",
+        "Malpe harbour and island ferry access",
+        "New Mangalore Port Authority"
+      ],
+      "verificationNote": "Historical claims about individual ports require period-specific archival or gazetteer evidence.",
+      "sources": [
+        {
+          "label": "Karnataka Tourism - Mangaluru",
+          "url": "https://karnatakatourism.org/en/destinations/mangaluru/"
+        },
+        {
+          "label": "New Mangalore Port Authority",
+          "url": "https://newmangaloreport.gov.in/"
+        }
+      ]
+    },
+    {
+      "id": "biodiversity",
+      "title": "Biodiversity & Wildlife",
+      "icon": "harvest",
+      "image": "/images/karavali/yana-caves.jpg",
+      "overview": "The coast-to-Ghat transition brings together beaches, estuaries, river mouths and Western Ghats forests.",
+      "details": [
+        "The three districts include varied coastal and upland habitats. Aghanashini, Sharavathi, Kali, Netravati and Gurupura river systems meet the sea along this landscape. This overview avoids naming species or conservation status without a site-specific source."
+      ],
+      "highlights": [
+        "Western Ghats forest edge",
+        "Estuary and mangrove habitats",
+        "Coastal and river-mouth ecosystems"
+      ],
+      "verificationNote": "Species lists and protected-area boundaries should be checked against current Forest Department records.",
+      "sources": [
+        {
+          "label": "Uttara Kannada District Portal",
+          "url": "https://uttarakannada.nic.in/en/"
+        },
+        {
+          "label": "Dakshina Kannada District Portal",
+          "url": "https://dk.nic.in/en/"
+        }
+      ]
+    },
+    {
+      "id": "rivers-estuaries",
+      "title": "Rivers, Estuaries & Islands",
+      "icon": "land",
+      "image": "/images/karavali/st-marys-islands.jpg",
+      "overview": "Short west-flowing rivers shape Karavali's estuaries, islands, fishing grounds and settlements.",
+      "details": [
+        "The regional overview records rivers including Netravati, Gurupura, Swarna, Sita, Sharavathi, Aghanashini, Gangavali and Kali. Their estuaries create changing brackish-water landscapes; local conditions vary by season and site."
+      ],
+      "highlights": [
+        "Netravati and Gurupura estuaries",
+        "Swarna and Sita river mouths",
+        "Sharavathi, Aghanashini and Kali systems"
+      ],
+      "sources": [
+        {
+          "label": "Karnataka Tourism - St. Mary's Island",
+          "url": "https://karnatakatourism.org/en/attractions/st-marys-island/"
+        },
+        {
+          "label": "Uttara Kannada District Portal",
+          "url": "https://uttarakannada.nic.in/en/"
+        }
+      ]
+    },
+    {
+      "id": "tourism-experiences",
+      "title": "Tourism & Travel Experiences",
+      "icon": "festival",
+      "image": "/images/karavali/gokarna-kotiteertha.jpg",
+      "overview": "Visitors can move between pilgrimage towns, beaches, islands, forts and forest landscapes across the three districts.",
+      "details": [
+        "The place explorer groups destinations by district and category. Ferry access, temple entry, weather and public facilities can change; consult current official guidance before travelling and follow local safety and conservation rules."
+      ],
+      "highlights": [
+        "Udupi's temple and island routes",
+        "Mangaluru's city and beach visits",
+        "Uttara Kannada's forts, pilgrimage sites and forest landscapes"
+      ],
+      "verificationNote": "Travel information is descriptive, not a live schedule or safety advisory.",
+      "sources": [
+        {
+          "label": "Karnataka Tourism - Udupi",
+          "url": "https://karnatakatourism.org/en/destinations/udupi/"
+        },
+        {
+          "label": "Karnataka Tourism - Mangaluru",
+          "url": "https://karnatakatourism.org/en/destinations/mangaluru/"
+        }
+      ]
+    },
+    {
+      "id": "education-reformers",
+      "title": "Education, Literature & Social Reformers",
+      "icon": "people",
+      "image": "/images/karavali/st-aloysius-chapel.jpg",
+      "overview": "Schools, colleges, writers and public figures are part of Karavali's modern cultural history.",
+      "details": [
+        "St. Aloysius in Mangaluru is a long-standing educational institution. The coast is also associated with writers and artists, including Kota Shivarama Karanth of Udupi district. Biographical details on this page are kept brief where a dedicated institutional source is not available."
+      ],
+      "highlights": [
+        "St. Aloysius and Mangaluru's education history",
+        "Kota Shivarama Karanth and Kannada letters",
+        "District-level literary and reform traditions"
+      ],
+      "verificationNote": "This category is a starting point; biographies should be expanded with institution and archive citations.",
+      "sources": [
+        {
+          "label": "St. Aloysius (Deemed to be University)",
+          "url": "https://staloysius.edu.in/"
+        },
+        {
+          "label": "Karnataka Tourism - Udupi",
+          "url": "https://karnatakatourism.org/en/destinations/udupi/"
+        }
+      ]
+    }
+  ]
+}

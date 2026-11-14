@@ -1,0 +1,95 @@
+{
+  "district": {
+    "id": "udupi",
+    "name": "Udupi",
+    "state": "Karnataka",
+    "region": "Karavali",
+    "headquarters": "Udupi",
+    "primary_language": "Tulu, Kannada, Konkani",
+    "geographic_features": "Flanked by Western Ghats and Arabian Sea, noted for its unique basalt rock islands and coastal backwaters.",
+    "climate": "Tropical maritime climate with heavy monsoon showers."
+  },
+  "records": [
+    {
+      "id": "udupi-krishna-matha",
+      "title": "Sri Krishna Matha & Ashta Mathas",
+      "category": "Architecture & Religion",
+      "description": "Founded by the 13th-century philosopher Sri Madhvacharya, famous for the Kanakana Kindi and the vibrant Paryaya festival.",
+      "location": "Udupi City",
+      "period": "13th Century CE",
+      "language": ["Kannada", "Tulu", "Sanskrit"],
+      "source": {
+        "name": "Udupi District Official Portal",
+        "url": "https://udupi.nic.in/en/"
+      }
+    },
+    {
+      "id": "st-marys-island",
+      "title": "St. Mary's Island Basaltic Formations",
+      "category": "Geography & Natural Heritage",
+      "description": "Unique geological monument featuring columnar basaltic lava formations created during Madagascar-India split 88 million years ago.",
+      "location": "Malpe Coast, Udupi",
+      "period": "Prehistoric Geological Epoch",
+      "language": ["English", "Kannada"],
+      "source": {
+        "name": "Karnataka Tourism",
+        "url": "https://karnatakatourism.org/en/"
+      }
+    },
+    {
+      "id": "udupi-culinary-heritage",
+      "title": "Udupi Vegetarian Culinary Tradition",
+      "category": "Food & Cuisine",
+      "description": "Renowned worldwide for healthy, plant-based sattvic cuisine rooted in temple traditions, utilizing local gourds, pulses, and jackfruit.",
+      "location": "Udupi",
+      "period": "Centuries-Old Tradition",
+      "language": ["Tulu", "Kannada"],
+      "source": {
+        "name": "IGNCA Culinary Archives",
+        "url": "https://ignca.gov.in/"
+      }
+    }
+  ],
+  "places": [
+    {
+      "id": "st-marys-islands",
+      "name": "St. Mary's Islands",
+      "category": "Natural Heritage & Geology",
+      "description": "A group of four small islands off Malpe coast featuring spectacular hexagonal basaltic rock pillars and shell beaches.",
+      "coordinates": "13.3855° N, 74.6934° E",
+      "highlights": ["Columnar Basaltic Rock Formations", "Shell Sand Beach", "Boat Ride from Malpe Port"]
+    },
+    {
+      "id": "sri-krishna-matha",
+      "name": "Sri Krishna Matha",
+      "category": "Architecture & Religion",
+      "description": "World-renowned Vaishnavite monastery and temple complex established by Sri Madhvacharya.",
+      "coordinates": "13.3409° N, 74.7421° E",
+      "highlights": ["Kanakana Kindi (Window)", "Golden Chariot", "Paryaya Tradition"]
+    },
+    {
+      "id": "malpe-beach",
+      "name": "Malpe Beach & Sea Walk",
+      "category": "Geography & Maritime",
+      "description": "A bustling natural fishing harbor and pristine beach featuring a scenic 450-meter sea walk into the Arabian Sea.",
+      "coordinates": "13.3512° N, 74.7088° E",
+      "highlights": ["Malpe Sea Walkway", "Estuary Views", "Fishing Port Culture"]
+    }
+  ],
+  "media_references": [
+    {
+      "id": "udupi-media-1",
+      "title": "Columnar Basalt Rocks at St. Mary's Island",
+      "subject": "Geological heritage",
+      "location": "Malpe, Udupi",
+      "catalogue_url": "https://karnatakatourism.org/en/",
+      "rights_status": "Public Educational Asset",
+      "availability": "Open Access"
+    }
+  ],
+  "future_research": [
+    "Geopark status documentation for St. Mary's Island",
+    "Cataloguing historical manuscripts in Ashta Mathas",
+    "Preservation of traditional Udupi brassware and bell-metal craft"
+  ]
+}

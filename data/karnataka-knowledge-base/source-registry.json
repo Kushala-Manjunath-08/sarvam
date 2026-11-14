@@ -1,0 +1,1914 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "source_id": "5e98105fb3be3902",
+      "url": "https://arebhasheacademy.karnataka.gov.in/11/academy/en",
+      "title": "Academy",
+      "organization": "Karnataka Arebhashe Samskruthi and Sahitya Academy, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "malenadu-kodagu"
+      ],
+      "districts": [],
+      "record_ids": [
+        "arebhashe-academy-remit"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "d946e6b9a4fb784c",
+      "url": "https://arebhasheacademy.karnataka.gov.in/11/academy/kn",
+      "title": "Academy",
+      "organization": "Karnataka Arebhashe Samskruthi and Sahitya Academy, Government of Karnataka",
+      "source_types": [
+        "additional"
+      ],
+      "regions": [
+        "malenadu-kodagu"
+      ],
+      "districts": [],
+      "record_ids": [
+        "arebhashe-academy-remit"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "c9db9eb6db816fe7",
+      "url": "https://arebhasheacademy.karnataka.gov.in/12/arebashe/kn",
+      "title": "???????",
+      "organization": "Karnataka Arebhashe Samskruthi and Sahitya Academy, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "malenadu-kodagu"
+      ],
+      "districts": [],
+      "record_ids": [
+        "arebhashe-language-and-region"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "1f2e8aa42ab4d55d",
+      "url": "https://bagalkot.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "bagalkot"
+      ],
+      "record_ids": [
+        "bagalkot-history-chalukya",
+        "theme-chalukya"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "b5e24353857debb4",
+      "url": "https://bagalkot.nic.in/en/agriculture-department/",
+      "title": "Agriculture Department",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "bagalkot"
+      ],
+      "record_ids": [
+        "bagalkot-agriculture-farm-ponds"
+      ],
+      "publication_years": [],
+      "reporting_years": [
+        "2014-15"
+      ],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "819a4de27231472e",
+      "url": "https://ballari.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "ballari"
+      ],
+      "record_ids": [
+        "ballari-inscription-history"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "ae355ed16ece327c",
+      "url": "https://ballari.nic.in/en/agriculture/",
+      "title": "Agriculture",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "ballari"
+      ],
+      "record_ids": [
+        "ballari-agriculture-extension"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "2dd594fa7fe75243",
+      "url": "https://bangalorerural.nic.in/en/agriculture/",
+      "title": "Department of Agriculture",
+      "organization": "Bangalore Rural District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "old-mysuru"
+      ],
+      "districts": [
+        "bengaluru-rural"
+      ],
+      "record_ids": [
+        "bengaluru-rural-agriculture-ragi"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "107017e9d4e66a2b",
+      "url": "https://bangalorerural.nic.in/en/tourist-place/devanahalli-fort-tippus-birth-place/",
+      "title": "Devanahalli Fort and Tippu's Birth Place",
+      "organization": "Bangalore Rural District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "old-mysuru"
+      ],
+      "districts": [
+        "bengaluru-rural"
+      ],
+      "record_ids": [
+        "bengaluru-rural-history-devanahalli"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "4b26bd9127f0ea74",
+      "url": "https://belagavi.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "belagavi"
+      ],
+      "record_ids": [
+        "belagavi-agriculture-textiles",
+        "belagavi-history-geography"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "f64e50785f41dfde",
+      "url": "https://bengalurusouth.nic.in/en/history/",
+      "title": "History",
+      "organization": "Bengaluru South District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "old-mysuru"
+      ],
+      "districts": [
+        "ramanagara"
+      ],
+      "record_ids": [
+        "ramanagara-culture-channapatna-toys"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "750c34bc86d60426",
+      "url": "https://bengalurusouth.nic.in/en/silk-department/",
+      "title": "Sericulture Department",
+      "organization": "Department of Sericulture, Zilla Panchayath, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "old-mysuru"
+      ],
+      "districts": [
+        "ramanagara"
+      ],
+      "record_ids": [
+        "ramanagara-agriculture-sericulture-2019-20"
+      ],
+      "publication_years": [],
+      "reporting_years": [
+        "2019-20"
+      ],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "721a7fc6f125fe93",
+      "url": "https://bengaluruurban.nic.in/en/departments/agriculture-department/",
+      "title": "Agriculture",
+      "organization": "Bengaluru Urban District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "old-mysuru"
+      ],
+      "districts": [
+        "bengaluru-urban"
+      ],
+      "record_ids": [
+        "bengaluru-urban-agriculture-ragi"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "1eb9dca2e2d4f66d",
+      "url": "https://bengaluruurban.nic.in/en/history/",
+      "title": "History",
+      "organization": "Bengaluru Urban District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "old-mysuru"
+      ],
+      "districts": [
+        "bengaluru-urban"
+      ],
+      "record_ids": [
+        "bengaluru-urban-history-kempegowda"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "f1086ab6395536eb",
+      "url": "https://bidar.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "bidar"
+      ],
+      "record_ids": [
+        "bidar-culture-heritage"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "a8369446f84f3cab",
+      "url": "https://bidar.nic.in/en/agriculture-market/",
+      "title": "Agriculture Market",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "bidar"
+      ],
+      "record_ids": [
+        "bidar-agriculture-market"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "d20a92ab8137487b",
+      "url": "https://chamrajnagar.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "Chamarajanagar District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "old-mysuru"
+      ],
+      "districts": [
+        "chamarajanagar"
+      ],
+      "record_ids": [
+        "chamarajanagar-agriculture-sericulture",
+        "chamarajanagar-history-arikottara"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "8b2a86d1c6a9a21e",
+      "url": "https://chikkaballapur.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "Chikkaballapur District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "old-mysuru"
+      ],
+      "districts": [
+        "chikkaballapura"
+      ],
+      "record_ids": [
+        "chikkaballapura-history-muddenahalli"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "9c99bb89866fd887",
+      "url": "https://chikkaballapur.nic.in/en/agriculture/",
+      "title": "Agriculture",
+      "organization": "Chikkaballapur District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "old-mysuru"
+      ],
+      "districts": [
+        "chikkaballapura"
+      ],
+      "record_ids": [
+        "chikkaballapura-agriculture-crop-area"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "23b3fed66c3c14e0",
+      "url": "https://chikkamagaluru.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "Chikkamagaluru District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "malenadu-kodagu"
+      ],
+      "districts": [
+        "chikkamagaluru"
+      ],
+      "record_ids": [
+        "chikkamagaluru-amritheshwara-temple",
+        "chikkamagaluru-coffee-origin-tradition",
+        "chikkamagaluru-western-ghats-headwaters"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "52421845b4806782",
+      "url": "https://chikkamagaluru.nic.in/en/tourist-place/sri-ksetra-horanadu/",
+      "title": "Sri Ksetra Horanadu",
+      "organization": "Chikkamagaluru District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "malenadu-kodagu"
+      ],
+      "districts": [
+        "chikkamagaluru"
+      ],
+      "record_ids": [
+        "chikkamagaluru-horanadu-temple"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "6633694d20db720d",
+      "url": "https://chitradurga.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "chitradurga"
+      ],
+      "record_ids": [
+        "chitradurga-culture-folk-arts"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "99ac06aeb821a6af",
+      "url": "https://chitradurga.nic.in/en/agriculture/",
+      "title": "Agriculture",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "chitradurga"
+      ],
+      "record_ids": [
+        "chitradurga-agriculture-rainfed",
+        "theme-dryland"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "6ed8e9da81aeb667",
+      "url": "https://coffeeboard.gov.in/IndexContent.html",
+      "title": "Coffee in India",
+      "organization": "Coffee Board of India",
+      "source_types": [
+        "additional"
+      ],
+      "regions": [
+        "malenadu-kodagu"
+      ],
+      "districts": [
+        "chikkamagaluru"
+      ],
+      "record_ids": [
+        "chikkamagaluru-coffee-origin-tradition"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "128e41fb835bcb26",
+      "url": "https://davanagere.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "davangere"
+      ],
+      "record_ids": [
+        "davangere-agriculture-trade",
+        "davangere-culture-history"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "be215ea58a37684f",
+      "url": "https://des.karnataka.gov.in/storage/pdf-files/AGS/FRE2022-23Final.pdf",
+      "title": "Fully Revised Estimates Report on Area, Production & Yield of Principal Crops in Karnataka 2022-23",
+      "organization": "Directorate of Economics and Statistics, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "old-mysuru"
+      ],
+      "districts": [
+        "chikkaballapura",
+        "mysuru"
+      ],
+      "record_ids": [
+        "chikkaballapura-agriculture-crop-area-2022-23",
+        "mysuru-agriculture-ragi-2022-23"
+      ],
+      "publication_years": [
+        "2024"
+      ],
+      "reporting_years": [
+        "2022-23"
+      ],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "a4fca3f43466a89e",
+      "url": "https://dharwad.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "dharwad"
+      ],
+      "record_ids": [
+        "dharwad-agriculture-cotton-hybrid",
+        "dharwad-history-geography",
+        "theme-cotton"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "cb03c04d6bceb936",
+      "url": "https://dk.nic.in/en/",
+      "title": "Dakshina Kannada District Official Portal - Home",
+      "organization": "Dakshina Kannada District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "karavali"
+      ],
+      "districts": [
+        "dakshina-kannada"
+      ],
+      "record_ids": [
+        "karavali-tulu-dakshina-kannada"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "b86054639ad68dba",
+      "url": "https://dk.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "Dakshina Kannada District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "karavali"
+      ],
+      "districts": [
+        "dakshina-kannada"
+      ],
+      "record_ids": [
+        "dakshina-kannada-mangaluru-trading-history",
+        "dakshina-kannada-western-ghats-arabian-sea"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "needs_review"
+    },
+    {
+      "source_id": "a6cbac46c1229d3c",
+      "url": "https://dk.nic.in/en/places-of-interest/",
+      "title": "Places of Interest",
+      "organization": "Dakshina Kannada District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "karavali"
+      ],
+      "districts": [
+        "dakshina-kannada"
+      ],
+      "record_ids": [
+        "dakshina-kannada-kadri-temple-kambala"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "ea52ef2dabe6237a",
+      "url": "https://gadag.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "additional",
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "gadag"
+      ],
+      "record_ids": [
+        "gadag-agriculture-crops",
+        "gadag-culture-music",
+        "theme-hindustani-music",
+        "theme-jowar",
+        "theme-pulses"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "d30ed636dd0397de",
+      "url": "https://hassan.nic.in/en/history/",
+      "title": "History",
+      "organization": "Hassan District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "old-mysuru"
+      ],
+      "districts": [
+        "hassan"
+      ],
+      "record_ids": [
+        "hassan-agriculture-major-crops",
+        "hassan-hoysala-heritage"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "86036f0d9125ce77",
+      "url": "https://haveri.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "haveri"
+      ],
+      "record_ids": [
+        "haveri-geography-central-karnataka"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "52743e66bfcc2836",
+      "url": "https://haveri.nic.in/en/agriculture/",
+      "title": "Agriculture",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "haveri"
+      ],
+      "record_ids": [
+        "haveri-agriculture-insurance"
+      ],
+      "publication_years": [],
+      "reporting_years": [
+        "2015-16"
+      ],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "0d95a08dba3250a3",
+      "url": "https://kalaburagi.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "additional",
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "kalaburagi"
+      ],
+      "record_ids": [
+        "kalaburagi-agriculture-crops",
+        "kalaburagi-history-sharana-sufi",
+        "theme-dryland",
+        "theme-jowar",
+        "theme-pulses",
+        "theme-sharana"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "a118c093a7053b61",
+      "url": "https://karnatakatourism.org/en/attractions/st-marys-island/",
+      "title": "St Mary's Island",
+      "organization": "Karnataka Tourism, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "karavali"
+      ],
+      "districts": [
+        "udupi"
+      ],
+      "record_ids": [
+        "udupi-st-marys-basalt"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "828464a7b3f8b62c",
+      "url": "https://karnatakatourism.org/en/destinations/coorg/",
+      "title": "Coorg: The Land of Coffee, Clouds, and Calm",
+      "organization": "Karnataka Tourism, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "malenadu-kodagu"
+      ],
+      "districts": [
+        "kodagu"
+      ],
+      "record_ids": [
+        "kodagu-kodava-kailpodh"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "ca3415800d8c5127",
+      "url": "https://karnatakatourism.org/en/destinations/shivamogga/",
+      "title": "Shivamogga",
+      "organization": "Karnataka Tourism, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "malenadu-kodagu"
+      ],
+      "districts": [
+        "shivamogga"
+      ],
+      "record_ids": [
+        "shivamogga-appe-midi-tourism"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "e3956f2e61a5c7a1",
+      "url": "https://karnatakatourism.org/en/destinations/udupi/",
+      "title": "Udupi: Culture Meets Coast",
+      "organization": "Karnataka Tourism, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "karavali"
+      ],
+      "districts": [
+        "udupi"
+      ],
+      "record_ids": [
+        "udupi-foodways-tourism-description",
+        "udupi-yakshagana-tourism-description"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "188e3308df1d5c9a",
+      "url": "https://karnatakatourism.org/en/events/kaveri-sankramana/",
+      "title": "Kaveri Sankramana",
+      "organization": "Karnataka Tourism, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "malenadu-kodagu"
+      ],
+      "districts": [
+        "kodagu"
+      ],
+      "record_ids": [
+        "kodagu-kaveri-sankramana"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "2d2bfcf15ef150a6",
+      "url": "https://karnatakatourism.org/en/experiences/food-culinary/",
+      "title": "Food & Culinary",
+      "organization": "Karnataka Tourism, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "malenadu-kodagu"
+      ],
+      "districts": [],
+      "record_ids": [
+        "kodava-foodways-tourism-reference"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "f6474e74c5c0a8f7",
+      "url": "https://kodagu.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "Kodagu District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "malenadu-kodagu"
+      ],
+      "districts": [
+        "kodagu"
+      ],
+      "record_ids": [
+        "kodagu-coffee-pepper-paddy"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "018e799013b4bf15",
+      "url": "https://kodagu.nic.in/en/tourism/culture-heritage/",
+      "title": "Fairs & Festivals",
+      "organization": "Kodagu District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "malenadu-kodagu"
+      ],
+      "districts": [
+        "kodagu"
+      ],
+      "record_ids": [
+        "kodava-huthri-harvest"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "d68671acfb506887",
+      "url": "https://kodagu.nic.in/en/tourist-place/omkareshwara-temple/",
+      "title": "Omkareshwara Temple",
+      "organization": "Kodagu District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "malenadu-kodagu"
+      ],
+      "districts": [
+        "kodagu"
+      ],
+      "record_ids": [
+        "kodagu-omkareshwara-temple"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "da4f585e337a48db",
+      "url": "https://kodagu.nic.in/en/tourist-place/talacauvery/",
+      "title": "Talacauvery",
+      "organization": "Kodagu District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "malenadu-kodagu"
+      ],
+      "districts": [
+        "kodagu"
+      ],
+      "record_ids": [
+        "kodagu-talacauvery-kaveri"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "236ca619c98993dd",
+      "url": "https://kolar.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "Kolar District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "old-mysuru"
+      ],
+      "districts": [
+        "kolar"
+      ],
+      "record_ids": [
+        "kolar-culture-temples"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "cf64c908528751d6",
+      "url": "https://kolar.nic.in/en/economy/",
+      "title": "Economy",
+      "organization": "Kolar District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "old-mysuru"
+      ],
+      "districts": [
+        "kolar"
+      ],
+      "record_ids": [
+        "kolar-agriculture-livelihoods"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "18b1a98afc2b572b",
+      "url": "https://koppal.nic.in/en/agriculture/",
+      "title": "Agriculture",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "koppal"
+      ],
+      "record_ids": [
+        "koppal-agriculture-extension"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "c1c96d2a68caf3b1",
+      "url": "https://koppal.nic.in/en/history/about-district/",
+      "title": "About District",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "additional",
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "koppal"
+      ],
+      "record_ids": [
+        "koppal-history-anegundi",
+        "theme-sharana",
+        "theme-vijayanagara-deccan-sultanates"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "49409b5a2b199497",
+      "url": "https://mandya.nic.in/en/agriculture/",
+      "title": "Agriculture",
+      "organization": "Mandya District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "old-mysuru"
+      ],
+      "districts": [
+        "mandya"
+      ],
+      "record_ids": [
+        "mandya-agriculture-krs-irrigation"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "d5d6ca36e71382bc",
+      "url": "https://mandya.nic.in/en/history/",
+      "title": "History",
+      "organization": "Mandya District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "old-mysuru"
+      ],
+      "districts": [
+        "mandya"
+      ],
+      "record_ids": [
+        "mandya-history-wodeyar-srirangapatna"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "b889794d1cf02d41",
+      "url": "https://mysuru.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "Mysuru District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "old-mysuru"
+      ],
+      "districts": [
+        "mysuru"
+      ],
+      "record_ids": [
+        "mysuru-culture-dasara"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "7dba5b2f290d9db1",
+      "url": "https://raichur.nic.in/",
+      "title": "Raichur District Portal",
+      "organization": "Raichur District Administration, Government of Karnataka",
+      "source_types": [
+        "additional"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [],
+      "record_ids": [
+        "theme-cotton"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "94c7a1544bff4cce",
+      "url": "https://raichur.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "raichur"
+      ],
+      "record_ids": [
+        "raichur-epigraphy-history"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "72e3d8db6235fc62",
+      "url": "https://raichur.nic.in/en/agriculture/",
+      "title": "Agriculture Department",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "raichur"
+      ],
+      "record_ids": [
+        "raichur-agriculture-extension"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "ae3fd4fdf4b36727",
+      "url": "https://raitamitra.karnataka.gov.in/126/Agriculture%20Statistics/en",
+      "title": "Agriculture Statistics",
+      "organization": "Department of Agriculture (KSDA), Government of Karnataka",
+      "source_types": [
+        "additional"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "belagavi",
+        "bidar",
+        "koppal",
+        "raichur",
+        "yadgir"
+      ],
+      "record_ids": [
+        "belagavi-agriculture-targets-2025-26",
+        "bidar-agriculture-targets-2025-26",
+        "koppal-agriculture-targets-2025-26",
+        "raichur-agriculture-targets-2025-26",
+        "yadgir-agriculture-targets-2025-26"
+      ],
+      "publication_years": [
+        "2025"
+      ],
+      "reporting_years": [
+        "2025-26 proposed targets"
+      ],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "173fdba8a8310145",
+      "url": "https://raitamitra.karnataka.gov.in/storage/pdf-files/Final2025-26Target.pdf",
+      "title": "Proposed Target of Season-wise Area under Major Agriculture Crops in Karnataka during 2025-26",
+      "organization": "Department of Agriculture (KSDA), Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "belagavi",
+        "bidar",
+        "koppal",
+        "raichur",
+        "yadgir"
+      ],
+      "record_ids": [
+        "belagavi-agriculture-targets-2025-26",
+        "bidar-agriculture-targets-2025-26",
+        "koppal-agriculture-targets-2025-26",
+        "raichur-agriculture-targets-2025-26",
+        "yadgir-agriculture-targets-2025-26"
+      ],
+      "publication_years": [
+        "2025"
+      ],
+      "reporting_years": [
+        "2025-26 proposed targets"
+      ],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "cf901148dcd7a425",
+      "url": "https://shivamogga.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "Shivamogga District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "malenadu-kodagu"
+      ],
+      "districts": [
+        "shivamogga"
+      ],
+      "record_ids": [
+        "shivamogga-archaeological-sites"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "7e756a8d799e7931",
+      "url": "https://shivamogga.nic.in/en/horticulture-department/",
+      "title": "Horticulture Department",
+      "organization": "Shivamogga District Horticulture Department, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "malenadu-kodagu"
+      ],
+      "districts": [
+        "shivamogga"
+      ],
+      "record_ids": [
+        "shivamogga-malnad-horticulture"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "12d2e5a8e100766e",
+      "url": "https://shivamogga.nic.in/en/tourist-place/jogfalls/",
+      "title": "Jog Falls Viewpoint",
+      "organization": "Shivamogga District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "malenadu-kodagu"
+      ],
+      "districts": [
+        "shivamogga"
+      ],
+      "record_ids": [
+        "shivamogga-jog-falls-viewpoint"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "f5243ea44297848b",
+      "url": "https://tumkur.nic.in/en/agricultural-marketing/",
+      "title": "Agricultural Marketing",
+      "organization": "Tumakuru District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "old-mysuru"
+      ],
+      "districts": [
+        "tumakuru"
+      ],
+      "record_ids": [
+        "tumakuru-agriculture-apmcs"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "a49f18ffb8094ec2",
+      "url": "https://tumkur.nic.in/en/history/",
+      "title": "History",
+      "organization": "Tumakuru District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "old-mysuru"
+      ],
+      "districts": [
+        "tumakuru"
+      ],
+      "record_ids": [
+        "tumakuru-history-ganga-inscription"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "2080d4f8ea64ee62",
+      "url": "https://udupi.nic.in/en/agriculture/",
+      "title": "Agriculture",
+      "organization": "Udupi District Agriculture Department, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "karavali"
+      ],
+      "districts": [
+        "udupi"
+      ],
+      "record_ids": [
+        "udupi-agriculture-extension"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "3fb7ee7d63560620",
+      "url": "https://udupi.nic.in/en/horticulture/",
+      "title": "Horticulture",
+      "organization": "Udupi District Horticulture Department, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "karavali"
+      ],
+      "districts": [
+        "udupi"
+      ],
+      "record_ids": [
+        "udupi-horticulture-crops"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "f1d61ea4546645a9",
+      "url": "https://udupi.nic.in/en/tourist-place/sri-krishna-matt/",
+      "title": "Sri Krishna Matt",
+      "organization": "Udupi District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "karavali"
+      ],
+      "districts": [
+        "udupi"
+      ],
+      "record_ids": [
+        "udupi-sri-krishna-matt-window"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "5a71f53120f507ec",
+      "url": "https://uttarakannada.nic.in/en/about-district-2/",
+      "title": "About District",
+      "organization": "Uttara Kannada District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "karavali"
+      ],
+      "districts": [
+        "uttara-kannada"
+      ],
+      "record_ids": [
+        "uttara-kannada-fisheries-and-farming",
+        "uttara-kannada-geography-coast-rivers",
+        "uttara-kannada-konkani-language"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "65d6ec0c0a784ca6",
+      "url": "https://uttarakannada.nic.in/en/agriculture-department/",
+      "title": "Agriculture Department",
+      "organization": "Uttara Kannada District Agriculture Department, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "karavali"
+      ],
+      "districts": [
+        "uttara-kannada"
+      ],
+      "record_ids": [
+        "uttara-kannada-agriculture-services"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "5e773132d181d3d3",
+      "url": "https://uttarakannada.nic.in/en/document/details-of-farmers-whose-horticulture-crops-were-damaged-due-to-monsoon-rains-in-uttara-kannada-district-2024-25/",
+      "title": "Details of farmers whose horticulture crops were damaged due to monsoon rains in Uttara Kannada district 2024-25",
+      "organization": "Uttara Kannada District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "karavali"
+      ],
+      "districts": [
+        "uttara-kannada"
+      ],
+      "record_ids": [
+        "uttara-kannada-horticulture-damage-2024-25"
+      ],
+      "publication_years": [
+        "2024"
+      ],
+      "reporting_years": [
+        "2024-25"
+      ],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "10fe66d60d539921",
+      "url": "https://uttarakannada.nic.in/en/history/",
+      "title": "History",
+      "organization": "Uttara Kannada District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "karavali"
+      ],
+      "districts": [
+        "uttara-kannada"
+      ],
+      "record_ids": [
+        "uttara-kannada-kadamba-banavasi-history"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "needs_review"
+    },
+    {
+      "source_id": "e383b2aebb599e1a",
+      "url": "https://uttarakannada.nic.in/en/tourist-place/mirjan-fort-kumta/",
+      "title": "Mirjan Fort Kumta",
+      "organization": "Uttara Kannada District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "karavali"
+      ],
+      "districts": [
+        "uttara-kannada"
+      ],
+      "record_ids": [
+        "uttara-kannada-mirjan-fort"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "f59f24d5c0d9e4df",
+      "url": "https://vijayanagara.nic.in/en/about-district/",
+      "title": "History of Vijayanagara",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "vijayanagara"
+      ],
+      "record_ids": [
+        "theme-vijayanagara-deccan-sultanates",
+        "vijayanagara-history-empire"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "a3383258a62e7d29",
+      "url": "https://vijayanagara.nic.in/en/agriculture/",
+      "title": "Agriculture",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "vijayanagara"
+      ],
+      "record_ids": [
+        "vijayanagara-agriculture-extension"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "9ef3cd805aa7c71b",
+      "url": "https://vijayapura.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "additional",
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "vijayapura"
+      ],
+      "record_ids": [
+        "theme-chalukya",
+        "vijayapura-history-dynasties"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "e6e6225948b44dcc",
+      "url": "https://vijayapura.nic.in/en/agriculture/",
+      "title": "Agriculture",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "vijayapura"
+      ],
+      "record_ids": [
+        "vijayapura-agriculture-extension"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "fe548291770e517f",
+      "url": "https://www.kvkdk.org/",
+      "title": "Krishi Vigyan Kendra - Dakshina Kannada",
+      "organization": "Krishi Vigyan Kendra Dakshina Kannada; hosted by Karnataka Veterinary, Animal and Fisheries Sciences University",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "karavali"
+      ],
+      "districts": [
+        "dakshina-kannada"
+      ],
+      "record_ids": [
+        "dakshina-kannada-kvk-paddy-fish-inputs"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "2918856d1eafd8c4",
+      "url": "https://yadgir.nic.in/en/about-district/",
+      "title": "About District",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "yadgir"
+      ],
+      "record_ids": [
+        "yadgir-history-dynasties"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    },
+    {
+      "source_id": "7b1c4e9428eb8069",
+      "url": "https://yadgir.nic.in/en/agriculture-market/",
+      "title": "Agriculture Market",
+      "organization": "District Administration, Government of Karnataka",
+      "source_types": [
+        "primary"
+      ],
+      "regions": [
+        "uttara-karnataka"
+      ],
+      "districts": [
+        "yadgir"
+      ],
+      "record_ids": [
+        "yadgir-agriculture-market"
+      ],
+      "publication_years": [],
+      "reporting_years": [],
+      "extraction_dates": [
+        "2026-11-14"
+      ],
+      "verification_status": "verified"
+    }
+  ]
+}

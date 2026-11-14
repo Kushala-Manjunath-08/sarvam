@@ -2,12 +2,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
 type Message = {
   id: number;
   sender: "bot" | "user";
   text: string;
   sources?: ChatSource[];
+<<<<<<< HEAD
   mode?: "groq" | "extractive" | "not_found";
   notice?: string | null;
   isError?: boolean;
@@ -40,22 +42,161 @@ const welcomeMessage: Message = {
   id: 1,
   sender: "bot",
   text: "Namaskara! Welcome to Namma Heritage. I'm here to help you discover Karnataka's stories, traditions and timeless places. What would you like to explore?",
+=======
+  grounded?: boolean;
+  error?: boolean;
+>>>>>>> origin/main
 };
 
-const suggestions = [
-  "Tell me about Karnataka",
-  "Explore heritage sites",
-  "What is Yakshagana?",
-];
+type ChatSource = {
+  citation: number;
+  id: string;
+  title: string;
+  organization: string;
+  url: string;
+  region: string;
+  district: string;
+  publication_year: string | number | null;
+  reporting_year: string | number | null;
+};
 
+type ChatResponse = {
+  answer: string;
+  sources: ChatSource[];
+  retrieval_mode: string;
+  grounded: boolean;
+};
+
+type KnowledgeStatus = {
+  document_count: number;
+  districts_covered: number;
+  retrieval_mode: string;
+};
+
+type ChatPageContext = {
+  region?: string;
+  district?: string;
+};
+
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+
+const generalSuggestions = [
+  "What crops are grown in Old Mysuru?",
+  "Tell me about Bidar's heritage",
+  "What is Yakshagana in Karavali?",
+];
+const regionSuggestions: Record<string, string[]> = {
+  "old-mysuru": [
+    "What does the source say about Mysuru Dasara?",
+    "Which crops are documented in Mandya?",
+    "What is known about Hassan's heritage?",
+  ],
+  "uttara-karnataka": [
+    "What is documented about Bidar's heritage?",
+    "Which crops are grown in this region?",
+    "Tell me about the Ilkal saree tradition",
+  ],
+  karavali: [
+    "What is Yakshagana in Karavali?",
+    "What does the source say about Udupi's Paryaya?",
+    "What is recorded about coastal Karnataka's heritage?",
+  ],
+  "malenadu-kodagu": [
+    "What does the source say about Huthri?",
+    "What food is documented in Shivamogga?",
+    "What is known about Kuvempu?",
+  ],
+};
+
+<<<<<<< HEAD
+=======
+const regionNames: Record<string, string> = {
+  "old-mysuru": "Old Mysuru",
+  "uttara-karnataka": "Uttara Karnataka",
+  karavali: "Karavali",
+  "malenadu-kodagu": "Malenadu & Kodagu",
+};
+
+function getChatPageContext(pathname: string): ChatPageContext {
+  const [section, slug] = pathname.split("/").filter(Boolean);
+  if (section === "regions" && slug && regionNames[slug]) {
+    return { region: slug };
+  }
+  if (section === "districts" && slug) {
+    return { district: slug };
+  }
+  return {};
+}
+
+function isKnowledgeStatus(value: unknown): value is KnowledgeStatus {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "document_count" in value &&
+    typeof value.document_count === "number" &&
+    "districts_covered" in value &&
+    typeof value.districts_covered === "number" &&
+    "retrieval_mode" in value &&
+    typeof value.retrieval_mode === "string"
+  );
+}
+
+function isChatResponse(value: unknown): value is ChatResponse {
+  if (typeof value !== "object" || value === null || !("answer" in value) || !("sources" in value)) {
+    return false;
+  }
+
+  return (
+    typeof value.answer === "string" &&
+    "grounded" in value &&
+    typeof value.grounded === "boolean" &&
+    "retrieval_mode" in value &&
+    typeof value.retrieval_mode === "string" &&
+    Array.isArray(value.sources) &&
+    value.sources.every(
+      (source) =>
+        typeof source === "object" &&
+        source !== null &&
+        "url" in source &&
+        "title" in source &&
+        typeof source.url === "string" &&
+        typeof source.title === "string",
+    )
+  );
+}
+
+>>>>>>> origin/main
 export default function HeritageChatbot() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+<<<<<<< HEAD
   const [messages, setMessages] = useState<Message[]>([welcomeMessage]);
+=======
+  const [knowledgeStatus, setKnowledgeStatus] =
+    useState<KnowledgeStatus | null>(null);
+  const [knowledgeServiceAvailable, setKnowledgeServiceAvailable] =
+    useState<boolean | null>(null);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: 1,
+      sender: "bot",
+      text: "Namaskara! Welcome to Namma Heritage. I'm here to help you discover Karnataka's stories, traditions and timeless places. What would you like to explore?",
+    },
+  ]);
+>>>>>>> origin/main
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messageInputRef = useRef<HTMLInputElement>(null);
+  const pageContext = getChatPageContext(pathname);
+  const currentRegion = pageContext.region
+    ? regionNames[pageContext.region]
+    : undefined;
+  const suggestions = pageContext.region
+    ? regionSuggestions[pageContext.region] ?? generalSuggestions
+    : generalSuggestions;
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -71,6 +212,37 @@ export default function HeritageChatbot() {
     return () => window.removeEventListener("sarvam:open-chat", openChat);
   }, []);
 
+<<<<<<< HEAD
+=======
+  useEffect(() => {
+    if (!isOpen) return;
+    let active = true;
+    setKnowledgeServiceAvailable(null);
+    void fetch(`${API_BASE_URL}/api/knowledge/status`, { cache: "no-store" })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error("The knowledge service is unavailable.");
+        }
+        const payload: unknown = await response.json();
+        if (!isKnowledgeStatus(payload)) {
+          throw new Error("The knowledge service returned invalid status.");
+        }
+        return payload;
+      })
+      .then((status) => {
+        if (!active) return;
+        setKnowledgeStatus(status);
+        setKnowledgeServiceAvailable(true);
+      })
+      .catch(() => {
+        if (active) setKnowledgeServiceAvailable(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, [isOpen]);
+
+>>>>>>> origin/main
   async function sendMessage(text = message) {
     const trimmed = text.trim();
 
@@ -86,13 +258,24 @@ export default function HeritageChatbot() {
     setMessage("");
     setIsTyping(true);
 
+<<<<<<< HEAD
     const conversation = [...messages.slice(1), userMessage].slice(-10);
+=======
+    const conversation = [...messages, userMessage]
+      .filter((item, index) => !(index === 0 && item.sender === "bot"))
+      .slice(-8)
+      .map((item) => ({
+        role: item.sender === "bot" ? "assistant" : "user",
+        content: item.text,
+      }));
+>>>>>>> origin/main
 
     try {
       const response = await fetch(`${API_BASE_URL}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+<<<<<<< HEAD
           messages: conversation.map((item) => ({
             role: item.sender === "bot" ? "assistant" : "user",
             content: item.text,
@@ -144,6 +327,58 @@ export default function HeritageChatbot() {
     if (isTyping) return;
     setMessages([welcomeMessage]);
     setMessage("");
+=======
+          messages: conversation,
+          context_region: pageContext.region,
+          context_district: pageContext.district,
+        }),
+      });
+      let payload: unknown;
+
+      try {
+        payload = await response.json();
+      } catch {
+        throw new Error(`The knowledge service returned an invalid response (${response.status}).`);
+      }
+
+      if (!response.ok) {
+        const detail =
+          typeof payload === "object" &&
+          payload !== null &&
+          "detail" in payload &&
+          typeof payload.detail === "string"
+            ? payload.detail
+            : `The knowledge service returned an error (${response.status}).`;
+        throw new Error(detail);
+      }
+
+      if (!isChatResponse(payload)) {
+        throw new Error("The knowledge service returned an invalid response.");
+      }
+
+      const botMessage: Message = {
+        id: Date.now() + 1,
+        sender: "bot",
+        text: payload.answer,
+        sources: payload.sources,
+        grounded: payload.grounded,
+      };
+      setMessages((previous) => [...previous, botMessage]);
+    } catch (error) {
+      const botMessage: Message = {
+        id: Date.now() + 1,
+        sender: "bot",
+        text:
+          error instanceof Error
+            ? error.message
+            : "The knowledge service could not answer this question.",
+        error: true,
+      };
+      setMessages((previous) => [...previous, botMessage]);
+    } finally {
+      setIsTyping(false);
+    }
+>>>>>>> origin/main
   }
 
   return (
@@ -178,8 +413,14 @@ export default function HeritageChatbot() {
                 <div>
                   <h2>Namma Heritage</h2>
                   <p>
-                    <span className="online-dot" />
-                    Discover Karnataka
+                    <span
+                      className={`online-dot${knowledgeServiceAvailable === false ? " is-offline" : ""}`}
+                    />
+                    {knowledgeServiceAvailable === true && knowledgeStatus
+                      ? `${knowledgeStatus.document_count} verified records · ${knowledgeStatus.districts_covered} districts`
+                      : knowledgeServiceAvailable === false
+                        ? "Knowledge service unavailable"
+                        : "Connecting to the knowledge library…"}
                   </p>
                 </div>
               </div>
@@ -206,8 +447,12 @@ export default function HeritageChatbot() {
 
             <div className="chat-welcome">
               <span className="welcome-kicker">A LIVING ATLAS OF INDIA</span>
-              <h3>Every place has a story.</h3>
-              <p>Let's discover the stories of Karnataka together.</p>
+              <h3>{currentRegion ? `Explore ${currentRegion}` : "Every place has a story."}</h3>
+              <p>
+                Ask about Karnataka's places, history, culture and traditions.
+                Answers are brief and linked to verified sources; if evidence is
+                missing, the chat will say so.
+              </p>
             </div>
 
             <div className="chat-messages" role="log" aria-label="Conversation">
@@ -220,6 +465,7 @@ export default function HeritageChatbot() {
                     <div className="bot-avatar">ನ</div>
                   )}
 
+<<<<<<< HEAD
                   <div className={`message-bubble ${item.isError ? "error" : ""}`}>
                     {item.text}
                     {item.notice && (
@@ -254,6 +500,39 @@ export default function HeritageChatbot() {
                       </div>
                     )}
                   </div>
+=======
+                  {item.sender === "bot" ? (
+                    <div className="bot-message-content">
+                      <div className={`message-bubble ${item.error ? "error" : ""}`}>
+                        {item.text}
+                      </div>
+                      {typeof item.grounded === "boolean" && (
+                        <span className={`message-grounding${item.grounded ? "" : " is-unverified"}`}>
+                          {item.grounded
+                            ? `${item.sources?.length ?? 0} cited source${item.sources?.length === 1 ? "" : "s"}`
+                            : "No verified source found"}
+                        </span>
+                      )}
+                      {item.sources && item.sources.length > 0 && (
+                        <div className="message-sources">
+                          <p>Sources</p>
+                          {item.sources.map((source) => (
+                            <a
+                              key={`${item.id}-${source.id}`}
+                              href={source.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              [{source.citation}] {source.title} · {source.district}
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="message-bubble">{item.text}</div>
+                  )}
+>>>>>>> origin/main
                 </div>
               ))}
 
@@ -502,6 +781,10 @@ export default function HeritageChatbot() {
           background: #9dbb78;
         }
 
+        .online-dot.is-offline {
+          background: #d58e76;
+        }
+
         .close-chat {
           width: 31px;
           height: 31px;
@@ -577,6 +860,10 @@ export default function HeritageChatbot() {
           margin-bottom: 13px;
         }
 
+        .message-row.bot {
+          align-items: flex-start;
+        }
+
         .message-row.user {
           justify-content: flex-end;
         }
@@ -605,6 +892,7 @@ export default function HeritageChatbot() {
           font-size: 12px;
           line-height: 1.65;
           overflow-wrap: anywhere;
+<<<<<<< HEAD
           white-space: pre-wrap;
         }
 
@@ -621,10 +909,32 @@ export default function HeritageChatbot() {
           color: #79664a;
           font-size: 10px;
           line-height: 1.5;
+=======
+          white-space: pre-line;
+        }
+
+        .bot-message-content {
+          display: flex;
+          flex-direction: column;
+          gap: 7px;
+          max-width: 83%;
+          min-width: 0;
+        }
+
+        .bot-message-content .message-bubble {
+          max-width: 100%;
+        }
+
+        .message-bubble.error {
+          border-color: #d7a29a;
+          background: #fff3f0;
+          color: #7d332a;
+>>>>>>> origin/main
         }
 
         .message-sources {
           display: grid;
+<<<<<<< HEAD
           gap: 7px;
           margin-top: 11px;
           padding-top: 9px;
@@ -664,6 +974,41 @@ export default function HeritageChatbot() {
           width: fit-content;
           font-size: 9px;
           font-weight: 500;
+=======
+          gap: 4px;
+          padding: 2px 3px 4px;
+        }
+
+        .message-grounding {
+          padding: 0 3px;
+          color: #63814f;
+          font-size: 9px;
+        }
+
+        .message-grounding.is-unverified {
+          color: #98633d;
+        }
+
+        .message-sources p {
+          margin: 0 0 2px;
+          color: #8d7655;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.8px;
+          text-transform: uppercase;
+        }
+
+        .message-sources a {
+          color: #755426;
+          font-size: 10px;
+          line-height: 1.45;
+          text-decoration: underline;
+          text-underline-offset: 2px;
+        }
+
+        .message-sources a:hover {
+          color: #3e2d17;
+>>>>>>> origin/main
         }
 
         .user .message-bubble {
