@@ -3,9 +3,9 @@ import type { RegionDetail } from "./regions";
 export const regionCategories = [
   { id: "geography", title: "Geography & Natural Heritage", icon: "land", image: "/images/karnataka-customs-map.png" },
   { id: "history", title: "History & Historical Events", icon: "history", image: "/images/hampi-ruins.svg" },
-  { id: "communities", title: "Communities & Cultural Identity", icon: "community", image: "/images/karnataka-dancer.jpg" },
+  { id: "communities", title: "Communities & Cultural Identity", icon: "community", image: "/images/karnataka-heritage.svg" },
   { id: "languages", title: "Languages & Dialects", icon: "language", image: "/images/karnataka-customs-map.png" },
-  { id: "festivals", title: "Festivals & Celebrations", icon: "festival", image: "/images/yakshagana-dancer.jpg" },
+  { id: "festivals", title: "Festivals & Celebrations", icon: "festival", image: "/images/yakshagana-stage.svg" },
   { id: "performing-arts", title: "Traditional Art & Performing Arts", icon: "performance", image: "/images/yakshagana-stage.svg" },
   { id: "food", title: "Food & Culinary Heritage", icon: "food", image: "/images/karnataka-heritage.svg" },
   { id: "architecture", title: "Architecture & Traditional Lifestyle", icon: "home", image: "/images/mysore-palace.svg" },

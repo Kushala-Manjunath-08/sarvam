@@ -10,11 +10,14 @@ import json
 import uuid
 import shutil
 import sqlite3
+from app.knowledge_base import router as knowledge_router
+
 app = FastAPI(
     title="LEGACYOS API",
     description="Human Knowledge Preservation System",
     version="1.0.0"
 )
+app.include_router(knowledge_router)
 
 app.add_middleware(
     CORSMiddleware,
